@@ -1,32 +1,53 @@
 import mongoose from "mongoose";
+import Questionarie from "./questionarie";
 const Schema = mongoose.Schema;
 
 const user = new Schema({
-  name: {
+  userName: {
     type: String,
     required: true,
   },
-  /**
-   * {
-   *    email: "ariel@gmail.com"
-   * }
-   */
-  email: {
+  gender: {
+    type: String,
+    enum: ["Male" || "Female" || "Other"],
+  },
+  eMail: {
     type: String,
     required: true,
   },
-  password: {
+  phoneNumber: {
     type: String,
     required: true,
   },
-  since: {
+  birthday: {
     type: Date,
-    default: Date.now,
+    required: true,
+  },
+  points: {
+    type: Number,
+    default: 0,
+  },
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: Messege,
+    },
+  ],
+
+  alerts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: Alert,
+    },
+  ],
+  questionaries: {
+    type: Schema.Types.ObjectId,
+    ref: Questionarie,
   },
 });
 
 mongoose.models = {};
 
 const User = mongoose.model("User", user);
-console.log("User", User);
+
 export default User;

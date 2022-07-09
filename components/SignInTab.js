@@ -1,18 +1,25 @@
-import { CssVarsProvider } from "@mui/joy/styles";
-import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
-import TextField from "@mui/joy/TextField";
-import Link from "@mui/joy/Link";
+import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
+import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import Button from "@mui/joy/Button";
-import Input from "@mui/joy/Input";
-import { shadows } from "@mui/system";
-import Logo from "./Logo";
+import Link from "@mui/joy/Link";
+import Sheet from "@mui/joy/Sheet";
+import { CssVarsProvider } from "@mui/joy/styles";
+import Typography from "@mui/joy/Typography";
 import TabPanel from "@mui/lab/TabPanel";
+import Stack from "@mui/material/Stack";
 import { useSession } from "next-auth/react";
+import Logo from "./Logo";
+import AvatarTools from "../Components/AvatarTools.js";
+
+import NotificationsTwoToneIcon from "@mui/icons-material/NotificationsTwoTone";
+
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import ForumTwoToneIcon from "@mui/icons-material/ForumTwoTone";
 
 function SignInTab() {
   const { data: session } = useSession();
-  console.log(session);
+  console.log(session?.user.image);
   return (
     <TabPanel value="1">
       <CssVarsProvider>
@@ -32,60 +39,32 @@ function SignInTab() {
           }}
         >
           <Logo />
-          <div>
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontFamily: "Kanit",
-                fontStyle: "normal",
-                fontWeight: 700,
-                fontSize: "15px",
-                lineHeight: "33px",
 
-                color: "#000000",
-              }}
-            >
-              Please sign up your account:
-            </Typography>
-            <TextField
-              className="input"
-              variant="none"
-              name="userName"
-              type="userName"
-              placeholder="UserName"
-            />
-            <TextField
-              className="input"
-              variant="none"
-              name="email"
-              type="email"
-              placeholder="Email"
-            />
-            <TextField
-              className="input"
-              variant="none"
-              name="password"
-              type="password"
-              placeholder="password"
-            />
-            <TextField
-              className="input"
-              variant="none"
-              name="password"
-              type="password"
-              placeholder="confirmPassword"
-            />
-            <TextField
-              className="input"
-              variant="none"
-              name="phone"
-              type="phone"
-              placeholder="phoneNumber"
-            />
-          </div>
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontFamily: "Kanit",
+              fontStyle: "normal",
+              fontWeight: 700,
+              fontSize: "15px",
+              lineHeight: "33px",
+
+              color: "#000000",
+            }}
+          >
+            Please logIn to your account:
+          </Typography>
+          {/* <Image
+            src="/images/github.jpg" // Route of the image file
+            height={40} // Desired size with correct aspect ratio
+            width={40} // Desired size with correct aspect ratio
+            alt="Your Name"
+          /> */}
           <Button
             sx={{
               mt: 1, // margin top
+              background: "#1374F9",
+              borderRadius: "34px",
             }}
           >
             Sign up
@@ -93,7 +72,7 @@ function SignInTab() {
           <Typography
             endDecorator={<Link href="/sign-in">Sign in</Link>}
             fontSize="sm"
-            sx={{ alignSelf: "center" }}
+            sx={{ alignSelf: "center", fontFamily: "Kanit" }}
           >
             have an account?
           </Typography>

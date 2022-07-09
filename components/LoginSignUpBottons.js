@@ -1,14 +1,9 @@
-import * as React from "react";
-import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { useContext } from "react";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import { ButtonGroup } from "@mui/material";
-import AppContext from "../context/AppContext";
 import TabList from "@mui/lab/TabList";
-import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
 
 export default function LoginSignUpBottons() {
   const { value, handleChange, setValue } = useContext(AppContext);
@@ -18,7 +13,7 @@ export default function LoginSignUpBottons() {
     return (
       <Box>
         <TabList
-          sx={{ pt: "5%" }}
+          sx={{ pt: "5%", fontFamily: "Kanit" }}
           fontSize="large"
           onChange={handleChange}
           value={value}
@@ -26,9 +21,9 @@ export default function LoginSignUpBottons() {
           selectionFollowsFocus
         >
           <Tab
-            sx={{ fontSize: 33, textTransform: "none" }}
+            sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
             label="Sign In"
-            value="2"
+            value="1"
           />
         </TabList>
       </Box>
@@ -37,7 +32,7 @@ export default function LoginSignUpBottons() {
     return (
       <Box>
         <TabList
-          sx={{ pt: "5%" }}
+          sx={{ pt: "5%", fontFamily: "Kanit" }}
           fontSize="large"
           onChange={handleChange}
           value={value}
@@ -45,14 +40,14 @@ export default function LoginSignUpBottons() {
           selectionFollowsFocus
         >
           <Tab
-            sx={{ fontSize: 33, textTransform: "none" }}
+            sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
             label="Sign Out"
             value="1"
           />
           <Tab
-            sx={{ fontSize: 33, textTransform: "none" }}
+            sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
             label="another tab"
-            value="1"
+            value="2"
           />
         </TabList>
       </Box>

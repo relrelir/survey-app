@@ -1,10 +1,8 @@
 import { Box } from "@mui/system";
-import SignInTab from "./SignInTab";
-import AvatarTools from "./AvatarTools";
-import { Typography } from "@mui/material";
-import { useAppContext } from "../context/AppContext";
 
-export default function RihgtMenu() {
+import SignedInTab from "./SignedInTab";
+
+export default function RightMenu() {
   return (
     <Box
       sx={{
@@ -18,7 +16,8 @@ export default function RihgtMenu() {
         background: "#F7F8FA",
       }}
     >
-      <SignInTab />
+      {/* <SignInTab /> */}
+      <SignedInTab />
     </Box>
   );
 }

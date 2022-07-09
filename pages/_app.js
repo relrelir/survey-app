@@ -1,13 +1,12 @@
-import "../styles/globals.css";
-import { SessionProvider } from "next-auth/react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Header from "../components/Header";
-import { useState } from "react";
-import { Button } from "@mui/material";
-import SignInTab from "../components/SignInTab";
-import RihgtMenu from "../components/rightMenu.js";
-import AppContext from "../context/AppContext";
 import TabContext from "@mui/lab/TabContext";
+import { createTheme } from "@mui/material/styles";
+import { SessionProvider } from "next-auth/react";
+import { useEffect, useState } from "react";
+import Header from "../components/Header";
+
+import RightMenu from "../components/rightMenu";
+import AppContext from "../context/AppContext";
+import "../styles/globals.css";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,13 +21,21 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    fetch("/api/survey")
+      .then((response) => response.json())
+      .then((survies) => console.log(survies));
+  }, []);
+
   return (
     <SessionProvider session={session}>
       <AppContext.Provider value={{ value, handleChange, setValue }}>
         <TabContext value={value}>
           <Header />
+
           <Component {...pageProps} />
-          <RihgtMenu />
+
+          <RightMenu />
         </TabContext>
       </AppContext.Provider>
     </SessionProvider>
