@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import { useSession } from "next-auth/react";
 import { useContext } from "react";
-import AppContext from "../context/AppContext";
+import AppContext from "../contexts/AppContext";
 
 export default function LoginSignUpBottons() {
   const { value, handleChange, setValue } = useContext(AppContext);

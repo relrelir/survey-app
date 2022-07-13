@@ -13,7 +13,7 @@ const question = new Schema({
   },
   answers: {
     type: Schema.Types.ObjectId,
-    ref: Answers,
+    ref: "Answers",
   },
 });
 

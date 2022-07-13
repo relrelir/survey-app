@@ -1,6 +1,7 @@
 import connectDB from "../../middlware/mongodb";
 import Message from "../../models/message";
 
+
 const handler = async (req, res) => {
   if (req.method === "POST") {
     const { sentBy, title, content } = req.body;

@@ -1,25 +1,15 @@
-import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import Button from "@mui/joy/Button";
 import Link from "@mui/joy/Link";
 import Sheet from "@mui/joy/Sheet";
 import { CssVarsProvider } from "@mui/joy/styles";
 import Typography from "@mui/joy/Typography";
 import TabPanel from "@mui/lab/TabPanel";
-import Stack from "@mui/material/Stack";
 import { useSession } from "next-auth/react";
 import Logo from "./Logo";
-import AvatarTools from "../Components/AvatarTools.js";
-
-import NotificationsTwoToneIcon from "@mui/icons-material/NotificationsTwoTone";
-
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
-import ForumTwoToneIcon from "@mui/icons-material/ForumTwoTone";
 
 function SignInTab() {
   const { data: session } = useSession();
-  console.log(session?.user.image);
+
   return (
     <TabPanel value="1">
       <CssVarsProvider>

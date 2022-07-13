@@ -1,12 +1,13 @@
 import NextAuth from "next-auth";
-import EmailProvider from "next-auth/providers/email";
+import User from "../../../models/user";
 import FacebookProvider from "next-auth/providers/facebook";
 import GitHubProvider from "next-auth/providers/gitHub";
 import GoogleProvider from "next-auth/providers/google";
+import { connectDBOnly } from "../../../middlware/mongodb";
+// import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import mongoose from "mongoose";
 
 export default NextAuth({
-  // Configure one or more authentication providers
-
   callbacks: {
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
@@ -35,10 +36,23 @@ export default NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    // Passwordless / email sign in
-    EmailProvider({
-      server: process.env.MAIL_SERVER,
-      from: "NextAuth.js <no-reply@example.com>",
-    }),
   ],
+
+  // callbacks: {
+  //   async signIn(user /*account, profile*/) {
+  //     console.log("user:", user);
+  //     await connectDBOnly();
+  //     await User.findOneAndUpdate(
+  //       {
+  //         email: user.user.email,
+  //       },
+  //       {
+  //         name: user.user.name,
+  //         image: user.user.image,
+  //       },
+  //       { upsert: true }
+  //     );
+  //     return true;
+  //   },
+  // },
 });

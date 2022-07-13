@@ -20,10 +20,10 @@ const questionarie = new Schema({
     type: Number,
     default: 0,
   },
-  question: {
-    type: Schema.Types.ObjectId,
-    ref: Question,
-  },
+  // question: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: Question,
+  // },
 });
 
 mongoose.models = {};

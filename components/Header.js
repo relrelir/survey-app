@@ -81,7 +81,10 @@ export default function Header() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
-                sx={{ fontSize: "200%", fontFamily: "Kanit" }}
+                sx={{
+                  fontSize: "200%",
+                  fontFamily: "Kanit",
+                }}
               />
             </Search>
             <AvatarTools />

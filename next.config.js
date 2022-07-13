@@ -1,15 +1,14 @@
 /** @type {import('next').NextConfig} */
 
-const { mongodb_pass, mongodb_user, mongodb_host, mongodb_name } = process.env;
-
+const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 
   env: {
-    mongodb_pass,
-    mongodb_user,
-    mongodb_host,
-    mongodb_name,
+    DB_USER,
+    DB_PASS,
+    DB_HOST,
+    DB_NAME,
   },
 };
 

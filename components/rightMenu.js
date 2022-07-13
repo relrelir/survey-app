@@ -1,8 +1,14 @@
 import { Box } from "@mui/system";
 
+import SignInTab from "./SignInTab";
+import SignInTabCopy from "./SignInTabCopy";
 import SignedInTab from "./SignedInTab";
+import { useSession } from "next-auth/react";
 
 export default function RightMenu() {
+  const { data: session } = useSession();
+
+  console.log(session);
   return (
     <Box
       sx={{
@@ -16,8 +22,7 @@ export default function RightMenu() {
         background: "#F7F8FA",
       }}
     >
-      {/* <SignInTab /> */}
-      <SignedInTab />
+      {!session ? <SignInTabCopy /> : <SignedInTab />}
     </Box>
   );
 }

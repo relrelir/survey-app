@@ -77,6 +77,12 @@ const handler = async (req, res) => {
         .then((data) => res.send(data))
         .catch((e) => res.send("error", e));
     }
+    if (_id) {
+      const newInfo = req.body;
+      User.findByIdAndUpdate(_id, newInfo)
+        .then((data) => res.send(data))
+        .catch((e) => res.send("error", e));
+    }
   } else {
     res.status(422).send("req_method_not_supported");
   }

@@ -2,11 +2,15 @@ import Button from "@mui/joy/Button";
 import Typography from "@mui/joy/Typography";
 import TabPanel from "@mui/lab/TabPanel";
 import Stack from "@mui/material/Stack";
-import { useSession } from "next-auth/react";
-
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { Avatar } from "@mui/material";
 import Box from "@mui/material/Box";
-import SurviesList from "../components/SurviesList.js";
+import SurviesList from "../components/SurviesList";
+import * as React from "react";
+
+import addNewQuestionarieButton from "./AddNewQuestionarieButton";
+
 function SignedInTab() {
   const { data: session } = useSession();
 
@@ -70,6 +74,20 @@ function SignedInTab() {
         </Stack>
       </Box>
       <SurviesList />
+      <Link href="/api/auth/signout">
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            signOut();
+          }}
+        >
+          Sign Out
+        </a>
+      </Link>
+      <Button variant="plain" sx={{ color: "grey" }} onClick={() => signOut()}>
+        Sign Out
+      </Button>
+      <addNewQuestionarieButton />
     </TabPanel>
   );
 }

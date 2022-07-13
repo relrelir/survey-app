@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import User from "./user";
 
 const { Schema } = mongoose;
 
 const message = new Schema({
   sentBy: {
     type: Schema.Types.ObjectId,
-    ref: User.ObjectId,
+    ref: "User",
   },
   title: {
     type: String,

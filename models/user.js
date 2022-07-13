@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import Questionarie from "./questionarie";
+
 const Schema = mongoose.Schema;
+//לשנות לפי סכימה של סשן
 
 const user = new Schema({
   userName: {
@@ -30,20 +31,22 @@ const user = new Schema({
   messages: [
     {
       type: Schema.Types.ObjectId,
-      ref: Messege,
+      ref: "Message",
     },
   ],
 
   alerts: [
     {
       type: Schema.Types.ObjectId,
-      ref: Alert,
+      ref: "Alert",
     },
   ],
-  questionaries: {
-    type: Schema.Types.ObjectId,
-    ref: Questionarie,
-  },
+  questionaries: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Questionarie",
+    },
+  ],
 });
 
 mongoose.models = {};

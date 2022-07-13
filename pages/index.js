@@ -5,10 +5,11 @@ import Header from "../components/Header.js";
 import Exmple from "../components/Exmple.js";
 import styles from "../styles/Home.module.css";
 import { Box } from "@mui/material";
-
+import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <Head>
