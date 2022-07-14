@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import AvatarTools from "../Components/AvatarTools.js";
-import LoginSignUpBottons from "./LoginSignUpBottons";
+import TabsHeader from "./TabsHeader";
 import Logo from "./Logo";
 
 const Search = styled("div")(({ theme }) => ({
@@ -73,20 +73,8 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <LoginSignUpBottons />
-            <Search sx={{ height: "50%" }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                sx={{
-                  fontSize: "200%",
-                  fontFamily: "Kanit",
-                }}
-              />
-            </Search>
+            <TabsHeader />
+           
             <AvatarTools />
           </Box>
         </Toolbar>

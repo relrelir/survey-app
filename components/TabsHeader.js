@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useContext } from "react";
 import AppContext from "../contexts/AppContext";
 
-export default function LoginSignUpBottons() {
+export default function TabsHeader() {
   const { value, handleChange, setValue } = useContext(AppContext);
   const { data: session, status } = useSession();
   const signUp = "Sign Up";

@@ -22,7 +22,17 @@ export default function RightMenu() {
         background: "#F7F8FA",
       }}
     >
-      {!session ? <SignInTabCopy /> : <SignedInTab />}
+      {!session ? (
+        <SignInTabCopy />
+      ) : (
+        <SignedInTab
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        />
+      )}
     </Box>
   );
 }

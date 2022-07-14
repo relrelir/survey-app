@@ -1,5 +1,14 @@
 import { Box, Typography } from "@mui/material";
+import { getSession } from "next-auth/react";
 import { ReactQuestionFactory } from "survey-react-ui";
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  console.log("session", session);
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 function createQuestionarie() {
   return (

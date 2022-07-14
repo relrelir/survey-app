@@ -3,12 +3,16 @@ import { useSession } from "next-auth/react";
 
 function SurviesTitleList() {
   const { data: session } = useSession();
-  session.user.questionaries = [{}];
-  console.log(session);
+  // session.user.questionaries = [
+  //   { title: "questionarie1" },
+  //   { title: "questionarie2" },
+  // ];
+  // console.log(session.user.questionaries[0].title);
   return (
     session.user.questionaries > 0 &&
-    session.user.questionaries.map((questionarie) => {
+    session.user.questionaries.map((questionarie) => (
       <Box
+        key={questionarie._id}
         sx={{
           my: "8px",
           width: "363px",
@@ -24,9 +28,9 @@ function SurviesTitleList() {
           },
         }}
       >
-        {questionarie}
-      </Box>;
-    })
+        {questionarie.title}
+      </Box>
+    ))
   );
 }
 

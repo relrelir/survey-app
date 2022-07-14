@@ -2,44 +2,80 @@ import connectDB from "../../middlware/mongodb";
 import bcrypt from "bcrypt";
 import User from "../../models/user";
 import Questionarie from "../../models/questionarie";
+import Cookies from "cookies";
+import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
+import { unstable_getServerSession } from "next-auth";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    const {
-      userName,
-      gender,
-      eMail,
-      phoneNumber,
-      birthday,
-      points,
-      messeges,
-      alerts,
-      questionaries,
-    } = req.body;
-    if (userName && gender && eMail && phoneNumber && birthday) {
-      try {
-        // Hash password to store it in DB
-        // const passwordhash = await bcrypt.hash(password, 10);
-        const user = new User({
-          userName,
-          gender,
-          eMail,
-          phoneNumber,
-          birthday,
-          points,
-          messeges,
-          alerts,
-          questionaries,
-        });
-        // Create new user
-        const userCreated = await user.save();
-        res.status(200).send(userCreated);
-      } catch (error) {
-        res.status(500).send(error.message);
-      }
-    } else {
-      res.status(422).send("data_incomplete");
-    }
+    // const check = await unstable_getServerSession(req, res);
+    console.log("HANDLER", req.cookies);
+
+    const { accessToken, email, name, image } = JSON.parse(req.body);
+
+    // console.log("accessToken", session);
+
+    // const cookies = new Cookies(req, res);
+    // cookies.set("access_token", accessToken);
+
+    const userCreated = await User.findOneAndUpdate(
+      {
+        email,
+      },
+      {
+        name,
+        image,
+        accessToken,
+      },
+      { upsert: true }
+    );
+
+    // res?
+
+    // setCookie("accessToken", accessToken, {
+    //   req,
+    //   res,
+    //   maxAge: 60 * 60 * 24,
+    //   // httpOnly: true,
+    // });
+
+    return res.status(200).json({ message: "ok" });
+
+    // const {
+    //   userName,
+    //   gender,
+    //   email,
+    //   phoneNumber,
+    //   birthday,
+    //   points,
+    //   messeges,
+    //   alerts,
+    //   questionaries,
+    // } = req.body;
+    // if (userName && gender && email && phoneNumber && birthday) {
+    //   try {
+    //     // Hash password to store it in DB
+    //     // const passwordhash = await bcrypt.hash(password, 10);
+    //     const user = new User({
+    //       userName,
+    //       gender,
+    //       email,
+    //       phoneNumber,
+    //       birthday,
+    //       points,
+    //       messeges,
+    //       alerts,
+    //       questionaries,
+    //     });
+    //     // Create new user
+    //     const userCreated = await user.save();
+    //     res.status(200).send(userCreated);
+    //   } catch (error) {
+    //     res.status(500).send(error.message);
+    //   }
+    // } else {
+    //   res.status(422).send("data_incomplete");
+    // }
   } else if (req.method === "GET") {
     const { _id } = req.query;
 

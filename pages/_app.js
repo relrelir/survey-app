@@ -25,11 +25,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    fetch("/api/questionarie")
-      .then((response) => response.json())
-      .then((survies) => console.log(survies));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/questionarie")
+  //     .then((response) => response.json())
+  //     .then((survies) => console.log(survies));
+  // }, []);
 
   return (
     <SessionProvider session={session}>

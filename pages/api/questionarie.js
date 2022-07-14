@@ -23,6 +23,7 @@ const handler = async (req, res) => {
     }
   } else if (req.method === "GET") {
     const { _id } = req.query;
+    // console.log("ELAD QUE req.cookies", req.cookies);
     if (_id !== undefined) {
       Questionarie.findById(_id)
         .then((data) => {

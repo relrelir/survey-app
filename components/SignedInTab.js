@@ -7,12 +7,12 @@ import Link from "next/link";
 import { Avatar } from "@mui/material";
 import Box from "@mui/material/Box";
 import SurviesList from "../components/SurviesList";
-import * as React from "react";
-
-import addNewQuestionarieButton from "./AddNewQuestionarieButton";
-
+import ControlPointTwoToneIcon from "@mui/icons-material/ControlPointTwoTone";
+import AddNewQuestionarieButton from "./AddNewQuestionarieButton";
+import { useRouter } from "next/router";
 function SignedInTab() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <TabPanel value="1">
@@ -41,8 +41,7 @@ function SignedInTab() {
             fontSize: 22,
 
             color: "#42A5F5",
-            display: "flex",
-            alignItems: "center",
+
             p: 1,
             m: 1,
             mr: 5,
@@ -87,7 +86,25 @@ function SignedInTab() {
       <Button variant="plain" sx={{ color: "grey" }} onClick={() => signOut()}>
         Sign Out
       </Button>
-      <addNewQuestionarieButton />
+
+      <ControlPointTwoToneIcon
+        onClick={() => router.push("/createQuestionarie")}
+        sx={{
+          fontSize: 100,
+          borderRadius: "50%",
+          boxShadow: "0px 0px 27px rgba(0, 0, 0, 0.11)",
+          opacity: "70%",
+          backgroundColor: "#FFFFFF",
+          color: "#abdbe3",
+          // color: "#FFFFFF",
+
+          "&:hover": {
+            backgroundColor: "#FFFFFF",
+            color: "#abcf6",
+            cursor: "pointer",
+          },
+        }}
+      />
     </TabPanel>
   );
 }
