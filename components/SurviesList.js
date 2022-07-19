@@ -10,7 +10,7 @@ function SurviesTitleList() {
   // console.log(session.user.questionaries[0].title);
   return (
     session.user.questionaries > 0 &&
-    session.user.questionaries.map((questionarie) => (
+    session.user.questionaries.map((questionarie) => {
       <Box
         key={questionarie._id}
         sx={{
@@ -29,8 +29,8 @@ function SurviesTitleList() {
         }}
       >
         {questionarie.title}
-      </Box>
-    ))
+      </Box>;
+    })
   );
 }
 

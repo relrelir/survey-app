@@ -88,7 +88,7 @@ function SignedInTab() {
       </Button>
 
       <ControlPointTwoToneIcon
-        onClick={() => router.push("/createQuestionarie")}
+        onClick={() => router.push("/questionarie/new")}
         sx={{
           fontSize: 100,
           borderRadius: "50%",

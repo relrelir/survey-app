@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
 
-const { Schema } = mongoose;
-
-const question = new Schema({
+export const QuestionSchema = new Schema({
+  name: {
+    type: String,
+    required: false,
+  },
   title: {
     type: String,
     required: true,
@@ -17,8 +19,7 @@ const question = new Schema({
   },
 });
 
-mongoose.models = {};
-
-const Question = mongoose.model("Question", question);
+const Question =
+  mongoose.models.Question || mongoose.model("Question", QuestionSchema);
 
 export default Question;

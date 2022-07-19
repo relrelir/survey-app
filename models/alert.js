@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
 
-const { Schema } = mongoose;
-
-const alert = new Schema({
+export const AlertSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -13,8 +11,4 @@ const alert = new Schema({
   },
 });
 
-mongoose.models = {};
-
-const Alert = mongoose.model("Alert", alert);
-
-export default Alert;
+export default mongoose.models.Alert || mongoose.model("Alert", AlertSchema);

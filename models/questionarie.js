@@ -1,33 +1,38 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
+import Question from "./question";
+import User from "./user";
 
-const Schema = mongoose.Schema;
-
-const questionarie = new Schema({
-  // author: { type: Schema.Types.ObjectId },
+export const QuestionarieSchema = new Schema({
   title: {
     type: String,
     required: true,
   },
+
   introduction: {
     type: String,
     required: false,
   },
-  // question: {
-  //   type: Array,
-  //   required: true,
-  // },
+
+  questions: [
+    {
+      type: ObjectId,
+      ref: Question,
+    },
+  ],
   pointsValue: {
     type: Number,
     default: 0,
   },
-  // question: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: Question,
-  // },
+  author: {
+    type: ObjectId,
+    ref: User,
+    // autopopulate: true,
+  },
 });
 
-mongoose.models = {};
+// schema.plugin(require('mongoose-autopopulate'));
 
-const Questionarie = mongoose.model("Questionarie", questionarie);
-
+const Questionarie =
+  mongoose.models.Questionarie ||
+  mongoose.model("Questionarie", QuestionarieSchema);
 export default Questionarie;

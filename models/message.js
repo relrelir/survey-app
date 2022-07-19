@@ -1,11 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
 import User from "./user";
 
-const { Schema } = mongoose;
-
-const message = new Schema({
+export const MessageSchema = new Schema({
   sentBy: {
-    type: Schema.Types.ObjectId,
+    type: ObjectId,
     ref: "User",
   },
   title: {
@@ -18,8 +16,5 @@ const message = new Schema({
   },
 });
 
-mongoose.models = {};
-
-const Message = mongoose.model("Message", message);
-
-export default Message;
+export default mongoose.models.Message ||
+  mongoose.model("Message", MessageSchema);

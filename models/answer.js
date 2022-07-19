@@ -1,9 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
 import User from "./user";
 
-const { Schema } = mongoose;
-
-const answer = new Schema({
+export const AnswerSchema = new Schema({
   content: {
     type: String,
     required: true,
@@ -18,14 +16,10 @@ const answer = new Schema({
   },
   users: [
     {
-      type: Schema.Types.ObjectId,
-      ref: User.ObjectId,
+      type: ObjectId,
+      ref: User,
     },
   ],
 });
 
-mongoose.models = {};
-
-const Answer = mongoose.model("Answer", answer);
-
-export default Answer;
+export default mongoose.models.Answer || mongoose.model("Answer", AnswerSchema);

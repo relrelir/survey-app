@@ -1,86 +1,67 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
+import VerificationToken from "./verification-token";
+import Message from "./message";
+import Alert from "./alert";
+// import Questionarie from "./questionarie";
 
-const { Schema } = mongoose;
-
-export const UserSchema = new Schema(
-  {
-    accessToken: {
-      type: String,
-      required: false,
-    },
-    name: {
-      type: String,
-      required: false,
-    },
-    email: {
-      type: String,
-      required: false,
-      unique: true,
-    },
-    image: {
-      type: String,
-      required: false,
-    },
-    emailVerified: {
-      type: Date,
-      required: false,
-    },
-    role: {
-      type: String,
-      enum: ["user", "editor", "moderator", "admin"],
-      required: false,
-    },
-    gender: {
-      type: String,
-      enum: ["none", "male", "female", "other"],
-      required: false,
-    },
-    phone: {
-      type: String,
-      required: false,
-    },
-    birthday: {
-      type: Date,
-      required: true,
-    },
-    points: {
-      type: Number,
-      default: 0,
-    },
-    messages: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Message",
-      },
-    ],
-    alerts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Alert",
-      },
-    ],
-    questionaries: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Questionarie",
-      },
-    ],
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: false,
   },
-  {
-    id: true,
-    toJSON: {
-      transform(doc, ret, options) {
-        ret.id = ret._id;
-        delete ret._id;
-
-        return ret;
-      },
+  email: {
+    type: String,
+    required: false,
+    // unique: true,
+  },
+  image: {
+    type: String,
+    required: false,
+  },
+  emailVerified: {
+    type: Date,
+    required: false,
+  },
+  role: {
+    type: String,
+    enum: ["user", "editor", "moderator", "admin"],
+    required: false,
+  },
+  gender: {
+    type: String,
+    enum: ["none", "male", "female", "other"],
+    required: false,
+  },
+  phone: {
+    type: String,
+    required: false,
+  },
+  birthday: {
+    type: Date,
+    required: false,
+  },
+  points: {
+    type: Number,
+    default: 0,
+  },
+  messages: [
+    {
+      type: ObjectId,
+      ref: Message,
     },
-    timestamps: {
-      createdAt: true,
-      updatedAt: true,
+  ],
+  alerts: [
+    {
+      type: ObjectId,
+      ref: Alert,
     },
-  }
-);
+  ],
+});
+UserSchema.virtual("questionaries", {
+  ref: "Questionarie",
+  localField: "_id",
+  foreignField: "author",
+});
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+export default User;

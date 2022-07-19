@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Component } from "react";
 import Header from "../components/Header.js";
-import Exmple from "../components/Exmple.js";
+
 import styles from "../styles/Home.module.css";
 import { Box } from "@mui/material";
 import { useRouter } from "next/router";
@@ -22,9 +22,7 @@ export default function Home() {
         </style>
       </Head>
 
-      <Box sx={{ dispaly: "flex", justifyContent: "flex-end" }}>
-        {/* <Exmple /> */}
-      </Box>
+      <Box sx={{ dispaly: "flex", justifyContent: "flex-end" }}></Box>
     </>
   );
 }

@@ -1,29 +1,85 @@
 import NextAuth from "next-auth";
 import User from "../../../models/user";
+import EmailProvider from "next-auth/providers/email";
 import FacebookProvider from "next-auth/providers/facebook";
 import GitHubProvider from "next-auth/providers/gitHub";
 import GoogleProvider from "next-auth/providers/google";
-import { connectDBOnly } from "../../../middlware/mongodb";
-import { getCookies, setCookie } from "cookies-next";
-// import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { dbClient } from "../../../middlware/mongodb";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
-export default NextAuth({
-  // callbacks: {
-  //   async jwt({ token, account }) {
-  //     // Persist the OAuth access_token to the token right after signin
-  //     if (account) {
-  //       token.accessToken = account.access_token;
-  //     }
-  //     return token;
-  //   },
-  //   async session({ session, token, user }) {
-  //     // Send properties to the client, like an access_token from a provider.
-  //     session.accessToken = token.accessToken;
-  //     return session;
-  //   },
-  // },
+export const authOptions = {
+  debug: true,
 
+  adapter: MongoDBAdapter(dbClient()),
+
+  secret: process.env.NEXTAUTH_SECRET,
+
+  session: {
+    strategy: "jwt", // "database"
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
+  },
+
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+
+  callbacks: {
+    async jwt(params) {
+      const { token, account, user } = params;
+
+      // if (account?.access_token) token.accessToken = account.access_token;
+      if (user?.role) token.role = user?.role;
+
+      console.log("jwtCallback", params);
+
+      return token;
+    },
+
+    async session(params) {
+      const { session, token, user } = params;
+
+      if (session) {
+        // if (token?.accessToken) session.accessToken = token.accessToken;
+
+        session.user = session.user || {};
+        let id = token?.sub || user?.id;
+        if (id) session.user.id = id;
+        let role = token?.role || user?.role;
+        if (role) session.user.role = role;
+      }
+
+      console.log("sessionCallback", params);
+
+      return session;
+    },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   const isAllowedToSignIn = true;
+
+    //   await fetch("http://localhost:3000/api/user", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       email,
+    //     }),
+    //   });
+    // },
+  },
+  pages: {
+    signIn: "/auth/signin",
+    signOut: "/auth/signOut",
+  },
   providers: [
+    EmailProvider({
+      server: {
+        host: "smtp.ethereal.email",
+        port: 587,
+        auth: {
+          user: "bernadette54@ethereal.email",
+          pass: "9TEUJAkjC5XG3p91Hm",
+        },
+      },
+      from: process.env.EMAIL_FROM,
+    }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
@@ -37,93 +93,6 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
+};
 
-  callbacks: {
-    // async jwt({ token, account }) {
-    //   console.log("jwt account:", account);
-    //   console.log("jwt token:", token);
-
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-
-    //     const { name, email, picture } = token;
-
-    //     const fetchRes = await fetch("http://localhost:3000/api/user", {
-    //       method: "POST",
-    //       credentials: "same-origin",
-    //       body: JSON.stringify({
-    //         // accessToken,
-    //         email,
-    //         name,
-    //         image: picture,
-    //       }),
-    //     });
-    //   }
-    //   return token;
-    // },
-    // async session({ session, token, user }) {
-    //   console.log("session user:", user);
-    //   console.log("session session:", session);
-    //   console.log("session token:", token);
-    //   console.log("cookies", getCookies());
-    //   const { name, email, picture } = session.user;
-
-    //   // const fetchRes = await fetch("http://localhost:3000/api/user", {
-    //   //   method: "POST",
-    //   //   credentials: "same-origin",
-    //   //   body: JSON.stringify({
-    //   //     // accessToken,
-    //   //     email,
-    //   //     name,
-    //   //     image: picture,
-    //   //   }),
-    //   // });
-
-    //   // const json = await fetchRes.json();
-
-    //   // console.log("json?.accessToken", json?.accessToken);
-
-    //   // // Send properties to the client, like an access_token from a provider.
-    //   // session.accessToken = token.accessToken;
-    //   return session;
-    // },
-    async signIn(res /*account, profile*/) {
-      console.log("signIn res:", res);
-      const accessToken = res?.account?.access_token;
-      const email = res?.user?.email;
-      const name = res?.user?.name;
-      const image = res?.user?.image;
-
-      const fetchRes = await fetch("http://localhost:3000/api/user", {
-        method: "POST",
-        credentials: "same-origin",
-        body: JSON.stringify({
-          accessToken,
-          email,
-          name,
-          image,
-        }),
-      });
-
-      const json = await fetchRes.json();
-
-      console.log("json?.accessToken", json?.accessToken);
-
-      return true;
-      // Cookies.set("access_token", accessToken);
-
-      // await connectDBOnly();
-      // await User.findOneAndUpdate(
-      //   {
-      //     email: res.user.email,
-      //   },
-      //   {
-      //     name: res.user.name,
-      //     image: res.user.image,
-      //   },
-      //   { upsert: true }
-      // );
-      // return true;
-    },
-  },
-});
+export default NextAuth(authOptions);

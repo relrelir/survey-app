@@ -1,4 +1,4 @@
-import { providers, signIn, getSession, csrfToken } from "next-auth-client";
+import { providers, signIn, getSession, csrfToken } from "next-auth/react";
 
 function SignInComponent({ providers }) {
   return (
