@@ -44,10 +44,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       >
         <TabContext value={value}>
           <Header />
-
           <Component {...pageProps} />
 
-          <RightMenu />
+          {/* <RightMenu /> */}
         </TabContext>
       </AppContext.Provider>
     </SessionProvider>

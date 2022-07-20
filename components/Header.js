@@ -73,8 +73,8 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <TabsHeader />
-           
+            {/* <TabsHeader /> */}
+
             <AvatarTools />
           </Box>
         </Toolbar>

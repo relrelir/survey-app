@@ -18,11 +18,29 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import Logo from "../../components/Logo";
 import { getToken } from "next-auth/jwt";
+import ErrorMessage from "../../components/error";
+
+const NEXTAUTH_SIGNIN_ERROS = {
+  Signin: "Try signing in with a different account.",
+  OAuthSignin: "Try signing in with a different account.",
+  OAuthCallback: "Try signing in with a different account.",
+  OAuthCreateAccount: "Try signing in with a different account.",
+  EmailCreateAccount: "Try signing in with a different account.",
+  Callback: "Try signing in with a different account.",
+  OAuthAccountNotLinked:
+    "To confirm your identity, sign in with the same account you used originally.",
+  EmailSignin: "The e-mail could not be sent.",
+  CredentialsSignin:
+    "Sign in failed. Check the details you provided are correct.",
+  SessionRequired: "Please sign in to access this page.",
+  default: "Unable to sign in.",
+};
 
 export default function SignInPage({ csrfToken }) {
   const { query } = useRouter();
-  console.log(query);
 
+  const errorMessage =
+    NEXTAUTH_SIGNIN_ERROS[query.error] || NEXTAUTH_SIGNIN_ERROS.default;
   const { data: session } = useSession();
   const {
     phone,
@@ -43,7 +61,7 @@ export default function SignInPage({ csrfToken }) {
     //   method: "PATCH",
     //   body: userBody,
     // });
-    // console.log(res);
+
     // const data = await res.json();
     // set(data);
   }
@@ -61,8 +79,8 @@ export default function SignInPage({ csrfToken }) {
   function SocialButtonComponent({ provider }) {
     return (
       <form
-        action="/api/auth/signin/google"
-        method="POST"
+        // action="/api/auth/signin/google"
+        // method="POST"
         onSubmit={(e) => (e.preventDefault(), signIn(provider))}
       >
         <input type="hidden" name="csrfToken" value={csrfToken} />
@@ -97,7 +115,7 @@ export default function SignInPage({ csrfToken }) {
       }}
     >
       <Logo />
-      <p>{query.error}</p>
+      <ErrorMessage message={errorMessage}></ErrorMessage>
       <form
         action="/api/auth/signin/email"
         method="POST"
@@ -108,6 +126,7 @@ export default function SignInPage({ csrfToken }) {
         }}
       >
         <input type="hidden" name="csrfToken" value={csrfToken} />
+        <input type="hidden" name="callbackUrl" value={callbackUrl} />
 
         <TextField
           className="input"

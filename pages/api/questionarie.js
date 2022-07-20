@@ -8,7 +8,7 @@ const handler = async (req, res) => {
     const { title, introduction, questions, pointsValue } = req.body;
     const token = await getToken({ req, secret });
     const userId = token.sub;
-    console.log(req.body);
+
     if (title /* && questions.length*/) {
       try {
         let user = await User.findById(userId);
@@ -32,9 +32,8 @@ const handler = async (req, res) => {
     }
   } else if (req.method === "GET") {
     const { _id } = req.query;
-    // console.log("ELAD QUE req.cookies", req.cookies);
+
     if (_id !== undefined) {
-      // /api/questionarie?_id=xxx
       Questionarie.findById(_id)
         .populate("author")
         .then((data) => {
@@ -42,17 +41,18 @@ const handler = async (req, res) => {
         })
         .catch((e) => ("error", e));
     } else {
-      // /api/questionarie
       Questionarie.find()
         .populate("author")
         // .skip(req.query.skip)
         // .limit(req.query.limit)
         .then((data) => {
           res.send(data);
+          console.log("data", data);
         })
         .catch((e) => ("error", e));
     }
   } else if (req.method === "DELETE") {
+    console.log("t0oDEL");
     const { _id } = req.query;
     if (_id) {
       Questionarie.findByIdAndRemove(_id)

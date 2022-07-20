@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { connectDB } from "../../middlware/mongodb";
 import Questionarie from "../../models/questionarie";
 
-export default function questionarieById({ questionarie }) {
+export default function questionarieByIdPage({ questionarie }) {
   //   const {
   //     query: { questionarieId },
   //   } = useRouter();
-  console.log(questionarie);
+
   return <pre>{JSON.stringify(questionarie)}</pre>;
 }
 

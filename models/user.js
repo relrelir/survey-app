@@ -12,37 +12,42 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: false,
-    // unique: true,
+    unique: true,
   },
   image: {
     type: String,
     required: false,
   },
   emailVerified: {
-    type: Date,
+    type: String,
     required: false,
   },
   role: {
     type: String,
-    enum: ["user", "editor", "moderator", "admin"],
+    enum: ["user", "editor", "admin", "superAdmin"],
     required: false,
+    default: "user",
   },
   gender: {
     type: String,
     enum: ["none", "male", "female", "other"],
     required: false,
+    default: "none",
   },
   phone: {
     type: String,
     required: false,
+    default: null,
   },
   birthday: {
-    type: Date,
+    type: String,
     required: false,
+    default: null,
   },
   points: {
     type: Number,
     default: 0,
+    // max: 100,
   },
   messages: [
     {

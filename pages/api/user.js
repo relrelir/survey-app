@@ -2,10 +2,11 @@ import connectDB from "../../middlware/mongodb";
 import bcrypt from "bcrypt";
 import User from "../../models/user";
 import questionaries from "../../models/questionarie";
+import { getToken } from "next-auth/jwt";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    const { name, gender, email, phone, birthday } = JSON.parse(req.body);
+    const { name, email, phone, birthday } = JSON.parse(req.body);
     console.log("email", email);
     if (email) {
       try {
@@ -47,7 +48,6 @@ const handler = async (req, res) => {
       User.findById(_id)
         .populate("questionarie")
         .then((user) => {
-          console.log(user);
           res.send(user);
         })
         .catch((e) => {
@@ -70,18 +70,21 @@ const handler = async (req, res) => {
         .catch((e) => ("error", e));
     }
   } else if (req.method === "PATCH") {
-    const { _id } = req.query;
-    if (_id) {
-      const newInfo = req.body;
-      User.findByIdAndUpdate(_id, newInfo)
-        .then((data) => res.send(data))
-        .catch((e) => res.send("error", e));
-    }
-    if (_id) {
-      const newInfo = req.body;
-      User.findByIdAndUpdate(_id, newInfo)
-        .then((data) => res.send(data))
-        .catch((e) => res.send("error", e));
+    let token = await getToken({ req });
+    if (!token) {
+      res.status(403).send("req_not_authorized");
+    } else {
+      const { name, email, image, gender, phone, birthday } = req.body;
+      User.findByIdAndUpdate(token.sub, {
+        name,
+        email,
+        image,
+        gender,
+        phone,
+        birthday,
+      })
+        .then((user) => res.status(200).json(user))
+        .catch((e) => res.status(400).json({ error: e.message }));
     }
   } else {
     res.status(422).send("req_method_not_supported");

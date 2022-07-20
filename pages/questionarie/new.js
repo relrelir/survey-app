@@ -15,7 +15,7 @@ export default function NewQuestionariePage() {
           questions: [],
           pointsValue: e.target.pointsValue.value,
         };
-        console.log(data);
+    
         fetch("/api/questionarie", {
           method: "post",
           headers: { "Content-Type": "application/json" },

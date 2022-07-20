@@ -7,7 +7,7 @@ export default function UserById({ user }) {
   //   const {
   //     query: { questionarieId },
   //   } = useRouter();
-  console.log(user);
+
   return <pre>{JSON.stringify(user)}</pre>;
 }
 
