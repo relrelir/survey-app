@@ -17,7 +17,6 @@ import ChooseMonth from "../../components/chooseDate/ChooseMonth";
 import ChooseDay from "../../components/chooseDate/ChooseDay";
 import ChooseYear from "../../components/chooseDate/ChooseYear";
 import ChooseGender from "../../components/chooseGender";
-import { JavascriptOutlined } from "@mui/icons-material";
 
 export async function getServerSideProps({ params, req, res }) {
   const token = await getToken({ req });

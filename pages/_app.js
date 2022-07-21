@@ -7,19 +7,17 @@ import { useRouter } from "next/router";
 import RightMenu from "../components/rightMenu";
 import AppContext from "../contexts/AppContext";
 import "../styles/globals.css";
-
-// const darkTheme = createTheme({
-//   palette: {
-//     mode: "dark",
-//   },
-// });
+import { Drawer } from "@mui/material";
+import SignedInTab from "../components/SignedInTab";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState(0);
   const [phone, setPhone] = useState("");
   const [birthday, setbirthday] = useState("");
   const [gender, setGender] = useState("");
   const [userDetails, setuUserDetails] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [questionaries, setQuestionaries] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -40,14 +38,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           setGender,
           userDetails,
           setuUserDetails,
+          isOpen,
+          setIsOpen,
+          questionaries,
+          setQuestionaries,
         }}
       >
-        <TabContext value={value}>
-          <Header />
-          <Component {...pageProps} />
-
-          {/* <RightMenu /> */}
-        </TabContext>
+        <SignedInTab />
+        <Header />
+        <Component {...pageProps} />
       </AppContext.Provider>
     </SessionProvider>
   );

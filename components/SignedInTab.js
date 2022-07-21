@@ -4,18 +4,30 @@ import TabPanel from "@mui/lab/TabPanel";
 import Stack from "@mui/material/Stack";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { Avatar } from "@mui/material";
+import { Avatar, Drawer } from "@mui/material";
 import Box from "@mui/material/Box";
 import SurviesList from "../components/SurviesList";
 import ControlPointTwoToneIcon from "@mui/icons-material/ControlPointTwoTone";
 import AddNewQuestionarieButton from "./AddNewQuestionarieButton";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import AppContext from "../contexts/AppContext";
+import { useEffect, useState } from "react";
+
 function SignedInTab() {
+  const { isOpen, setIsOpen, questionaries, setQuestionaries } =
+    useContext(AppContext);
   const { data: session } = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    fetch("/api/questionarie")
+      .then((response) => response.json())
+      .then((questionaries) => setQuestionaries(questionaries));
+  }, []);
+
   return (
-    <TabPanel value="1">
+    <Drawer anchor="right" open={isOpen} onClose={() => setIsOpen(false)}>
       <Box
         onClick={() => console.log(session)}
         sx={{
@@ -72,20 +84,7 @@ function SignedInTab() {
           </Button>
         </Stack>
       </Box>
-      <SurviesList />
-      <Link href="/api/auth/signout">
-        <a
-          onClick={(e) => {
-            e.preventDefault();
-            signOut();
-          }}
-        >
-          Sign Out
-        </a>
-      </Link>
-      <Button variant="plain" sx={{ color: "grey" }} onClick={() => signOut()}>
-        Sign Out
-      </Button>
+      <SurviesList questionaries={questionaries} />
 
       <ControlPointTwoToneIcon
         onClick={() => router.push("/questionarie/new")}
@@ -105,7 +104,17 @@ function SignedInTab() {
           },
         }}
       />
-    </TabPanel>
+      <Link href="/api/auth/signout">
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            signOut();
+          }}
+        >
+          Sign Out
+        </a>
+      </Link>
+    </Drawer>
   );
 }
 

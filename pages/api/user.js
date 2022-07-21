@@ -43,7 +43,7 @@ const handler = async (req, res) => {
     }
   } else if (req.method === "GET") {
     const { _id } = req.query;
-
+    console.log("get?User");
     if (_id !== undefined) {
       User.findById(_id)
         .populate("questionarie")

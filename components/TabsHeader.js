@@ -1,72 +1,55 @@
 import TabList from "@mui/lab/TabList";
+import { Tabs } from "@mui/material";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useContext } from "react";
 import AppContext from "../contexts/AppContext";
 
-export default function TabsHeader() {
-  const { value, handleChange, setValue } = useContext(AppContext);
-  const { data: session, status } = useSession();
-  const signUp = "Sign Up";
-  if (!session) {
-    return (
-      <Box>
-        <TabList
-          sx={{ pt: "5%", fontFamily: "Kanit" }}
-          fontSize="large"
-          onChange={handleChange}
-          value={value}
-          aria-label="Tabs where selection follows focus"
-          selectionFollowsFocus
-        >
-          <Tab
-            sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
-            label="Sign In"
-            value="1"
-          />
-        </TabList>
-      </Box>
-    );
-  } else {
-    return (
-      <Box>
-        <TabList
-          sx={{ pt: "5%", fontFamily: "Kanit" }}
-          fontSize="large"
-          onChange={handleChange}
-          value={value}
-          aria-label="Tabs where selection follows focus"
-          selectionFollowsFocus
-        >
-          <Tab
-            sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
-            label="Sign Out"
-            value="1"
-          />
-          <Tab
-            sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
-            label="another tab"
-            value="2"
-          />
-        </TabList>
-      </Box>
-    );
-  }
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={(event) => {
+        event.preventDefault();
+      }}
+      {...props}
+    />
+  );
 }
 
-// //if logged in
-// return (
-//   <Box sx={{ width: '100%' }}>
-//     <Tabs
-//       onChange={handleChange}
-//       value={value}
-//       aria-label="Tabs where selection follows focus"
-//       selectionFollowsFocus
-//     >
+export default function TabsHeader() {
+  const { value, handleChange, setValue } = useContext(AppContext);
 
-//       <Tab label="Go Pro" />
-//       <Tab label="Sign out" />
-//     </Tabs>
-//   </Box>
-// );
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Tabs
+        sx={{ pt: "5%", fontFamily: "Kanit" }}
+        fontSize="large"
+        onChange={handleChange}
+        value={value}
+        aria-label="tabs"
+        selectionFollowsFocus
+      >
+        <Tab
+          sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
+          label="Home page"
+          href="/"
+        />
+
+        <Tab
+          sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
+          label="About The Project"
+          href="/about"
+        />
+
+        <Tab
+          sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
+          label="Contact Us"
+          href="/contact"
+        />
+      </Tabs>
+    </Box>
+  );
+}

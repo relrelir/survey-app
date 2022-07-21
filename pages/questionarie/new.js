@@ -1,11 +1,14 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/joy/TextField";
 import { Box } from "@mui/material";
-
+import { useContext } from "react";
+import AppContext from "../../contexts/AppContext";
 export default function NewQuestionariePage() {
+  const { questionaries, setQuestionaries } = useContext(AppContext);
   return (
     <form
-      action="/api/questionarie"
+      // action="/api/questionarie"
+      href="/api/questionarie"
       method="port"
       onSubmit={(e) => {
         e.preventDefault();
@@ -15,13 +18,14 @@ export default function NewQuestionariePage() {
           questions: [],
           pointsValue: e.target.pointsValue.value,
         };
-    
+
         fetch("/api/questionarie", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         })
           .then((res) => res.json())
+          .then((data) => setQuestionaries((prev) => [...prev, data]))
           .catch(console.error);
       }}
     >

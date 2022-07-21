@@ -3,15 +3,16 @@ import NotificationsTwoToneIcon from "@mui/icons-material/NotificationsTwoTone";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import Button from "@mui/joy/Button";
-import { Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import ForumTwoToneIcon from "@mui/icons-material/ForumTwoTone";
-
-const guest = "Guest";
+import AppContext from "../contexts/AppContext";
 import { useSession } from "next-auth/react";
+import { useContext } from "react";
+const guest = "Guest";
 
-export default function Avater() {
+export default function AvatarTools() {
   const { data: session, status } = useSession();
   return (
     <Stack
@@ -41,6 +42,11 @@ export default function Avater() {
           <NotificationsTwoToneIcon fontSize="large" />
         </Badge>
       </Box>
+      <Avatar
+        alt="Remy Sharp"
+        sx={{ width: 30, height: 30, fontSize: 22 }}
+        src={session?.user.image}
+      />
     </Stack>
   );
 }

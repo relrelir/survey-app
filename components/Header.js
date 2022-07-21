@@ -9,6 +9,11 @@ import Toolbar from "@mui/material/Toolbar";
 import AvatarTools from "../Components/AvatarTools.js";
 import TabsHeader from "./TabsHeader";
 import Logo from "./Logo";
+import LoginButton from "./LoginButton.js";
+import { Button } from "@mui/material";
+import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import AppContext from "../contexts/AppContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -52,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const { isOpen, setIsOpen } = useContext(AppContext);
   return (
     <Box>
       <AppBar position="static" style={{ background: "white" }}>
@@ -74,9 +80,11 @@ export default function Header() {
             }}
           >
             {/* <TabsHeader /> */}
-
-            <AvatarTools />
+            <Button onClick={() => setIsOpen(true)}>
+              <AvatarTools />
+            </Button>
           </Box>
+          <LoginButton />
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
