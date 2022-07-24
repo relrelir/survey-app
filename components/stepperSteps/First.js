@@ -1,22 +1,29 @@
 import TextField from "@mui/joy/TextField";
-import { Button } from "@mui/material";
+import { Button, Stack, Switch, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useState } from "react";
 
-export default function StepperFirst() {
+export default function StepperFirst({ dataFirst, setDataFirst }) {
+  const [isQuize, setIsQuize] = useState(false);
+  const handleIsQuizeChange = (e) => {
+    setIsQuize(!isQuize);
+    console.log("isQuize", isQuize);
+  };
   return (
     <form
-      // action="/api/questionarie"
+      action="/api/questionarie"
       href="/api/questionarie"
       method="port"
       onSubmit={(e) => {
         e.preventDefault();
-        let data = {
+        setDataFirst({
           title: e.target.title.value,
           introduction: e.target.introduction.value,
+          isQuize: isQuize,
           questions: [],
           pointsValue: e.target.pointsValue.value,
-        };
-
+        });
+        console.log("dataFirst", dataFirst);
         fetch("/api/questionarie", {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -27,7 +34,6 @@ export default function StepperFirst() {
           .catch(console.error);
       }}
     >
-      <br />
       <Box
         sx={{
           display: "flex",
@@ -47,11 +53,9 @@ export default function StepperFirst() {
           name="title"
           type="title"
           placeholder="Title"
-          // onChange={handleChange}
+          // onChange={(e) => e.target.title.value}
         />
-
-        <br />
-
+        {/* {console.log(questionarie?.title)} */}
         <TextField
           className="input"
           variant="standard"
@@ -63,6 +67,17 @@ export default function StepperFirst() {
           // onChange={handleChange}
         />
 
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Typography>Survey</Typography>
+          <Switch
+            value={isQuize}
+            onChange={handleIsQuizeChange}
+            defaultChecked
+            inputProps={{ "aria-label": "ant design" }}
+          />
+          <Typography>Quize</Typography>
+        </Stack>
+
         <TextField
           fullWidth
           className="input"
@@ -72,24 +87,7 @@ export default function StepperFirst() {
           placeholder="PointsValue"
           // onChange={handleChange}
         />
-        {/* <Button
-          // onClick={handleNext}
-          sx={{
-            mx: "50%",
-          }}
-          type="submit"
-          variant="contained"
-          color="success"
-        >
-          Create
-        </Button> */}
-        {/* <Button onClick={handleNext} sx={{ mx: "50%" }}>
-    Next
-  </Button> */}
-        {/* <Button onClick={handleBack} sx={{ mx: "50%" }}>
-    Back
-  </Button> */}
-      </Box>{" "}
+      </Box>
     </form>
   );
 }

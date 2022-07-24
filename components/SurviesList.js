@@ -18,7 +18,7 @@ function SurviesTitleList() {
       {questionaries.length > 0 &&
         questionaries.map((questionarie) => {
           return (
-            <>
+            <Box key={questionarie._id}>
               <Box
                 onClick={() => {
                   router.push({
@@ -28,7 +28,6 @@ function SurviesTitleList() {
                     setIsOpen(false),
                     console.log(questionarie._id);
                 }}
-                key={`Title${questionarie._id}`}
                 sx={{
                   my: "8px",
                   width: "363px",
@@ -47,7 +46,6 @@ function SurviesTitleList() {
                 <h1>{questionarie.title} </h1>
               </Box>
               <Button
-                key={`Delete${questionarie._id}`}
                 sx={{
                   mr: "74%",
                   "&:hover": {
@@ -64,7 +62,7 @@ function SurviesTitleList() {
               {/* <Button onClick={() => deleteQuestionarie(questionarie._id)}>
                 DELETE
               </Button> */}
-            </>
+            </Box>
           );
         })}
     </>

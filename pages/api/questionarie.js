@@ -5,7 +5,7 @@ import User from "../../models/user";
 const secret = process.env.NEXTAUTH_SECRET;
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    const { title, introduction, questions, pointsValue } = req.body;
+    const { title, introduction, isQuize, questions, pointsValue } = req.body;
     const token = await getToken({ req, secret });
     const userId = token.sub;
 

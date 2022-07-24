@@ -3,7 +3,7 @@ import { Button, Stack, Switch, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
 
@@ -28,13 +28,13 @@ export default function Answers({ answers, setAnswers }) {
       </Stack>
 
       <h1>Set Answers</h1>
-      <br />
-      <FormControl sx={{ display: "flex", flexDirection: "row" }}>
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
+
+      <FormControl>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
           {
             // answers.length > 0 &&
             answers?.map((answer, index) => (
-              <div key={answer._id}>
+              <div key={answer?._id}>
                 <Checkbox
                   checked={answer.isCorrect}
                   onChange={(e) => {
@@ -86,12 +86,6 @@ export default function Answers({ answers, setAnswers }) {
               </div>
             ))
           }
-          <Button
-            variant="contained"
-            // onClick={}
-          >
-            Add Question
-          </Button>
         </Box>
       </FormControl>
     </>

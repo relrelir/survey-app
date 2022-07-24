@@ -12,6 +12,10 @@ export const QuestionarieSchema = new Schema({
     type: String,
     required: false,
   },
+  isQuize: {
+    type: Boolean,
+    default: false,
+  },
 
   questions: [
     {

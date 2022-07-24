@@ -9,6 +9,8 @@ import StepperSecond from "../../components/stepperSteps/Second";
 export default function NewQuestionariePage() {
   const { questionaries, setQuestionaries } = useContext(AppContext);
   const [activeStep, setActiveStep] = useState(0);
+  const [dataFirst, setDataFirst] = useState({});
+  const [dataSecond, setDataSecond] = useState({});
   const handleNext = () => {
     const newActiveStep = activeStep < 3 ? activeStep + 1 : activeStep;
     setActiveStep(newActiveStep);
@@ -16,6 +18,7 @@ export default function NewQuestionariePage() {
   const handleBack = () => {
     const newActiveStep = activeStep > 0 ? activeStep - 1 : activeStep;
     setActiveStep(newActiveStep);
+    console.log("dataFirst", dataFirst);
   };
   return (
     <>
@@ -32,44 +35,53 @@ export default function NewQuestionariePage() {
         }}
       >
         {activeStep === 0 ? (
-          <StepperFirst />
+          <StepperFirst dataFirst={dataFirst} setDataFirst={setDataFirst} />
         ) : activeStep === 1 ? (
-          <StepperSecond />
+          <StepperSecond
+            dataSecond={dataSecond}
+            setDataSecond={setDataSecond}
+          />
         ) : (
           <StepperSecond />
         )}
-        <Box
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Button
+          onClick={handleNext}
           sx={{
-            display: "flex",
-            flexDirection: "column",
+            position: "fixed",
+            bottom: "20%",
+            right: "15%",
           }}
         >
-          <Button
-            onClick={handleNext}
-            sx={{
-              position: "fixed",
-              bottom: "20%",
-              right: "15%",
-            }}
-          >
-            Next
-          </Button>
-          <Button
-            sx={{
-              position: "fixed",
-              bottom: "20%",
-              left: "15%",
-            }}
-            onClick={handleBack}
-          >
-            Back
-          </Button>
-        </Box>
-
-        {/* <Button onClick={handleNext} sx={{ mr: 1 }}>
-        Next
-      </Button> */}
+          Next
+        </Button>
+        <Button
+          sx={{
+            position: "fixed",
+            bottom: "20%",
+            left: "35%",
+          }}
+          onClick={handleBack}
+        >
+          Back
+        </Button>
       </Box>
+      <Button
+        sx={{
+          mx: "50%",
+        }}
+        type="submit"
+        variant="contained"
+        color="success"
+      >
+        Create
+      </Button>
     </>
   );
 }
