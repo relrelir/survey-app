@@ -25,7 +25,7 @@ const handler = async (req, res) => {
         const questionarieCreated = await questionarie.save();
         res.status(200).json(questionarieCreated);
       } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send(error.messege);
       }
     } else {
       res.status(422).send("data_incomplete");

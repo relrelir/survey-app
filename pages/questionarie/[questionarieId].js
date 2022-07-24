@@ -6,8 +6,8 @@ export default function questionarieByIdPage({ questionarie }) {
   //   const {
   //     query: { questionarieId },
   //   } = useRouter();
-
-  return <pre>{JSON.stringify(questionarie)}</pre>;
+  questionarie = JSON.stringify(questionarie);
+  return questionarie;
 }
 
 export async function getServerSideProps({ params, req, res }) {

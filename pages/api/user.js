@@ -36,7 +36,7 @@ const handler = async (req, res) => {
         res.status(200).send(userCreated);
       } catch (error) {
         console.log("fail");
-        res.status(500).send(error.message);
+        res.status(500).send(error.messege);
       }
     } else {
       res.status(422).send("data_incomplete");
@@ -84,7 +84,7 @@ const handler = async (req, res) => {
         birthday,
       })
         .then((user) => res.status(200).json(user))
-        .catch((e) => res.status(400).json({ error: e.message }));
+        .catch((e) => res.status(400).json({ error: e.messege }));
     }
   } else {
     res.status(422).send("req_method_not_supported");
@@ -134,7 +134,7 @@ export default connectDB(handler);
 //     //   // httpOnly: true,
 //     // });
 
-//     return res.status(200).json({ message: "ok" });
+//     return res.status(200).json({ messege: "ok" });
 
 //     // const {
 //     //   userName,
@@ -166,7 +166,7 @@ export default connectDB(handler);
 //     //     const userCreated = await user.save();
 //     //     res.status(200).send(userCreated);
 //     //   } catch (error) {
-//     //     res.status(500).send(error.message);
+//     //     res.status(500).send(error.messege);
 //     //   }
 //     // } else {
 //     //   res.status(422).send("data_incomplete");

@@ -21,7 +21,7 @@ const editUserHandler = async (req, res) => {
         birthday,
       })
         .then((user) => res.status(200).json(user))
-        .catch((e) => res.status(400).json({ error: e.message }));
+        .catch((e) => res.status(400).json({ error: e.messege }));
     }
   } else {
     res.status(422).send("req_method_not_supported");

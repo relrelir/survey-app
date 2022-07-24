@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AppContext from "../contexts/AppContext";
 
 function LinkTab(props) {
@@ -20,7 +20,11 @@ function LinkTab(props) {
 }
 
 export default function TabsHeader() {
-  const { value, handleChange, setValue } = useContext(AppContext);
+  const [value, setValue] = useState(0);
+  // const { value, setValue } = useContext(AppContext);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Box sx={{ width: "100%" }}>

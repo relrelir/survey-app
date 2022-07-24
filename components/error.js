@@ -1,3 +1,3 @@
-export default function ErrorMessage({ message }) {
-  return message ? <p sx={{ color: "red" }}>{message}</p> : <></>;
+export default function Errormessege({ messege }) {
+  return messege ? <p sx={{ color: "red" }}>{messege}</p> : <></>;
 }

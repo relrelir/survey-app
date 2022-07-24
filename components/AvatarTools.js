@@ -13,6 +13,8 @@ import { useContext } from "react";
 const guest = "Guest";
 
 export default function AvatarTools() {
+  const { isOpen, setIsMessegesOpen, isMessegesOpen, setIsOpen } =
+    useContext(AppContext);
   const { data: session, status } = useSession();
   return (
     <Stack
@@ -34,7 +36,10 @@ export default function AvatarTools() {
     >
       <Box sx={{ pr: 2, fontSize: 22 }}>
         <Badge sx={{ fontSize: 22 }} badgeContent={10} color="error">
-          <ForumTwoToneIcon fontSize="large" />
+          <ForumTwoToneIcon
+            onClick={() => setIsMessegesOpen(!isMessegesOpen)}
+            fontSize="large"
+          />
         </Badge>
       </Box>
       <Box sx={{ pr: 4, fontSize: 22 }}>
@@ -43,8 +48,18 @@ export default function AvatarTools() {
         </Badge>
       </Box>
       <Avatar
+        onClick={() => setIsOpen(!isOpen)}
         alt="Remy Sharp"
-        sx={{ width: 30, height: 30, fontSize: 22 }}
+        sx={{
+          width: 80,
+          height: 80,
+          fontSize: 22,
+          "&:hover": {
+            boxShadow: "0px 8px 8px rgba(0.0, 0.0, 0.0, 0.7)",
+            // opacity: [0.9, 0.9, 0.9],
+            cursor: "pointer",
+          },
+        }}
         src={session?.user.image}
       />
     </Stack>

@@ -11,7 +11,7 @@ const handler = async (req, res) => {
         const questionCreated = await question.save();
         res.status(200).send(questionCreated);
       } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send(error.messege);
       }
     } else {
       res.status(422).send("data_incomplete");

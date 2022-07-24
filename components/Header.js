@@ -57,19 +57,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const { isOpen, setIsOpen } = useContext(AppContext);
+  const { data: session, status } = useSession();
+  // const { isOpen, setIsOpen } = useContext(AppContext);
+
   return (
     <Box>
       <AppBar position="static" style={{ background: "white" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            aria-label="open drawer"
-            sx={{ mr: "2%", color: "#42A5F5" }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Logo />
 
           <Box sx={{ flexGrow: 1 }} />
@@ -79,12 +73,14 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            {/* <TabsHeader /> */}
-            <Button onClick={() => setIsOpen(true)}>
+            <TabsHeader />
+            {session && (
+              // <Button onClick={() => setIsOpen(true)}>
               <AvatarTools />
-            </Button>
+              // </Button>
+            )}
+            {!session && <LoginButton />}
           </Box>
-          <LoginButton />
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
@@ -161,7 +157,7 @@ export default function Header() {
 //           <MailIcon />
 //         </Badge>
 //       </IconButton>
-//       <p>Messages</p>
+//       <p>messeges</p>
 //     </MenuItem>
 //     <MenuItem>
 //       <IconButton

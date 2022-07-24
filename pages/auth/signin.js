@@ -18,7 +18,8 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import Logo from "../../components/Logo";
 import { getToken } from "next-auth/jwt";
-import ErrorMessage from "../../components/error";
+import Errormessege from "../../components/error";
+import { Paper } from "@mui/material";
 
 const NEXTAUTH_SIGNIN_ERROS = {
   Signin: "Try signing in with a different account.",
@@ -39,7 +40,7 @@ const NEXTAUTH_SIGNIN_ERROS = {
 export default function SignInPage({ csrfToken }) {
   const { query } = useRouter();
 
-  const errorMessage =
+  const errormessege =
     NEXTAUTH_SIGNIN_ERROS[query.error] || NEXTAUTH_SIGNIN_ERROS.default;
   const { data: session } = useSession();
   const {
@@ -99,9 +100,23 @@ export default function SignInPage({ csrfToken }) {
     );
   }
   return (
-    <Sheet
+    <Paper
+      elevation={3}
       variant="none"
       sx={{
+        // my: "38px",
+        // width: "370px",
+        // height: "131px",
+        backgroundColor: "#FFFFFF",
+        borderRadius: "18px",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        // transform: "matrix(-1, 0, 0, 1, 0, 0)",
+
+        "&:hover": {
+          boxShadow: "4px 16px 16px rgba(0, 0, 0, 0.7)",
+          opacity: [0.9, 0.9, 0.9],
+        },
+
         maxWidth: 400,
         mx: "auto",
         my: 4,
@@ -110,12 +125,12 @@ export default function SignInPage({ csrfToken }) {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        borderRadius: "sm",
-        boxShadow: "md",
+        // borderRadius: "sm",
+        // boxShadow: "md",
       }}
     >
       <Logo />
-      <ErrorMessage message={errorMessage}></ErrorMessage>
+      <Errormessege messege={errormessege}></Errormessege>
       <form
         action="/api/auth/signin/email"
         method="POST"
@@ -133,13 +148,23 @@ export default function SignInPage({ csrfToken }) {
           variant="filled"
           id="email"
           autoFocus
-          type="email"
+          // type="email"
           name="email"
           placeholder="email@example.com"
           required
-          label="email"
+          // label="email"
         />
-        <Button type="submit" variant="contained" color="success">
+
+        <Button
+          sx={{
+            mt: 1, // margin top
+            background: "#1374F9",
+            borderRadius: "34px",
+          }}
+          type="submit"
+          variant="contained"
+          color="success"
+        >
           Sign in with Email
         </Button>
       </form>
@@ -155,14 +180,7 @@ export default function SignInPage({ csrfToken }) {
         <SocialButtonComponent provider="github" />
         <SocialButtonComponent provider="facebook" />
       </Box>
-      <Typography
-        // endDecorator=
-        fontSize="m"
-        sx={{ alignSelf: "center" }}
-      >
-        have an account? {<Link href="/api/auth/signin">Sign in</Link>} with:
-      </Typography>
-    </Sheet>
+    </Paper>
   );
 }
 

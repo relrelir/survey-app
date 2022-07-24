@@ -4,15 +4,16 @@ import TabPanel from "@mui/lab/TabPanel";
 import Stack from "@mui/material/Stack";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { Avatar, Drawer } from "@mui/material";
+import { Avatar, Drawer, Fab } from "@mui/material";
 import Box from "@mui/material/Box";
-import SurviesList from "../components/SurviesList";
+import SurviesList from "./SurviesList";
 import ControlPointTwoToneIcon from "@mui/icons-material/ControlPointTwoTone";
 import AddNewQuestionarieButton from "./AddNewQuestionarieButton";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import AppContext from "../contexts/AppContext";
 import { useEffect, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 
 function SignedInTab() {
   const { isOpen, setIsOpen, questionaries, setQuestionaries } =
@@ -29,7 +30,9 @@ function SignedInTab() {
   return (
     <Drawer anchor="right" open={isOpen} onClose={() => setIsOpen(false)}>
       <Box
-        onClick={() => console.log(session)}
+        onClick={() => (
+          console.log(session), router.push("/user/edit"), setIsOpen(false)
+        )}
         sx={{
           my: "38px",
           width: "370px",
@@ -84,9 +87,38 @@ function SignedInTab() {
           </Button>
         </Stack>
       </Box>
-      <SurviesList questionaries={questionaries} />
+      <Link href="/api/auth/signout">
+        <a
+          onClick={(e) => (
+            e.preventDefault(),
+            router.push("/auth/signin"),
+            signOut(),
+            setIsOpen(false)
+          )}
+        >
+          Sign Out
+        </a>
+      </Link>
+      <SurviesList sx={{ mt: "100px" }} />
 
-      <ControlPointTwoToneIcon
+      <Fab
+        color="primary"
+        sx={{
+          boxShadow: "0px 8px 8px rgba(0.7, 0, 0, 0.7)",
+          position: "absolute",
+          bottom: (theme) => theme.spacing(7),
+          right: (theme) => theme.spacing(5),
+          "&:hover": {
+            backgroundColor: "#002984",
+            opacity: [0.0, 0.0, 0.9],
+          },
+        }}
+      >
+        <AddIcon
+          onClick={() => (setIsOpen(false), router.push("/questionarie/new"))}
+        />
+      </Fab>
+      {/* <ControlPointTwoToneIcon
         onClick={() => router.push("/questionarie/new")}
         sx={{
           fontSize: 100,
@@ -103,17 +135,7 @@ function SignedInTab() {
             cursor: "pointer",
           },
         }}
-      />
-      <Link href="/api/auth/signout">
-        <a
-          onClick={(e) => {
-            e.preventDefault();
-            signOut();
-          }}
-        >
-          Sign Out
-        </a>
-      </Link>
+      /> */}
     </Drawer>
   );
 }

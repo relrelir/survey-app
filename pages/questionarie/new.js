@@ -1,85 +1,75 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/joy/TextField";
-import { Box } from "@mui/material";
-import { useContext } from "react";
+import { Box, Stepper } from "@mui/material";
+import { useContext, useState } from "react";
 import AppContext from "../../contexts/AppContext";
+import HorizontalStepper from "../../components/HorizontalStepper";
+import StepperFirst from "../../components/stepperSteps/First";
+import StepperSecond from "../../components/stepperSteps/Second";
 export default function NewQuestionariePage() {
   const { questionaries, setQuestionaries } = useContext(AppContext);
+  const [activeStep, setActiveStep] = useState(0);
+  const handleNext = () => {
+    const newActiveStep = activeStep < 3 ? activeStep + 1 : activeStep;
+    setActiveStep(newActiveStep);
+  };
+  const handleBack = () => {
+    const newActiveStep = activeStep > 0 ? activeStep - 1 : activeStep;
+    setActiveStep(newActiveStep);
+  };
   return (
-    <form
-      // action="/api/questionarie"
-      href="/api/questionarie"
-      method="port"
-      onSubmit={(e) => {
-        e.preventDefault();
-        let data = {
-          title: e.target.title.value,
-          introduction: e.target.introduction.value,
-          questions: [],
-          pointsValue: e.target.pointsValue.value,
-        };
-
-        fetch("/api/questionarie", {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((data) => setQuestionaries((prev) => [...prev, data]))
-          .catch(console.error);
-      }}
-    >
-      <br />
+    <>
+      <HorizontalStepper
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        sx={{ mt: "10px" }}
+      />
       <Box
         sx={{
-          position: "flex",
-          alignContent: "center",
-          width: "968px",
-          height: "875px",
-
-          background: "#FFFFFF",
-          borderRadius: "40px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
-        <TextField
-          fullWidth
-          className="input"
-          variant="standard"
-          name="title"
-          type="title"
-          placeholder="Title"
-          // onChange={handleChange}
-        />
+        {activeStep === 0 ? (
+          <StepperFirst />
+        ) : activeStep === 1 ? (
+          <StepperSecond />
+        ) : (
+          <StepperSecond />
+        )}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Button
+            onClick={handleNext}
+            sx={{
+              position: "fixed",
+              bottom: "20%",
+              right: "15%",
+            }}
+          >
+            Next
+          </Button>
+          <Button
+            sx={{
+              position: "fixed",
+              bottom: "20%",
+              left: "15%",
+            }}
+            onClick={handleBack}
+          >
+            Back
+          </Button>
+        </Box>
 
-        <br />
-        <span>
-          <TextField
-            className="input"
-            variant="standard"
-            name="introduction"
-            type="introduction"
-            placeholder="Introduction"
-            multiline="true"
-            rows={4}
-            // onChange={handleChange}
-          />
-
-          <TextField
-            fullWidth
-            className="input"
-            variant="standard"
-            name="pointsValue"
-            type="number"
-            placeholder="PointsValue"
-            // onChange={handleChange}
-          />
-        </span>
-
-        <br />
-        <Button type="submit" variant="contained" color="success">
-          Create
-        </Button>
+        {/* <Button onClick={handleNext} sx={{ mr: 1 }}>
+        Next
+      </Button> */}
       </Box>
-    </form>
+    </>
   );
 }

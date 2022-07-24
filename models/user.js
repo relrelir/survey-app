@@ -1,6 +1,6 @@
 import mongoose, { Schema, ObjectId } from "mongoose";
 import VerificationToken from "./verification-token";
-import Message from "./message";
+import messege from "./messege";
 import Alert from "./alert";
 // import Questionarie from "./questionarie";
 
@@ -49,10 +49,10 @@ const UserSchema = new Schema({
     default: 0,
     // max: 100,
   },
-  messages: [
+  messeges: [
     {
       type: ObjectId,
-      ref: Message,
+      ref: messege,
     },
   ],
   alerts: [
