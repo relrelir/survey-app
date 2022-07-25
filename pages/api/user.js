@@ -1,5 +1,4 @@
 import connectDB from "../../middlware/mongodb";
-import bcrypt from "bcrypt";
 import User from "../../models/user";
 import questionaries from "../../models/questionarie";
 import { getToken } from "next-auth/jwt";

@@ -36,7 +36,7 @@ export default function ChooseYear({ setYear, year }) {
               value={year}
               label="year"
               onChange={(e) => setYear(e.target.value)}
-              placeFolder="select"
+              placefolder="select"
             >
               {years.map((i) => (
                 <MenuItem key={i} value={i}>

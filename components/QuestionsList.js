@@ -8,30 +8,32 @@ export default function QuestionsList({
   dataSecond,
   handleSideTabChange,
   sideTabvalue,
-  setSideTabValue,
+  questions,
+  setQuestions,
 }) {
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        left: 0,
-        top: 0,
-        my: "16%",
-        ml: "1.5%",
+    // <Box
+    //   sx={{
+    //     position: "fixed",
+    //     left: 0,
+    //     top: 0,
+    //     my: "16%",
+    //     ml: "1.5%",
 
-        width: "25%",
-        height: "75%",
-        backgroundColor: "#FFFFFF",
-        borderRadius: "18px",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-        // transform: "matrix(-1, 0, 0, 1, 0, 0)",
+    //     width: "25%",
+    //     height: "75%",
+    //     backgroundColor: "#FFFFFF",
+    //     borderRadius: "18px",
+    //     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    //     // transform: "matrix(-1, 0, 0, 1, 0, 0)",
 
-        "&:hover": {
-          boxShadow: "4px 16px 16px rgba(0, 0, 0, 0.7)",
-          opacity: [0.9, 0.9, 0.9],
-        },
-      }}
-    >
+    //     "&:hover": {
+    //       boxShadow: "4px 16px 16px rgba(0, 0, 0, 0.7)",
+    //       opacity: [0.9, 0.9, 0.9],
+    //     },
+    //   }}
+    // >
+    <>
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -40,12 +42,14 @@ export default function QuestionsList({
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
-        {dataSecond.length > 0 &&
-          dataSecond.map((question, index) => {
+        {questions.length > 0 &&
+          questions.map((question, index) => {
             return (
               <Tab
                 key={index}
-                label={`${dataSecond?.title ? dataSecond?.title : "add"}`}
+                label={`${
+                  question[index]?.title ? question[index]?.title : "..."
+                }`}
                 sx={{ color: "blue" }}
               />
             );
@@ -53,11 +57,11 @@ export default function QuestionsList({
       </Tabs>
 
       <Button
-        sx={{ my: "5px" }}
+        sx={{ my: "5px", mr: "73%", ml: "3%" }}
         variant="contained"
         onClick={() =>
-          setDataSecond([
-            ...dataSecond,
+          setQuestions([
+            ...questions,
             {
               title: "",
               introduction: "",
@@ -76,6 +80,7 @@ export default function QuestionsList({
       >
         Add Question
       </Button>
-    </Box>
+    </>
+    // </Box>
   );
 }

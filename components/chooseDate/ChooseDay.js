@@ -27,7 +27,7 @@ export default function ChooseDay({ setDay, day }) {
               value={day}
               label="day"
               onChange={(e) => setDay(e.target.value)}
-              placeFolder="select"
+              placefolder="select"
             >
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>

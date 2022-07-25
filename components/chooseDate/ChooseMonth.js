@@ -24,7 +24,7 @@ export default function ChooseMonth({ setMonth, month }) {
               value={month}
               label="month"
               onChange={(e) => setMonth(e.target.value)}
-              placeFolder="select"
+              placefolder="select"
             >
               <MenuItem value={1}>January</MenuItem>
               <MenuItem value={2}>February</MenuItem>

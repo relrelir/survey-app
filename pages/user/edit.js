@@ -2,10 +2,14 @@ import {
   Avatar,
   Button,
   FormControl,
+  Grid,
+  Input,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import User from "../../models/user";
@@ -86,75 +90,203 @@ export default function EditUserPage({ user }) {
       body: JSON.stringify({ name, email, gender, phone, birthday }),
     }).catch((res) => console.error(res.error));
   return (
-    <Box>
+    <Paper
+      sx={{
+        position: "absolute",
+        left: "308px",
+        top: "194px",
+        width: "1087px",
+        height: "811px",
+        background: "rgba(255, 255, 255, 0.85)",
+        boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+        borderRadius: "25px",
+      }}
+    >
       <form onSubmit={(e) => (e.preventDefault(), updateUser())}>
-        <Box
+        {/* <Button variant="text" aria-label="Remove"></Button> */}
+        <Avatar
+          alt="Remy Sharp"
           sx={{
-            display: "flex",
-            flexDirection: "row-reverse",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <Button variant="text" aria-label="Remove">
-            <Box sx={{ width: "14px", height: "14px" }}>
-              <Box>
-                <br />
-              </Box>
-            </Box>
-          </Button>
-          <Avatar
-            alt="Remy Sharp"
-            sx={{ width: 90, height: 90, fontSize: 22 }}
-            src={user?.image}
-          />
-        </Box>
-        <Button variant="contained">Upload New</Button>
-        <Button
-          id="library-profile-picture-btn"
-          data-event-category="ProfileSettings"
-          data-event-label="library-profile-picture-btn"
-        >
-          Choose from library
-        </Button>
-        <Box sx={{ minWidth: 120 }}>
-          <ChooseYear setYear={setYear} year={year} />
-          <ChooseMonth setMonth={setMonth} month={month} />
-          <ChooseDay setDay={setDay} day={day} />
-          <ChooseGender gender={gender} setGender={setGender} />
+            position: "absolute",
+            width: "220px",
+            height: "220px",
+            // left: "446px",
+            // top: "349px",
+            mt: "155px",
+            ml: "138px",
+            mr: "729px",
+            mb: "436px",
 
-          <div>
-            <button id="submit" name="submit" type="submit">
-              <span>Save Changes</span>
-            </button>
-          </div>
-        </Box>
-        <Box>
-          <TextField
-            className="input"
-            variant="filled"
-            name="name"
-            type="name"
-            placeholder="name"
-            onChange={handleChangeName}
-          />
-          <TextField
-            className="input"
-            variant="filled"
-            name="email"
-            type="email"
-            placeholder="email"
-            onChange={handleChangeEmail}
-          />
-          <TextField
-            className="input"
-            variant="filled"
-            name="phone"
-            type="phone"
-            placeholder="phone"
-            onChange={handleChangePhone}
-          />
-        </Box>
+            border: "6px solid #1374F9",
+            borderRadius: "206px",
+          }}
+          src={user?.image}
+        />
+
+        <Button
+          sx={{
+            position: "absolute",
+            width: "153px",
+            height: "41px",
+            mt: "356px",
+            ml: "174px",
+            mr: "760px",
+            mb: "414px",
+            // left: "482px",
+            // top: "550px",
+
+            // background: "#1374F9",
+            borderRadius: "40px",
+          }}
+          variant="contained"
+          size="large"
+          color="primary"
+        >
+          <Typography
+            sx={{
+              fontFamily: "Kanit",
+              fontStyle: "normal",
+              fontWeight: 800,
+              fontSize: "30px",
+              lineHeight: "45px",
+              /* identical to box height */
+
+              color: "#FFFFFF",
+              textTransform: "none",
+            }}
+          >
+            Change
+          </Typography>
+        </Button>
+
+        <ChooseYear setYear={setYear} year={year} />
+        <ChooseMonth setMonth={setMonth} month={month} />
+        <ChooseDay
+          sx={{
+            boxSizing: "border-box",
+
+            position: "absolute",
+            width: "120px",
+            height: "57px",
+
+            background: "#FFFFFF",
+            border: "1px solid #1374F9",
+            borderRadius: "0px 20px 20px 0px",
+          }}
+          setDay={setDay}
+          day={day}
+        />
+        <ChooseGender gender={gender} setGender={setGender} />
+
+        <Button
+          sx={{
+            position: "absolute",
+            width: "313px",
+            height: "69px",
+            mt: "642px",
+            // ml: "408px",
+            mr: "366px",
+            mb: "100px",
+            // left: "482px",
+            // top: "550px",
+
+            // background: "#1374F9",
+            borderRadius: "40px",
+          }}
+          variant="contained"
+          size="large"
+          color="primary"
+          id="submit"
+          name="submit"
+          type="submit"
+        >
+          <Typography
+            sx={{
+              fontFamily: "Kanit",
+              fontStyle: "normal",
+              fontWeight: 400,
+              fontSize: "35px",
+              lineHeight: "52px",
+              /* identical to box height */
+
+              color: "#FFFFFF",
+              textTransform: "none",
+            }}
+          >
+            Save Changes
+          </Typography>
+        </Button>
+
+        <Input
+          // className="input"
+          variant="filled"
+          name="name"
+          type="text"
+          placeholder="Name"
+          onChange={handleChangeName}
+          sx={{
+            boxSizing: "border-box",
+
+            position: "absolute",
+            width: "456px",
+            height: "72px",
+            mt: "149px",
+            // ml: "486px",
+            mr: "145px",
+            mb: "590px",
+
+            background: "#FFFFFF",
+            border: "2px solid #1374F9",
+            borderRadius: "40px",
+          }}
+        />
+        <Input
+          // className="input"
+          variant="filled"
+          name="email"
+          type="email"
+          placeholder="email"
+          onChange={handleChangeEmail}
+          sx={{
+            boxSizing: "border-box",
+
+            position: "absolute",
+            width: "456px",
+            height: "72px",
+            mt: "247px",
+            // ml: "486px",
+            mr: "145px",
+            mb: "492px",
+
+            background: "#FFFFFF",
+            border: "2px solid #1374F9",
+            borderRadius: "40px",
+          }}
+        />
+        <Input
+          // className="input"
+          variant="filled"
+          name="phone"
+          type="tel"
+          placeholder="phone"
+          onChange={handleChangePhone}
+          sx={{
+            boxSizing: "border-box",
+
+            position: "absolute",
+            width: "456px",
+            height: "72px",
+            mt: "345px",
+            // ml: "486px",
+            mr: "145px",
+            mb: "394px",
+
+            background: "#FFFFFF",
+            border: "2px solid #1374F9",
+            borderRadius: "40px",
+          }}
+        />
       </form>
-    </Box>
+    </Paper>
   );
 }
