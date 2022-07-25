@@ -12,7 +12,7 @@ export const AnswerSchema = new Schema({
   },
   isCorrect: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   pointsValue: {
     type: Number,

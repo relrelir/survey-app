@@ -1,11 +1,8 @@
-import TabList from "@mui/lab/TabList";
 import { Tabs } from "@mui/material";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useContext, useState } from "react";
-import AppContext from "../contexts/AppContext";
+import { useState } from "react";
+import { TabLink } from "./TabLink";
 
 function LinkTab(props) {
   return (
@@ -36,22 +33,36 @@ export default function TabsHeader() {
         aria-label="tabs"
         selectionFollowsFocus
       >
-        <Tab
-          sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
+        <TabLink
+          sx={{
+            fontSize: 33,
+            textTransform: "none",
+            fontFamily: "Kanit",
+            color: "black",
+          }}
           label="Home page"
           href="/"
         />
-
-        <Tab
-          sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
+        <TabLink
+          sx={{
+            fontSize: 33,
+            textTransform: "none",
+            fontFamily: "Kanit",
+            color: "black",
+          }}
           label="About The Project"
           href="/about"
         />
-
-        <Tab
-          sx={{ fontSize: 33, textTransform: "none", fontFamily: "Kanit" }}
+        <TabLink
+          sx={{
+            fontSize: 33,
+            textTransform: "none",
+            fontFamily: "Kanit",
+            color: "black",
+          }}
           label="Contact Us"
           href="/contact"
+          value={2}
         />
       </Tabs>
     </Box>

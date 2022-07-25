@@ -8,6 +8,8 @@ import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
 
 export default function Answers({ answers, setAnswers }) {
+  console.log("answers", answers);
+
   const [areOptions, setAreOptions] = useState(true);
   const handleAreOptionsChange = (e) => {
     setAreOptions(!areOptions);
@@ -31,10 +33,9 @@ export default function Answers({ answers, setAnswers }) {
 
       <FormControl>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          {
-            // answers.length > 0 &&
+          {answers.length > 0 &&
             answers?.map((answer, index) => (
-              <div key={answer?._id}>
+              <Box key={answer?._id ? answer?._id : index}>
                 <Checkbox
                   checked={answer.isCorrect}
                   onChange={(e) => {
@@ -65,7 +66,7 @@ export default function Answers({ answers, setAnswers }) {
                   id="standard-basic"
                   variant="standard"
                 />
-                {/* <br /> */}
+
                 <TextField
                   value={answer.pointsValue}
                   type="number"
@@ -83,9 +84,8 @@ export default function Answers({ answers, setAnswers }) {
                   id="standard-basic"
                   variant="standard"
                 />
-              </div>
-            ))
-          }
+              </Box>
+            ))}
         </Box>
       </FormControl>
     </>

@@ -9,8 +9,29 @@ import StepperSecond from "../../components/stepperSteps/Second";
 export default function NewQuestionariePage() {
   const { questionaries, setQuestionaries } = useContext(AppContext);
   const [activeStep, setActiveStep] = useState(0);
-  const [dataFirst, setDataFirst] = useState({});
-  const [dataSecond, setDataSecond] = useState({});
+  const [dataFirst, setDataFirst] = useState({
+    title: "",
+    introduction: "",
+    isQuize: false,
+    questions: [],
+    pointsValue: 0,
+    // author: {}
+  });
+  const [dataSecond, setDataSecond] = useState([
+    {
+      title: "",
+      introduction: "",
+      answers: [
+        {
+          areOptions: true,
+          content: "",
+          isCorrect: false,
+          pointsValue: 0,
+          // users: [{}],
+        },
+      ],
+    },
+  ]);
   const handleNext = () => {
     const newActiveStep = activeStep < 3 ? activeStep + 1 : activeStep;
     setActiveStep(newActiveStep);
@@ -18,7 +39,6 @@ export default function NewQuestionariePage() {
   const handleBack = () => {
     const newActiveStep = activeStep > 0 ? activeStep - 1 : activeStep;
     setActiveStep(newActiveStep);
-    console.log("dataFirst", dataFirst);
   };
   return (
     <>
@@ -37,12 +57,18 @@ export default function NewQuestionariePage() {
         {activeStep === 0 ? (
           <StepperFirst dataFirst={dataFirst} setDataFirst={setDataFirst} />
         ) : activeStep === 1 ? (
-          <StepperSecond
-            dataSecond={dataSecond}
-            setDataSecond={setDataSecond}
-          />
+          <>
+            <StepperSecond
+              dataSecond={dataSecond}
+              setDataSecond={setDataSecond}
+            />{" "}
+            {console.log("dataFirst", dataFirst)}
+          </>
         ) : (
-          <StepperSecond />
+          <>
+            <StepperSecond />
+            {console.log("dataSecond", dataSecond)}
+          </>
         )}
       </Box>
       <Box

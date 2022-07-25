@@ -7,11 +7,11 @@ export default function MessegesDrawer() {
   const { isMessegesOpen, setIsMessegesOpen, messeges, setMesseges } =
     useContext(AppContext);
   const router = useRouter();
-  useEffect(() => {
-    fetch("/api/messeges")
-      .then((response) => response.json())
-      .then((messeges) => setMesseges(messeges));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/messeges")
+  //     .then((response) => response.json())
+  //     .then((messeges) => setMesseges(messeges));
+  // }, [setMesseges]);
   return (
     <>
       {messeges.length > 0 &&

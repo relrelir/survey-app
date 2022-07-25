@@ -14,25 +14,25 @@ export default function StepperFirst({ dataFirst, setDataFirst }) {
       action="/api/questionarie"
       href="/api/questionarie"
       method="port"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setDataFirst({
-          title: e.target.title.value,
-          introduction: e.target.introduction.value,
-          isQuize: isQuize,
-          questions: [],
-          pointsValue: e.target.pointsValue.value,
-        });
-        console.log("dataFirst", dataFirst);
-        fetch("/api/questionarie", {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((data) => setQuestionaries((prev) => [...prev, data]))
-          .catch(console.error);
-      }}
+      // onSubmit={(e) => {
+      //   e.preventDefault();
+      //   setDataFirst({
+      //     title: e.target.title.value,
+      //     introduction: e.target.introduction.value,
+      //     isQuize: isQuize,
+      //     questions: [],
+      //     pointsValue: e.target.pointsValue.value,
+      //   });
+      //   console.log("dataFirst", dataFirst);
+      //   fetch("/api/questionarie", {
+      //     method: "post",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(data),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((data) => setQuestionaries((prev) => [...prev, data]))
+      //     .catch(console.error);
+      // }}
     >
       <Box
         sx={{
@@ -51,9 +51,14 @@ export default function StepperFirst({ dataFirst, setDataFirst }) {
           className="input"
           variant="standard"
           name="title"
-          type="title"
           placeholder="Title"
-          // onChange={(e) => e.target.title.value}
+          value={dataFirst.title}
+          onChange={(e) => {
+            setDataFirst({
+              ...dataFirst,
+              title: e.target.value,
+            });
+          }}
         />
         {/* {console.log(questionarie?.title)} */}
         <TextField
@@ -64,18 +69,32 @@ export default function StepperFirst({ dataFirst, setDataFirst }) {
           placeholder="Introduction"
           multiline="true"
           rows={4}
-          // onChange={handleChange}
+          value={dataFirst.introduction}
+          onChange={(e) => {
+            setDataFirst({
+              ...dataFirst,
+              introduction: e.target.value,
+            });
+          }}
         />
 
         <Stack direction="row" spacing={1} alignItems="center">
-          <Typography>Survey</Typography>
+          <Typography>Quize</Typography>
           <Switch
-            value={isQuize}
-            onChange={handleIsQuizeChange}
+            value={dataFirst.isQuize}
             defaultChecked
             inputProps={{ "aria-label": "ant design" }}
+            onChange={
+              (handleIsQuizeChange,
+              (e) => {
+                setDataFirst({
+                  ...dataFirst,
+                  isQuize: e.target.value,
+                });
+              })
+            }
           />
-          <Typography>Quize</Typography>
+          <Typography>Survey</Typography>
         </Stack>
 
         <TextField
@@ -85,7 +104,13 @@ export default function StepperFirst({ dataFirst, setDataFirst }) {
           name="pointsValue"
           type="number"
           placeholder="PointsValue"
-          // onChange={handleChange}
+          value={dataFirst.pointsValue}
+          onChange={(e) => {
+            setDataFirst({
+              ...dataFirst,
+              pointsValue: e.target.value,
+            });
+          }}
         />
       </Box>
     </form>
