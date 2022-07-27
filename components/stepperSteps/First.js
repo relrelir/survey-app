@@ -1,13 +1,18 @@
 import TextField from "@mui/joy/TextField";
-import { Button, Stack, Switch, Typography } from "@mui/material";
+import { Button, Input, Stack, Switch, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 
-export default function StepperFirst({ dataFirst, setDataFirst }) {
-  const [isQuize, setIsQuize] = useState(false);
+export default function StepperFirst({ questionarie, setQuestionarie }) {
+  const [isQuize, setIsQuize] = useState(true);
   const handleIsQuizeChange = (e) => {
     setIsQuize(!isQuize);
+    setQuestionarie({
+      ...questionarie,
+      isQuize: e.target.checked,
+    });
     console.log("isQuize", isQuize);
+    console.log("questionarie", questionarie);
   };
   return (
     <form
@@ -16,14 +21,14 @@ export default function StepperFirst({ dataFirst, setDataFirst }) {
       method="port"
       // onSubmit={(e) => {
       //   e.preventDefault();
-      //   setDataFirst({
+      //   setQuestionarie({
       //     title: e.target.title.value,
       //     introduction: e.target.introduction.value,
       //     isQuize: isQuize,
       //     questions: [],
       //     pointsValue: e.target.pointsValue.value,
       //   });
-      //   console.log("dataFirst", dataFirst);
+      //   console.log("questionarie", questionarie);
       //   fetch("/api/questionarie", {
       //     method: "post",
       //     headers: { "Content-Type": "application/json" },
@@ -46,68 +51,107 @@ export default function StepperFirst({ dataFirst, setDataFirst }) {
           borderRadius: "40px",
         }}
       >
-        <TextField
+        <Input
+          sx={{
+            boxSizing: "border-box",
+
+            width: "810px",
+            height: "72px",
+
+            background: "#FFFFFF",
+            border: "2px solid #1374F9",
+            borderRadius: "40px",
+          }}
           fullWidth
           className="input"
           variant="standard"
           name="title"
           placeholder="Title"
-          value={dataFirst.title}
+          value={questionarie.title}
           onChange={(e) => {
-            setDataFirst({
-              ...dataFirst,
+            setQuestionarie({
+              ...questionarie,
               title: e.target.value,
             });
           }}
         />
-        {/* {console.log(questionarie?.title)} */}
-        <TextField
+
+        <Input
+          sx={{
+            boxSizing: "border-box",
+
+            width: "810px",
+            height: "72px",
+
+            background: "#FFFFFF",
+            border: "2px solid #1374F9",
+            borderRadius: "40px",
+          }}
           className="input"
           variant="standard"
           name="introduction"
           type="introduction"
           placeholder="Introduction"
-          multiline="true"
-          rows={4}
-          value={dataFirst.introduction}
+          multiline
+          value={questionarie.introduction}
           onChange={(e) => {
-            setDataFirst({
-              ...dataFirst,
+            setQuestionarie({
+              ...questionarie,
               introduction: e.target.value,
             });
           }}
         />
 
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          sx={{
+            display: " flex",
+            my: "8px",
+            width: "250px",
+            height: "61px",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "18px",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            justifyContent: "center",
+            "&:hover": {
+              backgroundColor: "#c7cdd6",
+              opacity: [0.9, 0.8, 0.7],
+            },
+          }}
+          direction="row"
+          spacing={2}
+          alignItems="center"
+        >
           <Typography>Quize</Typography>
+
           <Switch
-            value={dataFirst.isQuize}
-            defaultChecked
+            checked={questionarie.isQuize}
             inputProps={{ "aria-label": "ant design" }}
-            onChange={
-              (handleIsQuizeChange,
-              (e) => {
-                setDataFirst({
-                  ...dataFirst,
-                  isQuize: e.target.value,
-                });
-              })
-            }
+            onChange={(e) => handleIsQuizeChange(e)}
           />
           <Typography>Survey</Typography>
         </Stack>
 
-        <TextField
+        <Input
+          sx={{
+            boxSizing: "border-box",
+
+            width: "810px",
+            height: "72px",
+
+            background: "#FFFFFF",
+            border: "2px solid #1374F9",
+            borderRadius: "40px",
+          }}
           fullWidth
           className="input"
           variant="standard"
           name="pointsValue"
           type="number"
           placeholder="PointsValue"
-          value={dataFirst.pointsValue}
+          value={questionarie.pointsValue}
           onChange={(e) => {
-            setDataFirst({
-              ...dataFirst,
+            setQuestionarie({
+              ...questionarie,
               pointsValue: e.target.value,
             });
           }}

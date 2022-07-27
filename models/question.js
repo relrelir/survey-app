@@ -9,6 +9,10 @@ export const QuestionSchema = new Schema({
     type: String,
     required: false,
   },
+  areOptions: {
+    type: Boolean,
+    default: true,
+  },
   answers: {
     type: ObjectId,
     ref: "Answers",

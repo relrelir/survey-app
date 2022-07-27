@@ -67,6 +67,10 @@ UserSchema.virtual("questionaries", {
   localField: "_id",
   foreignField: "author",
 });
+UserSchema.statics.findByEmail = function (email) {
+  return User.findOne({ email });
+};
+
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export default User;

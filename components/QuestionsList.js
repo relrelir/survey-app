@@ -4,35 +4,37 @@ import Tab from "@mui/material/Tab";
 import { useState } from "react";
 
 export default function QuestionsList({
-  setDataSecond,
-  dataSecond,
+  questionarie,
+  setQuestionarie,
+
   handleSideTabChange,
   sideTabvalue,
-  questions,
-  setQuestions,
 }) {
+  const { questions } = questionarie;
+
+  const handleAddQuestion = (e) => {
+    const newQuestionarie = { ...questionarie };
+    newQuestionarie.questions = [...questionarie.questions];
+
+    newQuestionarie.questions[newQuestionarie.questions.length] = {
+      title: "",
+      introduction: "",
+      isMultiChoise: true,
+      answers: [
+        {
+          content: "",
+          isCorrect: false,
+          pointsValue: 0,
+          // users: [{}],
+        },
+      ],
+    };
+
+    setQuestionarie(newQuestionarie);
+    console.log("questionarie", questionarie);
+  };
+
   return (
-    // <Box
-    //   sx={{
-    //     position: "fixed",
-    //     left: 0,
-    //     top: 0,
-    //     my: "16%",
-    //     ml: "1.5%",
-
-    //     width: "25%",
-    //     height: "75%",
-    //     backgroundColor: "#FFFFFF",
-    //     borderRadius: "18px",
-    //     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    //     // transform: "matrix(-1, 0, 0, 1, 0, 0)",
-
-    //     "&:hover": {
-    //       boxShadow: "4px 16px 16px rgba(0, 0, 0, 0.7)",
-    //       opacity: [0.9, 0.9, 0.9],
-    //     },
-    //   }}
-    // >
     <>
       <Tabs
         orientation="vertical"
@@ -42,7 +44,7 @@ export default function QuestionsList({
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
-        {questions.length > 0 &&
+        {questions?.length > 0 &&
           questions.map((question, index) => {
             return (
               <Tab
@@ -50,7 +52,20 @@ export default function QuestionsList({
                 label={`${
                   question[index]?.title ? question[index]?.title : "..."
                 }`}
-                sx={{ color: "blue" }}
+                sx={{
+                  display: " flex",
+                  my: "8px",
+                  width: "250px",
+                  height: "61px",
+                  backgroundColor: "#FFFFFF",
+                  borderRadius: "18px",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  justifyContent: "center",
+                  "&:hover": {
+                    backgroundColor: "#c7cdd6",
+                    opacity: [0.9, 0.8, 0.7],
+                  },
+                }}
               />
             );
           })}
@@ -59,28 +74,10 @@ export default function QuestionsList({
       <Button
         sx={{ my: "5px", mr: "73%", ml: "3%" }}
         variant="contained"
-        onClick={() =>
-          setQuestions([
-            ...questions,
-            {
-              title: "",
-              introduction: "",
-              answers: [
-                {
-                  areOptions: true,
-                  content: "",
-                  isCorrect: false,
-                  pointsValue: 0,
-                  // users: [{}],
-                },
-              ],
-            },
-          ])
-        }
+        onClick={(e) => handleAddQuestion(e)}
       >
         Add Question
       </Button>
     </>
-    // </Box>
   );
 }
