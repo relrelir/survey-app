@@ -8,7 +8,6 @@ import { Avatar, Drawer, Fab } from "@mui/material";
 import Box from "@mui/material/Box";
 import SurviesList from "./SurviesList";
 import ControlPointTwoToneIcon from "@mui/icons-material/ControlPointTwoTone";
-import AddNewQuestionarieButton from "./AddNewQuestionarieButton";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import AppContext from "../contexts/AppContext";

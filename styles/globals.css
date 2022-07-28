@@ -24,3 +24,10 @@ a {
   border-radius: 34px;
   margin: 15px;
 }
+.textfield {
+  background: #f7f8fa;
+  box-shadow: inset 3px 3px 7px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 7px rgba(0, 0, 0, 0.03);
+  border-radius: 34px;
+  margin: 15px;
+}

@@ -35,7 +35,7 @@ export default function QuestionsList({
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -46,12 +46,11 @@ export default function QuestionsList({
       >
         {questions?.length > 0 &&
           questions.map((question, index) => {
+            console.log("from list", question);
             return (
               <Tab
                 key={index}
-                label={`${
-                  question[index]?.title ? question[index]?.title : "..."
-                }`}
+                label={`${question?.title ? question?.title : "..."}`}
                 sx={{
                   display: " flex",
                   my: "8px",
@@ -78,6 +77,6 @@ export default function QuestionsList({
       >
         Add Question
       </Button>
-    </>
+    </Box>
   );
 }

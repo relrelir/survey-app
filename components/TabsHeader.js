@@ -27,7 +27,7 @@ export default function TabsHeader() {
     <Box sx={{ width: "100%" }}>
       <Tabs
         sx={{ pt: "5%", fontFamily: "Kanit" }}
-        fontSize="large"
+        fontSize="100%"
         onChange={handleChange}
         value={value}
         aria-label="tabs"

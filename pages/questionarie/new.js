@@ -8,9 +8,11 @@ import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { TabContext } from "@mui/lab";
+import QuestionsList from "../../components/QuestionsList";
 export default function NewQuestionariePage() {
   const { questionaries, setQuestionaries } = useContext(AppContext);
-
+  const [sideTabvalue, setSideTabValue] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [questionarie, setQuestionarie] = useState({
     // author: {},
@@ -34,6 +36,9 @@ export default function NewQuestionariePage() {
       },
     ],
   });
+  const handleSideTabChange = (event, newValue) => {
+    setSideTabValue(newValue);
+  };
 
   const handleNext = () => {
     const newActiveStep = activeStep < 3 ? activeStep + 1 : activeStep;
@@ -44,67 +49,96 @@ export default function NewQuestionariePage() {
     setActiveStep(newActiveStep);
   };
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        // height: "85vh",
-        width: "1087px",
-        height: "628px",
-        background: "rgba(255, 255, 255, 0.85)",
-        boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-        borderRadius: "25px",
-      }}
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Grid item="true">
-        <HorizontalStepper
-          activeStep={activeStep}
-          setActiveStep={setActiveStep}
-          sx={{ mt: "10px" }}
-        />
-
-        {activeStep === 0 ? (
-          <StepperFirst
-            questionarie={questionarie}
-            setQuestionarie={setQuestionarie}
-          />
-        ) : activeStep === 1 ? (
-          <StepperSecond
-            questionarie={questionarie}
-            setQuestionarie={setQuestionarie}
-          />
-        ) : (
-          <StepperSecond />
-        )}
-      </Grid>
-      <Grid item="true">
-        <Grid
-          container
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <Button item="true" md={6} onClick={handleBack}>
-            <ArrowBackIosIcon />
-            Back
-          </Button>
-          <Button item="true" md={6} onClick={handleNext}>
-            Next
-            <ArrowForwardIosIcon />
-          </Button>
-          {activeStep === 2 && (
-            <Button type="submit" variant="contained" color="success">
-              Create
-            </Button>
+      <HorizontalStepper
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+      />
+      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+        <TabContext value={`${sideTabvalue}`}>
+          {activeStep === 1 && (
+            <QuestionsList
+              handleSideTabChange={handleSideTabChange}
+              questionarie={questionarie}
+              setQuestionarie={setQuestionarie}
+              sideTabvalue={sideTabvalue}
+            />
           )}
-        </Grid>
-      </Grid>
-    </Grid>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <Grid
+              sx={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "1087px",
+                height: "628px",
+                background: "rgba(255, 255, 255, 0.85)",
+                boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+                borderRadius: "25px",
+              }}
+              container
+            >
+              <Grid item>
+                {activeStep === 0 ? (
+                  <StepperFirst
+                    questionarie={questionarie}
+                    setQuestionarie={setQuestionarie}
+                  />
+                ) : activeStep === 1 ? (
+                  <StepperSecond
+                    sideTabvalue={sideTabvalue}
+                    questionarie={questionarie}
+                    setQuestionarie={setQuestionarie}
+                  />
+                ) : (
+                  <StepperSecond />
+                )}
+              </Grid>
+
+              <Grid item>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                  }}
+                >
+                  <Button
+                    sx={{ mr: "150px", px: "20px", py: "10px" }}
+                    onClick={handleBack}
+                  >
+                    <ArrowBackIosIcon />
+                    Back
+                  </Button>
+                  <Button
+                    sx={{ ml: "150px", px: "20px", py: "10px" }}
+                    onClick={handleNext}
+                  >
+                    Next
+                    <ArrowForwardIosIcon />
+                  </Button>
+                  {activeStep === 2 && (
+                    <Button type="submit" variant="contained" color="success">
+                      Create
+                    </Button>
+                  )}
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </TabContext>
+      </Box>
+    </Box>
   );
 }

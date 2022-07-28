@@ -1,7 +1,17 @@
 import TextField from "@mui/joy/TextField";
-import { Button, Input, Stack, Switch, Typography } from "@mui/material";
+import {
+  Button,
+  FormLabel,
+  Grid,
+  Input,
+  Stack,
+  Switch,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import { BoxShadow } from "../../styles/boxShadow.style";
+import { InputStyle, TypographyStyle } from "./first.style";
 
 export default function StepperFirst({ questionarie, setQuestionarie }) {
   const [isQuize, setIsQuize] = useState(true);
@@ -15,148 +25,145 @@ export default function StepperFirst({ questionarie, setQuestionarie }) {
     console.log("questionarie", questionarie);
   };
   return (
-    <form
-      action="/api/questionarie"
-      href="/api/questionarie"
-      method="port"
-      // onSubmit={(e) => {
-      //   e.preventDefault();
-      //   setQuestionarie({
-      //     title: e.target.title.value,
-      //     introduction: e.target.introduction.value,
-      //     isQuize: isQuize,
-      //     questions: [],
-      //     pointsValue: e.target.pointsValue.value,
-      //   });
-      //   console.log("questionarie", questionarie);
-      //   fetch("/api/questionarie", {
-      //     method: "post",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify(data),
-      //   })
-      //     .then((res) => res.json())
-      //     .then((data) => setQuestionaries((prev) => [...prev, data]))
-      //     .catch(console.error);
-      // }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignContent: "center",
-          width: "968px",
-          height: "875px",
-
-          background: "#FFFFFF",
-          borderRadius: "40px",
-        }}
+    <form action="/api/questionarie" href="/api/questionarie" method="port">
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="stretch"
       >
-        <Input
+        <Box
           sx={{
-            boxSizing: "border-box",
-
-            width: "810px",
-            height: "72px",
-
-            background: "#FFFFFF",
-            border: "2px solid #1374F9",
-            borderRadius: "40px",
-          }}
-          fullWidth
-          className="input"
-          variant="standard"
-          name="title"
-          placeholder="Title"
-          value={questionarie.title}
-          onChange={(e) => {
-            setQuestionarie({
-              ...questionarie,
-              title: e.target.value,
-            });
-          }}
-        />
-
-        <Input
-          sx={{
-            boxSizing: "border-box",
-
-            width: "810px",
-            height: "72px",
-
-            background: "#FFFFFF",
-            border: "2px solid #1374F9",
-            borderRadius: "40px",
-          }}
-          className="input"
-          variant="standard"
-          name="introduction"
-          type="introduction"
-          placeholder="Introduction"
-          multiline
-          value={questionarie.introduction}
-          onChange={(e) => {
-            setQuestionarie({
-              ...questionarie,
-              introduction: e.target.value,
-            });
-          }}
-        />
-
-        <Stack
-          sx={{
-            display: " flex",
-            my: "8px",
-            width: "250px",
-            height: "61px",
-            backgroundColor: "#FFFFFF",
-            borderRadius: "18px",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
-            "&:hover": {
-              backgroundColor: "#c7cdd6",
-              opacity: [0.9, 0.8, 0.7],
-            },
+            alignItems: "center",
           }}
-          direction="row"
-          spacing={2}
-          alignItems="center"
         >
-          <Typography>Quize</Typography>
+          <Grid item>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FormLabel htmlFor="title" sx={TypographyStyle()}>
+                Title:
+              </FormLabel>
+              <Input
+                sx={InputStyle("72px", "810px")}
+                fullWidth
+                className="input"
+                variant="standard"
+                id="title"
+                name="title"
+                value={questionarie.title}
+                onChange={(e) => {
+                  setQuestionarie({
+                    ...questionarie,
+                    title: e.target.value,
+                  });
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                alignItems: "stretch",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                }}
+              >
+                <Box sx={{ mr: "100px" }}>
+                  <Typography sx={TypographyStyle()}>Introduction:</Typography>
+                </Box>
 
-          <Switch
-            checked={questionarie.isQuize}
-            inputProps={{ "aria-label": "ant design" }}
-            onChange={(e) => handleIsQuizeChange(e)}
-          />
-          <Typography>Survey</Typography>
-        </Stack>
+                <Input
+                  sx={InputStyle("300px", "300px")}
+                  className="input"
+                  variant="standard"
+                  name="introduction"
+                  type="introduction"
+                  multiline
+                  rows={4}
+                  value={questionarie.introduction}
+                  onChange={(e) => {
+                    setQuestionarie({
+                      ...questionarie,
+                      introduction: e.target.value,
+                    });
+                  }}
+                />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  gap: "10%",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "start",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={TypographyStyle()}>Points:</Typography>
 
-        <Input
-          sx={{
-            boxSizing: "border-box",
+                  <Input
+                    sx={InputStyle("72px", "200px")}
+                    fullWidth
+                    className="input"
+                    variant="standard"
+                    name="pointsValue"
+                    type="number"
+                    placeholder="PointsValue"
+                    value={questionarie.pointsValue}
+                    onChange={(e) => {
+                      setQuestionarie({
+                        ...questionarie,
+                        pointsValue: e.target.value,
+                      });
+                    }}
+                  />
+                </Box>
 
-            width: "810px",
-            height: "72px",
+                <Stack
+                  sx={BoxShadow("250px", "61px")}
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                >
+                  <Typography>Quize</Typography>
 
-            background: "#FFFFFF",
-            border: "2px solid #1374F9",
-            borderRadius: "40px",
-          }}
-          fullWidth
-          className="input"
-          variant="standard"
-          name="pointsValue"
-          type="number"
-          placeholder="PointsValue"
-          value={questionarie.pointsValue}
-          onChange={(e) => {
-            setQuestionarie({
-              ...questionarie,
-              pointsValue: e.target.value,
-            });
-          }}
-        />
-      </Box>
+                  <Switch
+                    checked={questionarie.isQuize}
+                    inputProps={{ "aria-label": "ant design" }}
+                    onChange={(e) => handleIsQuizeChange(e)}
+                  />
+                  <Typography>Survey</Typography>
+                </Stack>
+              </Box>
+            </Box>
+          </Grid>
+        </Box>
+      </Grid>
     </form>
   );
 }

@@ -22,7 +22,7 @@ export default function HorizontalStepper({ activeStep, setActiveStep }) {
   //   setActiveStep(newActiveStep);
   // };
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", mt: "3%" }}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>

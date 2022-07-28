@@ -88,220 +88,222 @@ export default function EditUserPage({ user }) {
       method="PATCH"
       onSubmit={(e) => (e.preventDefault(), updateUser())}
     >
-      <Grid
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "85vh",
-          background: "rgba(255, 255, 255, 0.85)",
-          boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-          borderRadius: "25px",
-        }}
-        container
-      >
+      <Box>
         <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "85vh",
-          }}
-          item="true"
-          sm={12}
-          md={6}
+          container
+          // sx={{
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   alignItems: "center",
+          //   justifyContent: "center",
+          //   height: "85vh",
+          //   background: "rgba(255, 255, 255, 0.85)",
+          //   boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+          //   borderRadius: "25px",
+          // }}
         >
-          <Avatar
-            alt="Remy Sharp"
-            sx={{
-              width: "220px",
-              height: "220px",
-              border: "6px solid #1374F9",
-              borderRadius: "206px",
-            }}
-            src={user?.image}
-          />
-          <Button
-            sx={{
-              position: "absolute",
-              width: "153px",
-              height: "41px",
-              background: "#1374F9",
-              borderRadius: "40px",
-            }}
-            variant="contained"
-            size="large"
-            color="primary"
+          <Grid
+            // sx={{
+            //   display: "flex",
+            //   flexDirection: "column",
+            //   alignItems: "center",
+            //   justifyContent: "center",
+            //   height: "85vh",
+            // }}
+            item
+            sm={12}
+            md={6}
           >
-            <Typography
+            <Avatar
+              alt="Remy Sharp"
               sx={{
-                fontFamily: "Kanit",
-                fontStyle: "normal",
-                fontWeight: 800,
-                fontSize: "30px",
-                lineHeight: "45px",
-                color: "#FFFFFF",
-                textTransform: "none",
+                width: "220px",
+                height: "220px",
+                border: "6px solid #1374F9",
+                borderRadius: "206px",
               }}
+              src={user?.image}
+            />
+            <Button
+              sx={{
+                position: "absolute",
+                width: "153px",
+                height: "41px",
+                background: "#1374F9",
+                borderRadius: "40px",
+              }}
+              variant="contained"
+              size="large"
+              color="primary"
             >
-              Change
-            </Typography>
-          </Button>
-          <ChooseGender
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            gender={gender}
-            setGender={setGender}
-          />
-        </Grid>
-
-        <Grid item="true" md={6} sm={12}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              height: "85%",
-              justifyContent: "space-evenly",
-            }}
-          >
-            <Input
-              className="input"
-              variant="filled"
-              name="name"
-              type="text"
-              placeholder="Name"
-              onChange={handleChangeName}
-              defaultValue={name}
-              sx={{
-                boxSizing: "border-box",
-                width: "456px",
-                height: "72px",
-                background: "#FFFFFF",
-                border: "2px solid #1374F9",
-                borderRadius: "40px",
-              }}
-            />
-            <Input
-              className="input"
-              variant="filled"
-              name="email"
-              type="email"
-              placeholder="email"
-              onChange={handleChangeEmail}
-              sx={{
-                boxSizing: "border-box",
-                width: "456px",
-                height: "72px",
-                background: "#FFFFFF",
-                border: "2px solid #1374F9",
-                borderRadius: "40px",
-              }}
-            />
-            <Input
-              className="input"
-              variant="filled"
-              name="phone"
-              type="tel"
-              placeholder="phone"
-              onChange={handleChangePhone}
-              sx={{
-                boxSizing: "border-box",
-                width: "456px",
-                height: "72px",
-                background: "#FFFFFF",
-                border: "2px solid #1374F9",
-                borderRadius: "40px",
-              }}
-            />
-            <FormControl>
-              <FormLabel
+              <Typography
                 sx={{
                   fontFamily: "Kanit",
                   fontStyle: "normal",
-                  fontWeight: 400,
+                  fontWeight: 800,
                   fontSize: "30px",
                   lineHeight: "45px",
-                  color: "#BDBCBC",
+                  color: "#FFFFFF",
+                  textTransform: "none",
                 }}
-                htmlFor="Birthday"
               >
-                Birthday
-              </FormLabel>
+                Change
+              </Typography>
+            </Button>
+            <ChooseGender
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              gender={gender}
+              setGender={setGender}
+            />
+          </Grid>
+
+          <Grid item md={6} sm={12}>
+            <Box
+            // sx={{
+            //   display: "flex",
+            //   flexDirection: "column",
+            //   height: "85%",
+            //   justifyContent: "space-evenly",
+            // }}
+            >
               <Input
-                variant="filled"
                 className="input"
-                placeholder="Birthday"
-                name="Birthday"
-                id="date"
-                label="Birthday"
-                type="date"
-                value={birthday}
-                min={startDate}
-                max={today}
-                onChange={(e) => setBirthday(e.target.value)}
+                variant="filled"
+                name="name"
+                type="text"
+                placeholder="Name"
+                onChange={handleChangeName}
+                defaultValue={name}
                 sx={{
-                  borderTop: "2px solid #1374F9",
-                  borderBottom: "2px solid #1374F9",
-                  borderRadius: "40px",
                   boxSizing: "border-box",
                   width: "456px",
-                  height: "130px",
+                  height: "72px",
                   background: "#FFFFFF",
+                  border: "2px solid #1374F9",
+                  borderRadius: "40px",
                 }}
-                // InputLabelProps={{
-                //   shrink: true,
-                // }}
               />
-            </FormControl>
+              <Input
+                className="input"
+                variant="filled"
+                name="email"
+                type="email"
+                placeholder="email"
+                onChange={handleChangeEmail}
+                sx={{
+                  boxSizing: "border-box",
+                  width: "456px",
+                  height: "72px",
+                  background: "#FFFFFF",
+                  border: "2px solid #1374F9",
+                  borderRadius: "40px",
+                }}
+              />
+              <Input
+                className="input"
+                variant="filled"
+                name="phone"
+                type="tel"
+                placeholder="phone"
+                onChange={handleChangePhone}
+                sx={{
+                  boxSizing: "border-box",
+                  width: "456px",
+                  height: "72px",
+                  background: "#FFFFFF",
+                  border: "2px solid #1374F9",
+                  borderRadius: "40px",
+                }}
+              />
+              <FormControl>
+                <FormLabel
+                  sx={{
+                    fontFamily: "Kanit",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    fontSize: "30px",
+                    lineHeight: "45px",
+                    color: "#BDBCBC",
+                  }}
+                  htmlFor="Birthday"
+                >
+                  Birthday
+                </FormLabel>
+                <Input
+                  variant="filled"
+                  className="input"
+                  placeholder="Birthday"
+                  name="Birthday"
+                  id="date"
+                  label="Birthday"
+                  type="date"
+                  value={birthday}
+                  min={startDate}
+                  max={today}
+                  onChange={(e) => setBirthday(e.target.value)}
+                  sx={{
+                    borderTop: "2px solid #1374F9",
+                    borderBottom: "2px solid #1374F9",
+                    borderRadius: "40px",
+                    boxSizing: "border-box",
+                    width: "456px",
+                    height: "130px",
+                    background: "#FFFFFF",
+                  }}
+                  // InputLabelProps={{
+                  //   shrink: true,
+                  // }}
+                />
+              </FormControl>
+            </Box>
+          </Grid>
+          <Box
+          // sx={{
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   alignItems: "center",
+          //   justifyContent: "center",
+          // }}
+          >
+            <Button
+              // sx={{
+              //   display: "flex",
+              //   flexDirection: "column",
+              //   alignItems: "center",
+              //   justifyContent: "center",
+              //   width: "313px",
+              //   height: "69px",
+              //   background: "#1374F9",
+              //   borderRadius: "40px",
+              // }}
+              variant="contained"
+              size="large"
+              color="primary"
+              id="submit"
+              name="submit"
+              type="submit"
+            >
+              <Typography
+              // sx={{
+              //   fontFamily: "Kanit",
+              //   fontStyle: "normal",
+              //   fontWeight: 400,
+              //   fontSize: "35px",
+              //   lineHeight: "52px",
+              //   textTransform: "none",
+              // }}
+              >
+                Save Changes
+              </Typography>
+            </Button>
           </Box>
         </Grid>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "313px",
-              height: "69px",
-              background: "#1374F9",
-              borderRadius: "40px",
-            }}
-            variant="contained"
-            size="large"
-            color="primary"
-            id="submit"
-            name="submit"
-            type="submit"
-          >
-            <Typography
-              sx={{
-                fontFamily: "Kanit",
-                fontStyle: "normal",
-                fontWeight: 400,
-                fontSize: "35px",
-                lineHeight: "52px",
-                textTransform: "none",
-              }}
-            >
-              Save Changes
-            </Typography>
-          </Button>
-        </Box>
-      </Grid>
+      </Box>
     </form>
   );
 }

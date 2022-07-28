@@ -93,11 +93,7 @@ export default function Answers({
               />
             </Box>
           ))}
-        <Button
-          sx={{ my: "5px", mr: "73%", ml: "3%" }}
-          variant="contained"
-          onClick={(e) => handleAddAnswer(e)}
-        >
+        <Button variant="contained" onClick={(e) => handleAddAnswer(e)}>
           Add Answer
         </Button>
       </FormControl>

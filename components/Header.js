@@ -1,86 +1,79 @@
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+import ForumTwoToneIcon from "@mui/icons-material/ForumTwoTone";
+import NotificationsTwoToneIcon from "@mui/icons-material/NotificationsTwoTone";
+import { Avatar, Badge, Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
-import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import AvatarTools from "../Components/AvatarTools.js";
-import TabsHeader from "./TabsHeader";
-import Logo from "./Logo";
-import LoginButton from "./LoginButton.js";
-import { Button } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useContext } from "react";
-import AppContext from "../contexts/AppContext";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "25px",
-  backgroundColor: alpha(theme.palette.common.black, 0.05),
-  color: "grey",
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.1),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(10),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import AppContext from "../contexts/AppContext.js";
+import LoginButton from "./LoginButton.js";
+import Logo from "./Logo";
+import TabsHeader from "./TabsHeader";
 
 export default function Header() {
   const { data: session, status } = useSession();
-  // const { isOpen, setIsOpen } = useContext(AppContext);
+  const { isOpen, setIsOpen } = useContext(AppContext);
 
   return (
     <Box>
-      <AppBar position="static" style={{ background: "white" }}>
+      <AppBar position="static" sx={{ background: "white" }}>
         <Toolbar>
           <Logo />
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              alignItems: "center",
-            }}
-          >
-            <TabsHeader />
-            {session && (
-              // <Button onClick={() => setIsOpen(true)}>
-              <AvatarTools />
-              // </Button>
-            )}
-            {!session && <LoginButton />}
-          </Box>
+
+          <TabsHeader />
+          {session && (
+            // <Button onClick={() => setIsOpen(true)}>
+            <Stack
+              direction="row"
+              spacing={2}
+              sx={{
+                fontSize: 22,
+
+                color: "#42A5F5",
+                display: "flex",
+                alignItems: "center",
+                p: 1,
+                m: 1,
+                mr: 5,
+                bgcolor: "grey",
+                height: 100,
+                borderRadius: 1,
+              }}
+            >
+              <Box sx={{ pr: 2, fontSize: 22 }}>
+                <Badge sx={{ fontSize: 22 }} badgeContent={10} color="error">
+                  <ForumTwoToneIcon
+                    onClick={() => setIsMessegesOpen(!isMessegesOpen)}
+                    fontSize="large"
+                  />
+                </Badge>
+              </Box>
+              <Box sx={{ pr: 4, fontSize: 22 }}>
+                <Badge badgeContent={11} color="error" sx={{ fontSize: 22 }}>
+                  <NotificationsTwoToneIcon fontSize="large" />
+                </Badge>
+              </Box>
+              <Avatar
+                onClick={() => setIsOpen(!isOpen)}
+                alt="Remy Sharp"
+                sx={{
+                  width: 80,
+                  height: 80,
+                  fontSize: 22,
+                  "&:hover": {
+                    boxShadow: "0px 8px 8px rgba(0.0, 0.0, 0.0, 0.7)",
+                    cursor: "pointer",
+                  },
+                }}
+                src={session?.user.image}
+              />
+            </Stack>
+            // </Button>
+          )}
+          {!session && <LoginButton />}
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
