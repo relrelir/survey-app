@@ -1,15 +1,15 @@
+import Button from "@mui/material/Button";
+import TextField from "@mui/joy/TextField";
+import { Box, Grid, Stepper } from "@mui/material";
+import { useContext, useState } from "react";
+import AppContext from "../../contexts/AppContext";
+import HorizontalStepper from "../../components/HorizontalStepper";
+import StepperFirst from "../../components/stepperSteps/First";
+import StepperSecond from "../../components/stepperSteps/Second";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { TabContext } from "@mui/lab";
-import { Box, Grid } from "@mui/material";
-import Button from "@mui/material/Button";
-import { useContext, useState } from "react";
-import HorizontalStepper from "../../components/HorizontalStepper";
 import QuestionsList from "../../components/QuestionsList";
-import StepperFirst from "../../components/stepperSteps/First";
-import StepperSecond from "../../components/stepperSteps/Second";
-import AppContext from "../../contexts/AppContext";
-import { NavigateButtonsStyle } from "../../styles/global.style";
 export default function NewQuestionariePage() {
   const { questionaries, setQuestionaries } = useContext(AppContext);
   const [sideTabvalue, setSideTabValue] = useState(0);
@@ -36,10 +36,8 @@ export default function NewQuestionariePage() {
       },
     ],
   });
-  const handleSideTabChange = (e, newValue) => {
-    console.log("newValue", newValue);
+  const handleSideTabChange = (event, newValue) => {
     setSideTabValue(newValue);
-    console.log("sideTabvalue", sideTabvalue);
   };
 
   const handleNext = () => {
@@ -58,11 +56,8 @@ export default function NewQuestionariePage() {
         activeStep={activeStep}
         setActiveStep={setActiveStep}
       />
-
-      <TabContext value={`${sideTabvalue}`}>
-        <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-        >
+      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+        <TabContext value={`${sideTabvalue}`}>
           {activeStep === 1 && (
             <QuestionsList
               handleSideTabChange={handleSideTabChange}
@@ -78,9 +73,6 @@ export default function NewQuestionariePage() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-evenly",
-              background: "rgba(255, 255, 255, 0.85)",
-              boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-              borderRadius: "25px",
             }}
           >
             <Grid
@@ -90,6 +82,9 @@ export default function NewQuestionariePage() {
                 justifyContent: "center",
                 width: "1087px",
                 height: "628px",
+                background: "rgba(255, 255, 255, 0.85)",
+                boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+                borderRadius: "25px",
               }}
               container
             >
@@ -110,34 +105,40 @@ export default function NewQuestionariePage() {
                 )}
               </Grid>
 
-              <Grid item></Grid>
+              <Grid item>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                  }}
+                >
+                  <Button
+                    sx={{ mr: "150px", px: "20px", py: "10px" }}
+                    onClick={handleBack}
+                  >
+                    <ArrowBackIosIcon />
+                    Back
+                  </Button>
+                  <Button
+                    sx={{ ml: "150px", px: "20px", py: "10px" }}
+                    onClick={handleNext}
+                  >
+                    Next
+                    <ArrowForwardIosIcon />
+                  </Button>
+                  {activeStep === 2 && (
+                    <Button type="submit" variant="contained" color="success">
+                      Create
+                    </Button>
+                  )}
+                </Box>
+              </Grid>
             </Grid>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-            gap: "200%",
-          }}
-        >
-          <Button sx={NavigateButtonsStyle()} onClick={handleBack}>
-            <ArrowBackIosIcon />
-            Back
-          </Button>
-          <Button sx={NavigateButtonsStyle()} onClick={handleNext}>
-            Next
-            <ArrowForwardIosIcon />
-          </Button>
-          {activeStep === 2 && (
-            <Button type="submit" variant="contained" color="success">
-              Create
-            </Button>
-          )}
-        </Box>
-      </TabContext>
+        </TabContext>
+      </Box>
     </Box>
   );
 }

@@ -5,12 +5,15 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Box } from "@mui/material";
-import { FormLabelStyle } from "../styles/global.style";
 
 export default function ChooseGender({ gender, setGender }) {
   return (
     <Box
       sx={{
+        // display: "flex",
+        // flexDirection: "column",
+        // alignItems: "stretch",
+        // justifyContent: "center",
         boxSizing: "border-box",
         background: "#FFFFFF",
         borderTop: "2px solid #1374F9",
@@ -19,7 +22,17 @@ export default function ChooseGender({ gender, setGender }) {
       }}
     >
       <FormControl>
-        <FormLabel sx={FormLabelStyle()} htmlFor="gender">
+        <FormLabel
+          sx={{
+            fontFamily: "Kanit",
+            fontStyle: "normal",
+            fontWeight: 400,
+            fontSize: "30px",
+            lineHeight: "45px",
+            color: "#BDBCBC",
+          }}
+          htmlFor="gender"
+        >
           Gender
         </FormLabel>
         <RadioGroup

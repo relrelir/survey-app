@@ -1,10 +1,7 @@
 import { Box, Button } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import React, { useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { BoxShadowTabs, ButtonDeleteTabs } from "../styles/boxShadow.style";
-import { TabList } from "@mui/lab";
+import { useState } from "react";
 
 export default function QuestionsList({
   questionarie,
@@ -37,48 +34,42 @@ export default function QuestionsList({
     console.log("questionarie", questionarie);
   };
 
-  const handleDeleteQuestion = (e, index) => {
-    console.log("index", index);
-    const newQuestionarie = { ...questionarie };
-    newQuestionarie.questions = [...questionarie.questions];
-    newQuestionarie.questions.splice(index, 1);
-
-    setQuestionarie(newQuestionarie);
-    console.log("questionarie", questionarie);
-  };
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <TabList
+      <Tabs
         orientation="vertical"
         variant="scrollable"
-        // value={sideTabvalue}
+        value={sideTabvalue}
         onChange={handleSideTabChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
         {questions?.length > 0 &&
           questions.map((question, index) => {
+            console.log("from list", question);
             return (
-              // <Box key={index}>
               <Tab
                 key={index}
                 label={`${question?.title ? question?.title : "..."}`}
-                sx={BoxShadowTabs()}
-                value={`${sideTabvalue}`}
+                sx={{
+                  display: " flex",
+                  my: "8px",
+                  width: "250px",
+                  height: "61px",
+                  backgroundColor: "#FFFFFF",
+                  borderRadius: "18px",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  justifyContent: "center",
+                  "&:hover": {
+                    backgroundColor: "#c7cdd6",
+                    opacity: [0.9, 0.8, 0.7],
+                  },
+                }}
               />
-              //  <Button
-              //   sx={ButtonDeleteTabs()}
-              //   onClick={(e) => handleDeleteQuestion(e, index)}
-              //   variant="contained"
-              //   startIcon={<DeleteIcon />}
-              // >
-              //   Delete
-              // </Button>
-              // </Box>
             );
           })}
-      </TabList>
+      </Tabs>
+
       <Button
         sx={{ my: "5px", mr: "73%", ml: "3%" }}
         variant="contained"
