@@ -11,7 +11,7 @@ import {
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { BoxShadow } from "../../styles/boxShadow.style";
-import { InputStyle, TypographyStyle } from "./first.style";
+import { InputStyle, TypographyStyle } from "../../styles/global.style";
 
 export default function StepperFirst({ questionarie, setQuestionarie }) {
   const [isQuize, setIsQuize] = useState(true);
@@ -76,6 +76,7 @@ export default function StepperFirst({ questionarie, setQuestionarie }) {
                 flexDirection: "row",
                 justifyContent: "space-evenly",
                 alignItems: "stretch",
+                gap: "30%",
               }}
             >
               <Box
@@ -127,6 +128,7 @@ export default function StepperFirst({ questionarie, setQuestionarie }) {
                   <Typography sx={TypographyStyle()}>Points:</Typography>
 
                   <Input
+                    align="middle"
                     sx={InputStyle("72px", "200px")}
                     fullWidth
                     className="input"

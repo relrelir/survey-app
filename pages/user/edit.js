@@ -21,6 +21,13 @@ import { getToken } from "next-auth/jwt";
 import { connectDB } from "../../middlware/mongodb";
 
 import ChooseGender from "../../components/ChooseGender";
+import {
+  AvatarStyle,
+  ButtonRoundStyle,
+  FormLabelStyle,
+  InputStyle,
+  TypoUserEditStyle,
+} from "../../styles/global.style";
 
 export async function getServerSideProps({ params, req, res }) {
   const token = await getToken({ req });
@@ -89,88 +96,34 @@ export default function EditUserPage({ user }) {
       onSubmit={(e) => (e.preventDefault(), updateUser())}
     >
       <Box>
-        <Grid
-          container
-          // sx={{
-          //   display: "flex",
-          //   flexDirection: "column",
-          //   alignItems: "center",
-          //   justifyContent: "center",
-          //   height: "85vh",
-          //   background: "rgba(255, 255, 255, 0.85)",
-          //   boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-          //   borderRadius: "25px",
-          // }}
-        >
-          <Grid
-            // sx={{
-            //   display: "flex",
-            //   flexDirection: "column",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            //   height: "85vh",
-            // }}
-            item
-            sm={12}
-            md={6}
-          >
-            <Avatar
-              alt="Remy Sharp"
-              sx={{
-                width: "220px",
-                height: "220px",
-                border: "6px solid #1374F9",
-                borderRadius: "206px",
-              }}
-              src={user?.image}
-            />
-            <Button
-              sx={{
-                position: "absolute",
-                width: "153px",
-                height: "41px",
-                background: "#1374F9",
-                borderRadius: "40px",
-              }}
-              variant="contained"
-              size="large"
-              color="primary"
-            >
-              <Typography
-                sx={{
-                  fontFamily: "Kanit",
-                  fontStyle: "normal",
-                  fontWeight: 800,
-                  fontSize: "30px",
-                  lineHeight: "45px",
-                  color: "#FFFFFF",
-                  textTransform: "none",
-                }}
-              >
-                Change
-              </Typography>
-            </Button>
-            <ChooseGender
+        <Grid container>
+          <Grid item sm={12} md={6}>
+            <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "space-evenly",
               }}
-              gender={gender}
-              setGender={setGender}
-            />
+            >
+              <Avatar
+                alt="Remy Sharp"
+                sx={AvatarStyle("220px", "220px")}
+                src={user?.image}
+              />
+              <Button
+                sx={ButtonRoundStyle("153px", "41px")}
+                variant="contained"
+                size="large"
+                color="primary"
+              >
+                <Typography sx={TypoUserEditStyle()}>Change</Typography>
+              </Button>
+              <ChooseGender gender={gender} setGender={setGender} />
+            </Box>
           </Grid>
 
           <Grid item md={6} sm={12}>
-            <Box
-            // sx={{
-            //   display: "flex",
-            //   flexDirection: "column",
-            //   height: "85%",
-            //   justifyContent: "space-evenly",
-            // }}
-            >
+            <Box>
               <Input
                 className="input"
                 variant="filled"
@@ -179,14 +132,7 @@ export default function EditUserPage({ user }) {
                 placeholder="Name"
                 onChange={handleChangeName}
                 defaultValue={name}
-                sx={{
-                  boxSizing: "border-box",
-                  width: "456px",
-                  height: "72px",
-                  background: "#FFFFFF",
-                  border: "2px solid #1374F9",
-                  borderRadius: "40px",
-                }}
+                sx={InputStyle("72px", "456px")}
               />
               <Input
                 className="input"
@@ -195,14 +141,7 @@ export default function EditUserPage({ user }) {
                 type="email"
                 placeholder="email"
                 onChange={handleChangeEmail}
-                sx={{
-                  boxSizing: "border-box",
-                  width: "456px",
-                  height: "72px",
-                  background: "#FFFFFF",
-                  border: "2px solid #1374F9",
-                  borderRadius: "40px",
-                }}
+                sx={InputStyle("72px", "456px")}
               />
               <Input
                 className="input"
@@ -211,27 +150,10 @@ export default function EditUserPage({ user }) {
                 type="tel"
                 placeholder="phone"
                 onChange={handleChangePhone}
-                sx={{
-                  boxSizing: "border-box",
-                  width: "456px",
-                  height: "72px",
-                  background: "#FFFFFF",
-                  border: "2px solid #1374F9",
-                  borderRadius: "40px",
-                }}
+                sx={InputStyle("72px", "456px")}
               />
               <FormControl>
-                <FormLabel
-                  sx={{
-                    fontFamily: "Kanit",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    fontSize: "30px",
-                    lineHeight: "45px",
-                    color: "#BDBCBC",
-                  }}
-                  htmlFor="Birthday"
-                >
+                <FormLabel sx={FormLabelStyle()} htmlFor="Birthday">
                   Birthday
                 </FormLabel>
                 <Input
@@ -246,41 +168,19 @@ export default function EditUserPage({ user }) {
                   min={startDate}
                   max={today}
                   onChange={(e) => setBirthday(e.target.value)}
-                  sx={{
-                    borderTop: "2px solid #1374F9",
-                    borderBottom: "2px solid #1374F9",
-                    borderRadius: "40px",
-                    boxSizing: "border-box",
-                    width: "456px",
-                    height: "130px",
-                    background: "#FFFFFF",
-                  }}
-                  // InputLabelProps={{
-                  //   shrink: true,
-                  // }}
+                  sx={InputStyle(
+                    "130px",
+                    "456px",
+                    "2px solid #1374F9",
+                    "2px solid #1374F9"
+                  )}
                 />
               </FormControl>
             </Box>
           </Grid>
-          <Box
-          // sx={{
-          //   display: "flex",
-          //   flexDirection: "column",
-          //   alignItems: "center",
-          //   justifyContent: "center",
-          // }}
-          >
+          <Box>
             <Button
-              // sx={{
-              //   display: "flex",
-              //   flexDirection: "column",
-              //   alignItems: "center",
-              //   justifyContent: "center",
-              //   width: "313px",
-              //   height: "69px",
-              //   background: "#1374F9",
-              //   borderRadius: "40px",
-              // }}
+              sx={ButtonRoundStyle("313px", "69px")}
               variant="contained"
               size="large"
               color="primary"
@@ -288,18 +188,7 @@ export default function EditUserPage({ user }) {
               name="submit"
               type="submit"
             >
-              <Typography
-              // sx={{
-              //   fontFamily: "Kanit",
-              //   fontStyle: "normal",
-              //   fontWeight: 400,
-              //   fontSize: "35px",
-              //   lineHeight: "52px",
-              //   textTransform: "none",
-              // }}
-              >
-                Save Changes
-              </Typography>
+              <Typography sx={TypoUserEditStyle()}>Save Changes</Typography>
             </Button>
           </Box>
         </Grid>
