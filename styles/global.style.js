@@ -26,6 +26,20 @@ export function InputStyle(height, width, borderTop, borderBottom) {
     borderRadius: "40px",
   };
 }
+export function InputAnsStyle(height, width) {
+  return {
+    boxSizing: "border-box",
+
+    textIndent: "50%",
+
+    height,
+    width,
+    fontSize: "150%",
+    background: "#FFFFFF",
+    border: "2px solid #1374F9",
+    borderRadius: "40px",
+  };
+}
 export function NavigateButtonsStyle() {
   return {
     width: "77px",

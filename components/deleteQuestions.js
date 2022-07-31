@@ -29,7 +29,13 @@ export default function DeleteQuestions({
 
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", mb: "5%", gap: "36px" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        mb: "5%",
+        gap: "36px",
+      }}
     >
       {questions?.length > 0 &&
         questions.map((question, index) => {

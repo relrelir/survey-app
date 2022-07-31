@@ -5,15 +5,34 @@ import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BoxShadowTabs, ButtonDeleteTabs } from "../styles/boxShadow.style";
 import { TabList } from "@mui/lab";
+import { makeStyles } from "@mui/styles";
+import ClearIcon from "@mui/icons-material/Clear";
+import { deleteButtonStyle } from "../styles/global.style";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export default function QuestionsList({
   questionarie,
   setQuestionarie,
-
   handleSideTabChange,
   sideTabvalue,
 }) {
   const { questions } = questionarie;
+
+  const useStyles = makeStyles({
+    customLabelColor: {
+      width: "22px",
+      height: "45px",
+
+      fontFamily: "Kanit",
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: "30px",
+      lineHeight: "45px",
+      color: "#1374F9",
+    },
+  });
+
+  const classes = useStyles();
 
   const handleAddQuestion = (e) => {
     const newQuestionarie = { ...questionarie };
@@ -37,24 +56,21 @@ export default function QuestionsList({
     console.log("questionarie", questionarie);
   };
 
-  const handleDeleteQuestion = (e, index) => {
-    console.log("index", index);
-    const newQuestionarie = { ...questionarie };
-    newQuestionarie.questions = [...questionarie.questions];
-    newQuestionarie.questions.splice(index, 1);
-
-    setQuestionarie(newQuestionarie);
-    console.log("questionarie", questionarie);
-  };
-
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        height: "628px",
+      }}
+    >
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={sideTabvalue}
         onChange={handleSideTabChange}
-        aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
         {questions?.length > 0 &&
@@ -63,19 +79,10 @@ export default function QuestionsList({
               // <Box key={index}>
               <Tab
                 key={index}
-                label={`${question?.title ? question?.title : "..."}`}
+                label={question?.title ? index + 1 + question?.title : index}
                 sx={BoxShadowTabs()}
-                // value={sideTabvalue}
+                className={classes.customLabelColor}
               />
-              //  <Button
-              //   sx={ButtonDeleteTabs()}
-              //   onClick={(e) => handleDeleteQuestion(e, index)}
-              //   variant="contained"
-              //   startIcon={<DeleteIcon />}
-              // >
-              //   Delete
-              // </Button>
-              // </Box>
             );
           })}
       </Tabs>
