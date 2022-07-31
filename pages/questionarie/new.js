@@ -4,7 +4,9 @@ import { TabContext } from "@mui/lab";
 import { Box, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useContext, useState } from "react";
+import DeleteQuestions from "../../components/deleteQuestions";
 import HorizontalStepper from "../../components/HorizontalStepper";
+import QuestionLength from "../../components/questionLength";
 import QuestionsList from "../../components/QuestionsList";
 import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
@@ -36,6 +38,7 @@ export default function NewQuestionariePage() {
       },
     ],
   });
+
   const handleSideTabChange = (e, newValue) => {
     console.log("newValue", newValue);
     setSideTabValue(newValue);
@@ -64,12 +67,21 @@ export default function NewQuestionariePage() {
           sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
         >
           {activeStep === 1 && (
-            <QuestionsList
-              handleSideTabChange={handleSideTabChange}
-              questionarie={questionarie}
-              setQuestionarie={setQuestionarie}
-              sideTabvalue={sideTabvalue}
-            />
+            <>
+              <QuestionLength questionarie={questionarie} />
+              <QuestionsList
+                handleSideTabChange={handleSideTabChange}
+                questionarie={questionarie}
+                setQuestionarie={setQuestionarie}
+                sideTabvalue={sideTabvalue}
+              />
+              <DeleteQuestions
+                questionarie={questionarie}
+                setQuestionarie={setQuestionarie}
+                sideTabvalue={sideTabvalue}
+                setSideTabValue={setSideTabValue}
+              />
+            </>
           )}
 
           <Box

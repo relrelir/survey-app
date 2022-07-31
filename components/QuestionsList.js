@@ -49,10 +49,10 @@ export default function QuestionsList({
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <TabList
+      <Tabs
         orientation="vertical"
         variant="scrollable"
-        // value={sideTabvalue}
+        value={sideTabvalue}
         onChange={handleSideTabChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
@@ -65,7 +65,7 @@ export default function QuestionsList({
                 key={index}
                 label={`${question?.title ? question?.title : "..."}`}
                 sx={BoxShadowTabs()}
-                value={`${sideTabvalue}`}
+                // value={sideTabvalue}
               />
               //  <Button
               //   sx={ButtonDeleteTabs()}
@@ -78,7 +78,7 @@ export default function QuestionsList({
               // </Box>
             );
           })}
-      </TabList>
+      </Tabs>
       <Button
         sx={{ my: "5px", mr: "73%", ml: "3%" }}
         variant="contained"

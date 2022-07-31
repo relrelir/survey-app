@@ -81,3 +81,33 @@ export function FormLabelStyle() {
     textTransform: "none",
   };
 }
+export function deleteButtonStyle(width, height) {
+  return {
+    width,
+    height,
+    background: "#FDFDFD",
+    border: "2px solid #9C9B9B",
+    borderRadius: "11px",
+
+    "&:hover": {
+      cursor: "pointer",
+      borderRadius: "8px",
+      border: "2px solid #1374F9",
+    },
+  };
+}
+export function numbersStyleStyle() {
+  return {
+    width: "17px",
+    height: "45px",
+
+    fontFamily: "Kanit",
+    fontStyle: "normal",
+    fontWeight: 600,
+    fontSize: "30px",
+    lineHeight: "45px",
+    /* identical to box height */
+
+    color: "#1374F9",
+  };
+}

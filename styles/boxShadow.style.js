@@ -27,12 +27,3 @@ export function BoxShadowTabs() {
     },
   };
 }
-export function ButtonDeleteTabs() {
-  return {
-    mr: "74%",
-    "&:hover": {
-      backgroundColor: "#002984",
-      opacity: [0.0, 0.0, 0.9],
-    },
-  };
-}
