@@ -1,27 +1,13 @@
-import TextField from "@mui/joy/TextField";
-import {
-  Button,
-  Checkbox,
-  FormLabel,
-  Grid,
-  Input,
-  Stack,
-  Switch,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import { useState } from "react";
-import { styled } from "@mui/material/styles";
-import Answers from "../answers";
-import QuestionsList from "../QuestionsList";
 import { TabPanel } from "@mui/lab";
+import { Checkbox, FormLabel, Grid, Input } from "@mui/material";
+import { Box } from "@mui/system";
+import Answers from "../answers";
 
 import {
   InputAnsStyle,
   InputStyle,
   TypographyStyle,
 } from "../../styles/global.style";
-import { BoxShadow } from "../../styles/boxShadow.style";
 
 export default function StepperSecond({
   questionarie,
