@@ -1,6 +1,9 @@
 import { Button } from "@mui/material";
+import { useContext } from "react";
+import stepperContext from "../../contexts/stepperContext";
 
-export default function StepperThird({ questionarie }) {
+export default function StepperThird() {
+  const { questionarie } = useContext(stepperContext);
   const postQuestionarie = async (e) => {
     const { title, introduction, isQuize, questions, pointsValue } =
       questionarie;

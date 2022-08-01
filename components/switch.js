@@ -1,11 +1,11 @@
 import { Box, Stack, Switch, Typography } from "@mui/material";
+import { useContext } from "react";
+import stepperContext from "../contexts/stepperContext";
 import { BoxShadow } from "../styles/boxShadow.style";
 
-export default function MultiChoiseSwitch({
-  questionarie,
-  sideTabvalue,
-  handleMultiChoiseChange,
-}) {
+export default function MultiChoiseSwitch() {
+  const { questionarie, sideTabvalue, handleMultiChoiseChange } =
+    useContext(stepperContext);
   const { questions } = questionarie;
   return (
     questions?.length > 0 &&

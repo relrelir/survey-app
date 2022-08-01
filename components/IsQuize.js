@@ -1,6 +1,9 @@
 import { Stack, Switch, Typography } from "@mui/material";
+import { useContext } from "react";
+import stepperContext from "../contexts/stepperContext";
 import { BoxShadow } from "../styles/boxShadow.style";
-export default function IsQuize({ handleIsQuizeChange, questionarie }) {
+export default function IsQuize() {
+  const { handleIsQuizeChange, questionarie } = useContext(stepperContext);
   return (
     <Stack
       sx={BoxShadow("250px", "61px")}

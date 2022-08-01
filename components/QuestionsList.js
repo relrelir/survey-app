@@ -1,37 +1,18 @@
 import { Box, Button } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import React, { useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { BoxShadowTabs, ButtonDeleteTabs } from "../styles/boxShadow.style";
-import { TabList } from "@mui/lab";
+import Tabs from "@mui/material/Tabs";
 import { makeStyles } from "@mui/styles";
-import ClearIcon from "@mui/icons-material/Clear";
-import { deleteButtonStyle } from "../styles/global.style";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import React, { useContext } from "react";
+import stepperContext from "../contexts/stepperContext";
+import { BoxShadowTabs, TextTabsStyle } from "../styles/boxShadow.style";
 
-export default function QuestionsList({
-  questionarie,
-  setQuestionarie,
-  handleSideTabChange,
-  sideTabvalue,
-}) {
+export default function QuestionsList() {
+  const { questionarie, setQuestionarie, handleSideTabChange, sideTabvalue } =
+    useContext(stepperContext);
+
   const { questions } = questionarie;
 
-  const useStyles = makeStyles({
-    customLabelColor: {
-      width: "22px",
-      height: "45px",
-
-      fontFamily: "Kanit",
-      fontStyle: "normal",
-      fontWeight: 600,
-      fontSize: "30px",
-      lineHeight: "45px",
-      color: "#1374F9",
-    },
-  });
-
+  const useStyles = makeStyles(TextTabsStyle());
   const classes = useStyles();
 
   const handleAddQuestion = (e) => {
@@ -59,7 +40,6 @@ export default function QuestionsList({
   return (
     <Box
       sx={{
-        flexGrow: 1,
         display: "flex",
         alignItems: "center",
         flexDirection: "column",

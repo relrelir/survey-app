@@ -1,28 +1,12 @@
-import TextField from "@mui/joy/TextField";
-import {
-  Button,
-  FormLabel,
-  Grid,
-  Input,
-  Stack,
-  Switch,
-  Typography,
-} from "@mui/material";
+import { FormLabel, Input, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
-import { BoxShadow } from "../../styles/boxShadow.style";
+import { useContext } from "react";
+import stepperContext from "../../contexts/stepperContext";
 import { InputStyle, TypographyStyle } from "../../styles/global.style";
-import IsQuize from "../IsQuize";
 
-export default function StepperFirst({
-  questionarie,
-  setQuestionarie,
-  handleIsQuizeChange,
-  isQuize,
-}) {
+export default function StepperFirst() {
+  const { questionarie, setQuestionarie } = useContext(stepperContext);
   return (
-    // <form action="/api/questionarie" href="/api/questionarie" method="port">
-
     <Box
       sx={{
         display: "flex",
@@ -125,7 +109,5 @@ export default function StepperFirst({
         </Box>
       </Box>
     </Box>
-
-    // </form>
   );
 }

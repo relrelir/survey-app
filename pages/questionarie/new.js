@@ -1,24 +1,21 @@
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { TabContext } from "@mui/lab";
-import { Box, Grid, Stack, Switch, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Box } from "@mui/material";
 import { useContext, useState } from "react";
 import ArrowsNextBack from "../../components/ArrowsNextBack";
 import DeleteQuestions from "../../components/deleteQuestions";
 import HorizontalStepper from "../../components/HorizontalStepper";
 import IsQuize from "../../components/IsQuize";
-
 import QuestionsList from "../../components/QuestionsList";
 import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
 import StepperThird from "../../components/stepperSteps/third";
 import MultiChoiseSwitch from "../../components/switch";
 import AppContext from "../../contexts/AppContext";
-import { BoxShadow } from "../../styles/boxShadow.style";
-import { NavigateButtonsStyle } from "../../styles/global.style";
+import stepperContext from "../../contexts/stepperContext";
+
 export default function NewQuestionariePage() {
   const { questionaries, setQuestionaries } = useContext(AppContext);
+
   const [sideTabvalue, setSideTabValue] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [questionarie, setQuestionarie] = useState({
@@ -89,70 +86,52 @@ export default function NewQuestionariePage() {
     <Box
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <HorizontalStepper
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}
-      />
-
-      <TabContext value={`${sideTabvalue}`}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          {activeStep === 1 && (
-            <>
-              <QuestionsList
-                handleSideTabChange={handleSideTabChange}
-                questionarie={questionarie}
-                setQuestionarie={setQuestionarie}
-                sideTabvalue={sideTabvalue}
-              />
-              <DeleteQuestions
-                questionarie={questionarie}
-                setQuestionarie={setQuestionarie}
-                sideTabvalue={sideTabvalue}
-                setSideTabValue={setSideTabValue}
-              />
-            </>
-          )}
-
+      <stepperContext.Provider
+        value={{
+          isQuize,
+          setIsQuize,
+          handleIsQuizeChange,
+          // activeStep,
+          sideTabvalue,
+          handleSideTabChange,
+          questionarie,
+          setQuestionarie,
+          setSideTabValue,
+          isMultiChoise,
+          handleMultiChoiseChange,
+          handleNext,
+          handleBack,
+        }}
+      >
+        <HorizontalStepper activeStep={activeStep} />
+        <TabContext value={`${sideTabvalue}`}>
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              width: "1087px",
-              height: "628px",
-              background: "rgba(255, 255, 255, 0.85)",
-              boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-              borderRadius: "25px",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            {activeStep === 0 ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <StepperFirst
-                  handleIsQuizeChange={handleIsQuizeChange}
-                  isQuize={isQuize}
-                  setIsQuize={setIsQuize}
-                  questionarie={questionarie}
-                  setQuestionarie={setQuestionarie}
-                />
-                <IsQuize
-                  handleIsQuizeChange={handleIsQuizeChange}
-                  questionarie={questionarie}
-                />
-              </Box>
-            ) : activeStep === 1 ? (
+            {activeStep === 1 && (
               <>
+                <QuestionsList />
+                <DeleteQuestions />
+              </>
+            )}
+
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                width: "1087px",
+                height: "628px",
+                background: "rgba(255, 255, 255, 0.85)",
+                boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+                borderRadius: "25px",
+              }}
+            >
+              {activeStep === 0 ? (
                 <Box
                   sx={{
                     display: "flex",
@@ -160,31 +139,34 @@ export default function NewQuestionariePage() {
                     justifyContent: "center",
                   }}
                 >
-                  <StepperSecond
-                    isMultiChoise={isMultiChoise}
-                    sideTabvalue={sideTabvalue}
-                    questionarie={questionarie}
-                    setQuestionarie={setQuestionarie}
-                  />
-
-                  <MultiChoiseSwitch
-                    questionarie={questionarie}
-                    sideTabvalue={sideTabvalue}
-                    handleMultiChoiseChange={handleMultiChoiseChange}
-                  />
+                  <StepperFirst />
+                  <IsQuize />
                 </Box>
-              </>
-            ) : (
-              <StepperThird questionarie={questionarie} />
-            )}
+              ) : activeStep === 1 ? (
+                <>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <StepperSecond />
+                    <MultiChoiseSwitch />
+                  </Box>
+                </>
+              ) : (
+                <StepperThird />
+              )}
+            </Box>
           </Box>
-        </Box>
-        <ArrowsNextBack
-          activeStep={activeStep}
-          handleNext={handleNext}
-          handleBack={handleBack}
-        />
-      </TabContext>
+          <ArrowsNextBack
+            activeStep={activeStep}
+            handleNext={handleNext}
+            handleBack={handleBack}
+          />
+        </TabContext>
+      </stepperContext.Provider>
     </Box>
   );
 }

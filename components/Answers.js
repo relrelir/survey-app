@@ -1,25 +1,17 @@
-import React, { useState } from "react";
-import { Button, Input, Stack, Switch, Typography } from "@mui/material";
+import { Button, Input } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-
-import FormControl from "@mui/material/FormControl";
+import React, { useContext } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
-
-import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
+import stepperContext from "../contexts/stepperContext";
 import {
   deleteButtonStyle,
   InputAnsStyle,
-  InputStyle,
   TypographyStyle,
 } from "../styles/global.style";
 
-export default function Answers({
-  questionIndex,
-  questionarie,
-  setQuestionarie,
-  handleAnswerPoints,
-}) {
+export default function Answers({ questionIndex, handleAnswerPoints }) {
+  const { questionarie, setQuestionarie } = useContext(stepperContext);
   // const {
   //   questions: { [questionIndex]: question },
   // } = questionarie;

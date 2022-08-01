@@ -27,3 +27,17 @@ export function BoxShadowTabs() {
     },
   };
 }
+export function TextTabsStyle() {
+  return {
+    customLabelColor: {
+      width: "22px",
+      height: "45px",
+      fontFamily: "Kanit",
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: "30px",
+      lineHeight: "45px",
+      color: "#1374F9",
+    },
+  };
+}

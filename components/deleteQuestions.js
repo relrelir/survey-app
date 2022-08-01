@@ -1,21 +1,12 @@
-import { Box, Button } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import React, { useState } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { BoxShadowTabs } from "../styles/boxShadow.style";
-import { TabList } from "@mui/lab";
-import { deleteButtonStyle } from "../styles/global.style";
 import ClearIcon from "@mui/icons-material/Clear";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { Box, Button } from "@mui/material";
+import React, { useContext } from "react";
+import stepperContext from "../contexts/stepperContext";
+import { deleteButtonStyle } from "../styles/global.style";
 
-export default function DeleteQuestions({
-  questionarie,
-  setQuestionarie,
-
-  sideTabvalue,
-  setSideTabValue,
-}) {
+export default function DeleteQuestions() {
+  const { questionarie, setQuestionarie, sideTabvalue, setSideTabValue } =
+    useContext(stepperContext);
   const { questions } = questionarie;
 
   const handleDeleteQuestion = (e, index) => {
@@ -44,9 +35,6 @@ export default function DeleteQuestions({
               <Button
                 onClick={(e) => handleDeleteQuestion(e, index)}
                 startIcon={<ClearIcon sx={deleteButtonStyle("30px", "30px")} />}
-                // startIcon={
-                //   <HighlightOffIcon sx={deleteButtonStyle("30px", "30px")} />
-                // }
               />
             </Box>
           );

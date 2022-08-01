@@ -12,7 +12,6 @@ import { CssBaseline, Drawer, ThemeProvider } from "@mui/material";
 import SignedInTab from "../components/SignedInDrawer";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  // const [value, setValue] = useState(0);
   const [phone, setPhone] = useState(null);
   const [birthday, setbirthday] = useState(null);
   const [gender, setGender] = useState(null);

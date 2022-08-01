@@ -2,18 +2,18 @@ import { TabPanel } from "@mui/lab";
 import { Checkbox, FormLabel, Grid, Input } from "@mui/material";
 import { Box } from "@mui/system";
 import Answers from "../Answers";
-
+import { useContext } from "react";
+import stepperContext from "../../contexts/stepperContext";
 import {
   InputAnsStyle,
   InputStyle,
   TypographyStyle,
 } from "../../styles/global.style";
 
-export default function StepperSecond({
-  questionarie,
-  setQuestionarie,
-  sideTabvalue,
-}) {
+export default function StepperSecond() {
+  const { questionarie, setQuestionarie, sideTabvalue } =
+    useContext(stepperContext);
+
   const { questions } = questionarie;
 
   // const { answers } = questions;
@@ -142,8 +142,6 @@ export default function StepperSecond({
                           <Answers
                             handleAnswerPoints={handleAnswerPoints}
                             questionIndex={questionIndex}
-                            questionarie={questionarie}
-                            setQuestionarie={setQuestionarie}
                           />
                         )}
 
