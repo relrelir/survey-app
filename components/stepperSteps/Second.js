@@ -90,39 +90,34 @@ export default function StepperSecond({
                         <Box
                           sx={{
                             display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "start",
-                            alignItems: "start",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
                           }}
                         >
-                          <FormLabel htmlFor="title" sx={TypographyStyle()}>
-                            Title:
+                          <FormLabel
+                            htmlFor="title"
+                            sx={TypographyStyle("126px", "45px")}
+                          >
+                            Question:
                           </FormLabel>
                           <Input
-                            id="title"
-                            sx={InputStyle("72px", "810px")}
+                            id="Question"
+                            sx={InputStyle("810px", "72px")}
                             fullWidth
                             className="input"
                             variant="standard"
-                            name="title"
+                            name="Question"
                             type="text"
                             defaultValue={question?.title}
                             onChange={(e) =>
                               handleQuestionTitle(e, questionIndex)
                             }
                           />
-                        </Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
+
                           <FormLabel
                             htmlFor="introduction"
-                            sx={TypographyStyle()}
+                            sx={TypographyStyle("173px", "45px")}
                           >
                             introduction:
                           </FormLabel>
@@ -155,7 +150,9 @@ export default function StepperSecond({
                         {!questionarie.questions[questionIndex]
                           .isMultiChoise && (
                           <>
-                            <h1 sx={TypographyStyle()}>Answers</h1>
+                            <h1 sx={TypographyStyle("117px", "45px")}>
+                              Answers
+                            </h1>
                             <Box
                               sx={{
                                 display: "flex",

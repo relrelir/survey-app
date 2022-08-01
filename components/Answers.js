@@ -111,7 +111,7 @@ export default function Answers({
 
   return (
     <>
-      <h1 sx={TypographyStyle()}>Answers</h1>
+      <h1 sx={TypographyStyle("117px", "45px")}>Answers</h1>
 
       {answers?.length > 0 &&
         answers?.map((answer, answerIndex) => (

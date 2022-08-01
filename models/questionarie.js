@@ -1,4 +1,5 @@
-import mongoose, { Schema, ObjectId } from "mongoose";
+import { ObjectId } from "mongodb";
+import mongoose, { Schema } from "mongoose";
 import Question from "./question";
 import User from "./user";
 

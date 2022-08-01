@@ -1,18 +1,46 @@
-// import { Button } from "@mui/material";
+import { Button } from "@mui/material";
 
-// export default function StepperThird() {
-//   const postQuestionarie = async (e) => {
-//    try{
+export default function StepperThird({ questionarie }) {
+  const postQuestionarie = async (e) => {
+    const { title, introduction, isQuize, questions, pointsValue } =
+      questionarie;
 
-//    } fetch(`/api/questionarie`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ title, introduction, isQuize, questions, pointsValue }).catch((res) => console.error(res.error))
-//   }
+    await fetch(`/api/questionariePost`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        introduction,
+        isQuize,
+        questions,
+        pointsValue,
+      }),
+    });
 
-//   return (
-//     <Button type="submit" variant="contained" color="success">
-//       Create
-//     </Button>
-//   );
-// }
+    // .catch((res) => console.error(res.error));
+  };
+
+  //     try {
+  //       fetch(`/api/questionarie`),
+  //         {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify({
+  //             title,
+  //             introduction,
+  //             isQuize,
+  //             questions,
+  //             pointsValue,
+  //           }),
+  //         };
+  //     } catch (err) {
+  //       console.error("err", err);
+  //     }
+  //   };
+
+  return (
+    <Button onClick={postQuestionarie} variant="contained" color="success">
+      Create
+    </Button>
+  );
+}

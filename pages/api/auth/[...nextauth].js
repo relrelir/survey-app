@@ -31,8 +31,6 @@ export const authOptions = {
       // if (account?.access_token) token.accessToken = account.access_token;
       if (user?.role) token.role = user?.role;
 
-      console.log("jwtCallback", params);
-
       return token;
     },
 

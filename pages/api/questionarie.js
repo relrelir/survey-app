@@ -2,14 +2,18 @@ import { getToken } from "next-auth/jwt";
 import connectDB from "../../middlware/mongodb";
 import Questionarie from "../../models/questionarie";
 import User from "../../models/user";
+
 const secret = process.env.NEXTAUTH_SECRET;
+
 const handler = async (req, res) => {
+  console.log("try123");
   if (req.method === "POST") {
     const { title, introduction, isQuize, questions, pointsValue } = req.body;
     const token = await getToken({ req, secret });
+    console.log("token:", token);
     const userId = token.sub;
 
-    if (title /* && questions.length*/) {
+    if (title) {
       try {
         let user = await User.findById(userId);
         console.log("user", user);
@@ -18,6 +22,7 @@ const handler = async (req, res) => {
           author: user,
           title,
           introduction,
+          isQuize,
           questions,
           pointsValue,
         });

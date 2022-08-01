@@ -4,8 +4,10 @@ import { TabContext } from "@mui/lab";
 import { Box, Grid, Stack, Switch, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useContext, useState } from "react";
+import ArrowsNextBack from "../../components/ArrowsNextBack";
 import DeleteQuestions from "../../components/deleteQuestions";
 import HorizontalStepper from "../../components/HorizontalStepper";
+import IsQuize from "../../components/IsQuize";
 
 import QuestionsList from "../../components/QuestionsList";
 import StepperFirst from "../../components/stepperSteps/First";
@@ -41,6 +43,17 @@ export default function NewQuestionariePage() {
       },
     ],
   });
+
+  const [isQuize, setIsQuize] = useState(true);
+  const handleIsQuizeChange = (e) => {
+    setIsQuize(!isQuize);
+    setQuestionarie({
+      ...questionarie,
+      isQuize: e.target.checked,
+    });
+    console.log("isQuize", isQuize);
+    console.log("questionarie", questionarie);
+  };
 
   const handleSideTabChange = (e, newValue) => {
     setSideTabValue(newValue);
@@ -86,7 +99,7 @@ export default function NewQuestionariePage() {
           sx={{
             display: "flex",
             flexDirection: "row",
-            alignItems: "start",
+            alignItems: "center",
           }}
         >
           {activeStep === 1 && (
@@ -109,10 +122,8 @@ export default function NewQuestionariePage() {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-
+              flexDirection: "column",
+              justifyContent: "center",
               width: "1087px",
               height: "628px",
               background: "rgba(255, 255, 255, 0.85)",
@@ -120,68 +131,59 @@ export default function NewQuestionariePage() {
               borderRadius: "25px",
             }}
           >
-            <Grid container>
-              {activeStep === 0 ? (
-                <Grid item>
-                  <StepperFirst
-                    questionarie={questionarie}
-                    setQuestionarie={setQuestionarie}
-                  />
-                </Grid>
-              ) : activeStep === 1 ? (
+            {activeStep === 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <StepperFirst
+                  handleIsQuizeChange={handleIsQuizeChange}
+                  isQuize={isQuize}
+                  setIsQuize={setIsQuize}
+                  questionarie={questionarie}
+                  setQuestionarie={setQuestionarie}
+                />
+                <IsQuize
+                  handleIsQuizeChange={handleIsQuizeChange}
+                  questionarie={questionarie}
+                />
+              </Box>
+            ) : activeStep === 1 ? (
+              <>
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    alignItems: "start",
-                    justifyContent: "start",
+                    justifyContent: "center",
                   }}
                 >
-                  <Grid item>
-                    <StepperSecond
-                      isMultiChoise={isMultiChoise}
-                      sideTabvalue={sideTabvalue}
-                      questionarie={questionarie}
-                      setQuestionarie={setQuestionarie}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <MultiChoiseSwitch
-                      questionarie={questionarie}
-                      sideTabvalue={sideTabvalue}
-                      handleMultiChoiseChange={handleMultiChoiseChange}
-                    />
-                  </Grid>
+                  <StepperSecond
+                    isMultiChoise={isMultiChoise}
+                    sideTabvalue={sideTabvalue}
+                    questionarie={questionarie}
+                    setQuestionarie={setQuestionarie}
+                  />
+
+                  <MultiChoiseSwitch
+                    questionarie={questionarie}
+                    sideTabvalue={sideTabvalue}
+                    handleMultiChoiseChange={handleMultiChoiseChange}
+                  />
                 </Box>
-              ) : (
-                <StepperThird />
-              )}
-            </Grid>
+              </>
+            ) : (
+              <StepperThird questionarie={questionarie} />
+            )}
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-            gap: "200%",
-          }}
-        >
-          <Button sx={NavigateButtonsStyle()} onClick={handleBack}>
-            <ArrowBackIosIcon />
-            Back
-          </Button>
-          <Button sx={NavigateButtonsStyle()} onClick={handleNext}>
-            Next
-            <ArrowForwardIosIcon />
-          </Button>
-          {activeStep === 2 && (
-            <Button type="submit" variant="contained" color="success">
-              Create
-            </Button>
-          )}
-        </Box>
+        <ArrowsNextBack
+          activeStep={activeStep}
+          handleNext={handleNext}
+          handleBack={handleBack}
+        />
       </TabContext>
     </Box>
   );

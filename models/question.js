@@ -1,22 +1,27 @@
-import mongoose, { Schema, ObjectId } from "mongoose";
+import { ObjectId } from "mongodb";
+import mongoose, { Schema } from "mongoose";
+import Answer from "./answer";
 
 export const QuestionSchema = new Schema({
   title: {
     type: String,
     required: true,
+    // minLength: 2,
   },
   introduction: {
     type: String,
     required: false,
   },
-  areOptions: {
+  isMultiChoise: {
     type: Boolean,
     default: true,
   },
-  answers: {
-    type: ObjectId,
-    ref: "Answers",
-  },
+  answers: [
+    {
+      type: ObjectId,
+      ref: Answer,
+    },
+  ],
 });
 
 const Question =

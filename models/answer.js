@@ -1,4 +1,5 @@
-import mongoose, { Schema, ObjectId } from "mongoose";
+import { ObjectId } from "mongodb";
+import mongoose, { Schema } from "mongoose";
 import User from "./user";
 
 export const AnswerSchema = new Schema({
@@ -22,4 +23,5 @@ export const AnswerSchema = new Schema({
   ],
 });
 
-export default mongoose.models.Answer || mongoose.model("Answer", AnswerSchema);
+const Answer = mongoose.models.Answer || mongoose.model("Answer", AnswerSchema);
+export default Answer;

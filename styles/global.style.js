@@ -1,7 +1,7 @@
-export function TypographyStyle() {
+export function TypographyStyle(width, height) {
   return {
-    width: "267px",
-    height: "45px",
+    width,
+    height,
     fontFamily: "Kanit",
     fontStyle: "normal",
     fontWeight: 600,
@@ -10,7 +10,7 @@ export function TypographyStyle() {
     color: "#000000",
   };
 }
-export function InputStyle(height, width, borderTop, borderBottom) {
+export function InputStyle(width, height, borderTop, borderBottom) {
   return {
     boxSizing: "border-box",
 

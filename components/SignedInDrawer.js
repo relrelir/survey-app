@@ -24,7 +24,7 @@ function SignedInTab() {
     fetch("/api/questionarie")
       .then((response) => response.json())
       .then((questionaries) => setQuestionaries(questionaries));
-  }, [setQuestionaries]);
+  }, [isOpen]);
 
   return (
     <Drawer anchor="right" open={isOpen} onClose={() => setIsOpen(false)}>
