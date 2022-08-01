@@ -10,6 +10,7 @@ import HorizontalStepper from "../../components/HorizontalStepper";
 import QuestionsList from "../../components/QuestionsList";
 import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
+import StepperThird from "../../components/stepperSteps/third";
 import MultiChoiseSwitch from "../../components/switch";
 import AppContext from "../../contexts/AppContext";
 import { BoxShadow } from "../../styles/boxShadow.style";
@@ -153,10 +154,8 @@ export default function NewQuestionariePage() {
                   </Grid>
                 </Box>
               ) : (
-                <StepperSecond />
+                <StepperThird />
               )}
-
-              <Grid item></Grid>
             </Grid>
           </Box>
         </Box>

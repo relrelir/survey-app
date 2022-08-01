@@ -1,7 +1,7 @@
 import { TabPanel } from "@mui/lab";
 import { Checkbox, FormLabel, Grid, Input } from "@mui/material";
 import { Box } from "@mui/system";
-import Answers from "../answers";
+import Answers from "../Answers";
 
 import {
   InputAnsStyle,
