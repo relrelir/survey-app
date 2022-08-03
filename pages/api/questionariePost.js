@@ -53,48 +53,49 @@ const handler = async (req, res) => {
         //   questions: newQuestions,
         // });
         /////////////////////////////////////
-        // let $questions = [];
-        // for (let q of questions) {
-        //   let $answers = [];
-        //   for (let a of q.answers) {
-        //     let answer = new Answer(a);
-        //     $answers.push(answer.save());
-        //   }
-        //   let { title, introduction, isMultiChoise } = q;
+        let $questions = [];
+        for (let q of questions) {
+          let $answers = [];
+          for (let a of q.answers) {
+            let { content, isCorrect, pointsValue } = a;
+            let answer = new Answer({ content, isCorrect, pointsValue });
+            $answers.push(answer.save());
+          }
+          let { title, introduction, isMultiChoise } = q;
 
-        //   let question = new Question({
-        //     title,
-        //     introduction,
-        //     isMultiChoise,
-        //     answers: await Promise.all($answers),
-        //   });
-        //   $questions.push(question.save());
-        // }
-        // const questionarie = new Questionarie({
-        //   author: user,
-        //   title,
-        //   introduction,
-        //   isQuize,
-        //   questions: await Promise.all($questions),
-        // });
-
-        //////////////////////////
+          let question = new Question({
+            title,
+            introduction,
+            isMultiChoise,
+            answers: await Promise.all($answers),
+          });
+          $questions.push(question.save());
+        }
         const questionarie = new Questionarie({
           author: user,
           title,
           introduction,
           isQuize,
-          questions: questions.map(
-            ({ title, introduction, isMultiChoise, answers }) =>
-              new Question({
-                title,
-                introduction,
-                isMultiChoise,
-                answers: answers.map((a) => new Answer(a)),
-              })
-          ),
-          pointsValue,
+          questions: await Promise.all($questions),
         });
+
+        //////////////////////////
+        // const questionarie = new Questionarie({
+        //   author: user,
+        //   title,
+        //   introduction,
+        //   isQuize,
+        //   questions: questions.map(
+        //     ({ title, introduction, isMultiChoise, answers }) =>
+        //       new Question({
+        //         title,
+        //         introduction,
+        //         isMultiChoise,
+        //         answers: answers.map((a) => new Answer(a)),
+        //       })
+        //   ),
+        //   pointsValue,
+        // });
 
         const questionarieCreated = await questionarie.save();
         res.status(200).json(questionarieCreated);

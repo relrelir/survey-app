@@ -178,15 +178,15 @@ export default function SignInPage({ csrfToken }) {
 }
 
 export async function getServerSideProps({ params, req, res }) {
-  if (
-    await Promise.all([getToken({ req }), connectDB(), getCsrfToken({ req })])
-  )
-    return {
-      redirect: {
-        destination: req?.query?.callbackUrl || "/",
-        permanent: false,
-        props: { csrfToken },
-      },
-    };
-  const csrfToken = await getCsrfToken({ req });
+  const [tokens] = await Promise.all([
+    getToken({ req }),
+    getCsrfToken({ req }),
+  ]);
+  return {
+    redirect: {
+      destination: req?.query?.callbackUrl || "/",
+      permanent: false,
+      props: [tokens[1]],
+    },
+  };
 }
