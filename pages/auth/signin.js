@@ -1,25 +1,18 @@
-import Image from "next/image";
-import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
-import TextField from "@mui/joy/TextField";
-import Link from "next/link";
 import Button from "@mui/joy/Button";
+import TextField from "@mui/joy/TextField";
+import Image from "next/image";
 // import Input from "@mui/joy/Input";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 
-import TabPanel from "@mui/lab/TabPanel";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
-import AppContext from "../../contexts/AppContext";
-import { useContext } from "react";
-import { useRouter } from "next/router";
-import Logo from "../../components/Logo";
-import { getToken } from "next-auth/jwt";
-import Errormessege from "../../components/error";
 import { Paper } from "@mui/material";
+import { getToken } from "next-auth/jwt";
+import { getCsrfToken, signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import Errormessege from "../../components/error";
+import Logo from "../../components/Logo";
+import AppContext from "../../contexts/AppContext";
+import { connectDB } from "../../middlware/mongodb";
 
 const NEXTAUTH_SIGNIN_ERROS = {
   Signin: "Try signing in with a different account.",
@@ -185,13 +178,15 @@ export default function SignInPage({ csrfToken }) {
 }
 
 export async function getServerSideProps({ params, req, res }) {
-  if (await getToken({ req }))
+  if (
+    await Promise.all([getToken({ req }), connectDB(), getCsrfToken({ req })])
+  )
     return {
       redirect: {
         destination: req?.query?.callbackUrl || "/",
         permanent: false,
+        props: { csrfToken },
       },
     };
   const csrfToken = await getCsrfToken({ req });
-  return { props: { csrfToken } };
 }

@@ -10,6 +10,7 @@ const handler = async (req, res) => {
   console.log("try123");
   if (req.method === "POST") {
     const { title, introduction, isQuize, questions, pointsValue } = req.body;
+
     // await connectDB();
     // const token = await getToken({ req, secret });
     const [token] = await Promise.all([getToken({ req, secret }), connectDB()]);
@@ -21,13 +22,14 @@ const handler = async (req, res) => {
         let user = await User.findById(userId);
         console.log("user", user);
         console.log("userId", userId);
-
+        //////////////////////////////////////////////
         // let newQuestions = [];
         // for (let q of questions) {
         //   let newAnswers = [];
 
         //   for (let a of q.answers) {
-        //     let answer = new Answer(a);
+        //     let { content, isCorrect, pointsValue } = a;
+        //     let answer = new Answer({ content, isCorrect, pointsValue });
 
         //     newAnswers.push(await answer.save());
         //   }
@@ -50,33 +52,33 @@ const handler = async (req, res) => {
         //   isQuize,
         //   questions: newQuestions,
         // });
-        /*
-        let $questions = [];
-        for (let q of questions) {
-          let $answers = [];
-          for (let a of q.answers) {
-            let answer = new Answer(a);
-            $answers.push(answer.save());
-          }
-          let { title, introduction, isMultiChoise } = q;
+        /////////////////////////////////////
+        // let $questions = [];
+        // for (let q of questions) {
+        //   let $answers = [];
+        //   for (let a of q.answers) {
+        //     let answer = new Answer(a);
+        //     $answers.push(answer.save());
+        //   }
+        //   let { title, introduction, isMultiChoise } = q;
 
-          let question = new Question({
-            title,
-            introduction,
-            isMultiChoise,
-            answers: await Promise.all($answers),
-          });
-          $questions.push(question.save());
-        }
-        const questionarie = new Questionarie({
-          author: user,
-          title,
-          introduction,
-          isQuize,
-          questions: await Promise.all($questions),
-        });
-*/
+        //   let question = new Question({
+        //     title,
+        //     introduction,
+        //     isMultiChoise,
+        //     answers: await Promise.all($answers),
+        //   });
+        //   $questions.push(question.save());
+        // }
+        // const questionarie = new Questionarie({
+        //   author: user,
+        //   title,
+        //   introduction,
+        //   isQuize,
+        //   questions: await Promise.all($questions),
+        // });
 
+        //////////////////////////
         const questionarie = new Questionarie({
           author: user,
           title,

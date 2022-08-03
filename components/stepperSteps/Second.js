@@ -78,6 +78,7 @@ export default function StepperSecond() {
               <Grid item key={questionIndex}>
                 <TabPanel value={`${sideTabvalue}`} index={sideTabvalue}>
                   <Box>
+                    {sideTabvalue}
                     {sideTabvalue === questionIndex && (
                       <Box
                         sx={{

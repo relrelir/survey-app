@@ -39,8 +39,6 @@ export default function StepperThird() {
   //     } catch (err) {
   //       console.error("err", err);
   //     }
-  //   };
-
   return (
     <Button onClick={postQuestionarie} variant="contained" color="success">
       Create

@@ -2,13 +2,14 @@ import { Box, Button, Typography } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { makeStyles } from "@mui/styles";
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import stepperContext from "../contexts/stepperContext";
 import { BoxShadowTabs, TextTabsStyle } from "../styles/boxShadow.style";
 import ClearIcon from "@mui/icons-material/Clear";
 import { deleteButtonStyle, numbersStyle } from "../styles/global.style";
 
 export default function QuestionsList() {
+  const isDelete = useRef(false);
   const {
     handleSideTabChange,
     questionarie,
@@ -46,12 +47,14 @@ export default function QuestionsList() {
 
   const handleDeleteQuestion = (e, index) => {
     const newQuestionarie = { ...questionarie };
-    newQuestionarie.questions = [...questionarie.questions];
-    newQuestionarie.questions.splice(index, 1);
 
-    setSideTabValue(
-      sideTabvalue ? sideTabvalue : sideTabvalue > 0 ? sideTabvalue - 1 : 0
-    );
+    let value = sideTabvalue > 0 ? sideTabvalue - 1 : 0;
+    setSideTabValue(value);
+    isDelete.current = index;
+    // setTimeout(() => {
+    //   newQuestionarie.questions = [...questionarie.questions];
+    //   newQuestionarie.questions.splice(index, 1);
+    // }, 1000);
     setQuestionarie(newQuestionarie);
   };
 
@@ -66,11 +69,21 @@ export default function QuestionsList() {
         width: "110%",
       }}
     >
+      {sideTabvalue}
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={sideTabvalue}
-        onChange={handleSideTabChange}
+        onChange={() => {
+          if (isDelete.current !== false) {
+            const newQuestionarie = { ...questionarie };
+            newQuestionarie.questions = [...questionarie.questions];
+            newQuestionarie.questions.splice(isDelete.current, 1);
+            isDelete.current = false;
+          }
+
+          handleSideTabChange();
+        }}
         sx={{ borderRight: 2, borderColor: "divider" }}
       >
         {questions?.length > 0 &&
@@ -94,7 +107,9 @@ export default function QuestionsList() {
                     }}
                   >
                     <Typography sx={numbersStyle()}>
-                      {question?.title ? index + 1 + question?.title : index}
+                      {question?.title
+                        ? index + 1 + question?.title
+                        : index + 1}
                     </Typography>
                     <Button
                       onClick={(e) => handleDeleteQuestion(e, index)}
