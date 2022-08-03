@@ -102,7 +102,7 @@ export function deleteButtonStyle(width, height) {
     background: "#FDFDFD",
     border: "2px solid #9C9B9B",
     borderRadius: "11px",
-
+    ml: "90%",
     "&:hover": {
       cursor: "pointer",
       borderRadius: "8px",
@@ -110,11 +110,11 @@ export function deleteButtonStyle(width, height) {
     },
   };
 }
-export function numbersStyleStyle() {
+export function numbersStyle() {
   return {
     width: "17px",
     height: "45px",
-
+    // mr: "100%",
     fontFamily: "Kanit",
     fontStyle: "normal",
     fontWeight: 600,

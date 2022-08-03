@@ -12,13 +12,15 @@ export default function StepperFirst() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        ml: "10%",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <FormLabel htmlFor="title" sx={TypographyStyle("62px", "45px")}>
@@ -53,6 +55,7 @@ export default function StepperFirst() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Box sx={{ mr: "100px" }}>
@@ -83,6 +86,7 @@ export default function StepperFirst() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Typography sx={TypographyStyle("173px", "45px")}>

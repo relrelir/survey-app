@@ -31,7 +31,16 @@ export default function DeleteQuestions() {
       {questions?.length > 0 &&
         questions.map((question, index) => {
           return (
-            <Box key={index}>
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "flex-start",
+                mb: "5%",
+                gap: "36px",
+              }}
+            >
               <Button
                 onClick={(e) => handleDeleteQuestion(e, index)}
                 startIcon={<ClearIcon sx={deleteButtonStyle("30px", "30px")} />}

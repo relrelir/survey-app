@@ -115,7 +115,7 @@ export default function NewQuestionariePage() {
             {activeStep === 1 && (
               <>
                 <QuestionsList />
-                <DeleteQuestions />
+                {/* <DeleteQuestions /> */}
               </>
             )}
 
@@ -137,6 +137,7 @@ export default function NewQuestionariePage() {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
+                    alignItems: "start",
                   }}
                 >
                   <StepperFirst />
@@ -149,6 +150,8 @@ export default function NewQuestionariePage() {
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
+                      ml: "22%",
+                      alignItems: "start",
                     }}
                   >
                     <StepperSecond />

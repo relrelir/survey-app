@@ -15,12 +15,12 @@ export function BoxShadow(width, height) {
 export function BoxShadowTabs() {
   return {
     my: "8px",
-    width: "250px",
-    height: "61px",
+    width: "285px",
+    height: "52px",
     backgroundColor: "#FFFFFF",
-    borderRadius: "18px",
+    borderRadius: "15px",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-
+    zIndex: 2,
     "&:hover": {
       backgroundColor: "#c7cdd6",
       opacity: [0.9, 0.8, 0.7],
@@ -30,7 +30,7 @@ export function BoxShadowTabs() {
 export function TextTabsStyle() {
   return {
     customLabelColor: {
-      width: "22px",
+      // width: "22px",
       height: "45px",
       fontFamily: "Kanit",
       fontStyle: "normal",
