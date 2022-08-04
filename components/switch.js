@@ -13,7 +13,7 @@ export default function MultiChoiseSwitch() {
       {
         return (
           sideTabvalue == questionIndex && (
-            <Box key={questionIndex} sx={{ display: " flex", my: "8px" }}>
+            <Box key={questionIndex}>
               <Stack
                 sx={BoxShadow("300px", "61px")}
                 direction="row"

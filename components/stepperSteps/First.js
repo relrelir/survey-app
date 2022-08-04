@@ -2,7 +2,11 @@ import { FormLabel, Input, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext } from "react";
 import stepperContext from "../../contexts/stepperContext";
-import { InputStyle, TypographyStyle } from "../../styles/global.style";
+import {
+  InputNumberStyle,
+  InputStyle,
+  TypographyStyle,
+} from "../../styles/global.style";
 
 export default function StepperFirst() {
   const { questionarie, setQuestionarie } = useContext(stepperContext);
@@ -23,10 +27,12 @@ export default function StepperFirst() {
           alignItems: "center",
         }}
       >
-        <FormLabel htmlFor="title" sx={TypographyStyle("62px", "45px")}>
+        <FormLabel htmlFor="title" sx={TypographyStyle()}>
           Title:
         </FormLabel>
         <Input
+          multiline
+          rows={1}
           sx={InputStyle("810px", "72px")}
           fullWidth
           className="input"
@@ -59,9 +65,7 @@ export default function StepperFirst() {
           }}
         >
           <Box sx={{ mr: "100px" }}>
-            <Typography sx={TypographyStyle("173px", "45px")}>
-              Introduction:
-            </Typography>
+            <Typography sx={TypographyStyle()}>Introduction:</Typography>
           </Box>
 
           <Input
@@ -71,7 +75,7 @@ export default function StepperFirst() {
             name="introduction"
             type="introduction"
             multiline
-            rows={4}
+            rows={3}
             value={questionarie.introduction}
             onChange={(e) => {
               setQuestionarie({
@@ -89,13 +93,11 @@ export default function StepperFirst() {
             alignItems: "center",
           }}
         >
-          <Typography sx={TypographyStyle("173px", "45px")}>
-            Points Value:
-          </Typography>
+          <Typography sx={TypographyStyle()}>Points Value:</Typography>
 
           <Input
             align="middle"
-            sx={InputStyle("263px", "209px")}
+            sx={InputNumberStyle("263px", "209px")}
             fullWidth
             className="input"
             variant="standard"

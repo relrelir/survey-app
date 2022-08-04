@@ -1,4 +1,4 @@
-import { Button, Input } from "@mui/material";
+import { Button, Input, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import React, { useContext } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -104,7 +104,7 @@ export default function Answers({ questionIndex, handleAnswerPoints }) {
 
   return (
     <>
-      <h1 sx={TypographyStyle("117px", "45px")}>Answers</h1>
+      <Typography sx={TypographyStyle()}>Answers</Typography>
 
       {answers?.length > 0 &&
         answers?.map((answer, answerIndex) => (

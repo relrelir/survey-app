@@ -9,7 +9,7 @@ import IsQuize from "../../components/IsQuize";
 import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
 import StepperThird from "../../components/stepperSteps/third";
-import MultiChoiseSwitch from "../../components/switch";
+
 import stepperContext from "../../contexts/stepperContext";
 
 export default function NewQuestionariePage() {
@@ -100,7 +100,7 @@ export default function NewQuestionariePage() {
         }}
       >
         <HorizontalStepper activeStep={activeStep} />
-        {/* <TabContext value={`${sideTabvalue}`}> */}
+
         <Box
           sx={{
             display: "flex",
@@ -141,7 +141,6 @@ export default function NewQuestionariePage() {
                   }}
                 >
                   <StepperSecond />
-                  <MultiChoiseSwitch />
                 </Box>
               </>
             ) : (
@@ -155,7 +154,6 @@ export default function NewQuestionariePage() {
           handleBack={handleBack}
         />
       </stepperContext.Provider>
-      {/* </TabContext> */}
     </Box>
   );
 }

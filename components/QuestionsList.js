@@ -54,8 +54,6 @@ export default function QuestionsList() {
     let value =
       sideTabvalue === questionarie.questions.length
         ? sideTabvalue - 1
-        : sideTabvalue === 0
-        ? 0
         : sideTabvalue;
     setSideTabValue(value);
     setTimeout(() => {
@@ -114,7 +112,7 @@ export default function QuestionsList() {
                     <Button
                       onClick={(e) => handleDeleteQuestion(e, index)}
                       startIcon={
-                        <ClearIcon sx={deleteButtonStyle("30px", "30px")} />
+                        <ClearIcon sx={deleteButtonStyle("37px", "37px")} />
                       }
                     />
                   </Box>
