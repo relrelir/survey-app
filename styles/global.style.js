@@ -1,12 +1,9 @@
-export function TypographyStyle(width, height) {
+export function TypographyStyle() {
   return {
-    width,
-    height,
     fontFamily: "Kanit",
     fontStyle: "normal",
     fontWeight: 600,
     fontSize: "30px",
-    lineHeight: "30px",
     color: "#000000",
   };
 }
@@ -14,8 +11,28 @@ export function InputStyle(width, height, borderTop, borderBottom) {
   return {
     boxSizing: "border-box",
 
-    textIndent: "50%",
+    paddingInlineStart: "10%",
+    paddingInlineEnd: "10%",
 
+    textDecoration: "none",
+    borderTop,
+    borderBottom,
+    height,
+    width,
+    fontSize: "250%",
+    background: "#FFFFFF",
+    border: "2px solid #1374F9",
+    borderRadius: "40px",
+  };
+}
+export function InputNumberStyle(width, height, borderTop, borderBottom) {
+  return {
+    boxSizing: "border-box",
+
+    paddingInlineStart: "30%",
+    paddingInlineEnd: "20%",
+
+    textDecoration: "none",
     borderTop,
     borderBottom,
     height,
@@ -29,9 +46,7 @@ export function InputStyle(width, height, borderTop, borderBottom) {
 export function InputAnsStyle(height, width) {
   return {
     boxSizing: "border-box",
-
     textIndent: "50%",
-
     height,
     width,
     fontSize: "150%",
@@ -117,7 +132,6 @@ export function deleteButtonStyle(width, height) {
     background: "#FDFDFD",
     border: "2px solid #9C9B9B",
     borderRadius: "11px",
-
     "&:hover": {
       cursor: "pointer",
       borderRadius: "8px",
