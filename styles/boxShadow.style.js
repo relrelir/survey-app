@@ -18,12 +18,12 @@ export function BoxShadowTabs(my) {
     flexDirection: "row",
     justifyContent: "flex-start",
     my,
-    width: "285px",
-    height: "52px",
+    // mr: "40px",
+    // width: "285px",
+    height: "55px",
     backgroundColor: "#FFFFFF",
     borderRadius: "15px",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    zIndex: 2,
     "&:hover": {
       backgroundColor: "#c7cdd6",
       opacity: [0.9, 0.8, 0.7],
@@ -55,14 +55,20 @@ export function SignInPaperStyle() {
 export function createTabStyle() {
   return {
     textTransform: "none",
-    width: "162px",
+    // width: "162px",
+
     height: "36px",
     fontFamily: "Kanit",
     fontStyle: "normal",
     fontWeight: 500,
     fontSize: "24px",
     lineHeight: "30px",
-    color: "#1374F9",
-    mb: "15%",
+    color: "#000001",
+
+    "&:hover": {
+      color: "#1374F9",
+      // boxShadow: "4px 16px 16px rgba(0, 0, 0, 0.7)",
+      // opacity: [0.9, 0.9, 0.9],
+    },
   };
 }

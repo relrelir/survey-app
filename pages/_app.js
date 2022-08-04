@@ -1,15 +1,12 @@
-import TabContext from "@mui/lab/TabContext";
-import { createTheme } from "@mui/material/styles";
+/* eslint-disable no-unused-vars */
 import { SessionProvider } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import MessegesDrawer from "../components/messegesDrawer";
-import { useRouter } from "next/router";
 
+import SignedInTab from "../components/SignedInDrawer";
 import AppContext from "../contexts/AppContext";
 import "../styles/globals.css";
-import { CssBaseline, Drawer, ThemeProvider } from "@mui/material";
-import SignedInTab from "../components/SignedInDrawer";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [phone, setPhone] = useState(null);
@@ -22,12 +19,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [messeges, setMesseges] = useState([]);
   const [isEdited, setIsEdited] = useState(false);
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
-
   useEffect(() => {
     fetch("/api/questionarie")
       .then((response) => response.json())
@@ -38,16 +29,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     console.log("_id", _id);
     fetch(`/api/deleteQuestionarie`, {
       method: "DELETE",
-
       body: _id,
     })
       .then((response) => response.json())
       .then((questionaries) => setIsEdited(!isEdited));
   };
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
 
   return (
     <SessionProvider session={session}>

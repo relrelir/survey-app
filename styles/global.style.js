@@ -6,7 +6,7 @@ export function TypographyStyle(width, height) {
     fontStyle: "normal",
     fontWeight: 600,
     fontSize: "30px",
-    lineHeight: "45px",
+    lineHeight: "30px",
     color: "#000000",
   };
 }
@@ -117,9 +117,7 @@ export function deleteButtonStyle(width, height) {
     background: "#FDFDFD",
     border: "2px solid #9C9B9B",
     borderRadius: "11px",
-    // ml: "70%",
-    position: "sticky",
-    zIndex: 1,
+
     "&:hover": {
       cursor: "pointer",
       borderRadius: "8px",
@@ -144,6 +142,7 @@ export function numbersStyle() {
 }
 export function tabTitleStyle() {
   return {
+    position: "relative",
     width: "240px",
     height: "36px",
     textTransform: "none",
@@ -154,5 +153,29 @@ export function tabTitleStyle() {
     lineHeight: "55px",
     color: "#000000",
     "&:hover": { fontWeight: 500, fontSize: "26px", ml: "3px" },
+  };
+}
+export function tabHeaderStyle() {
+  return {
+    fontSize: 33,
+    textTransform: "none",
+    fontFamily: "Kanit",
+    color: "black",
+    fontWeight: 700,
+    lineHeight: 2.5,
+    "&:hover": { fontWeight: 800, fontSize: "33", textTransform: "none" },
+  };
+}
+export function AddChoiceStyle() {
+  return {
+    // width: "139px",
+    height: "42px",
+    fontFamily: "Kanit",
+    fontStyle: "normal",
+    fontWeight: 400,
+    fontSize: "28px",
+    lineHeight: "42px",
+    textTransform: "none",
+    color: "#1374F9",
   };
 }

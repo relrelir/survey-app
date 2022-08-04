@@ -1,11 +1,11 @@
-import { TabContext } from "@mui/lab";
+// import { TabContext } from "@mui/lab";
 import { Box } from "@mui/material";
 import { useState } from "react";
 import ArrowsNextBack from "../../components/ArrowsNextBack";
 
 import HorizontalStepper from "../../components/HorizontalStepper";
 import IsQuize from "../../components/IsQuize";
-import QuestionsList from "../../components/QuestionsList";
+
 import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
 import StepperThird from "../../components/stepperSteps/third";
@@ -100,72 +100,62 @@ export default function NewQuestionariePage() {
         }}
       >
         <HorizontalStepper activeStep={activeStep} />
-        <TabContext value={`${sideTabvalue}`}>
+        {/* <TabContext value={`${sideTabvalue}`}> */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: "column",
+              justifyContent: "center",
+              width: "1087px",
+              height: "628px",
+              background: "rgba(255, 255, 255, 0.85)",
+              boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+              borderRadius: "25px",
+              // zIndex: -1,
             }}
           >
-            {activeStep === 1 && (
+            {activeStep === 0 ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <StepperFirst />
+                <IsQuize />
+              </Box>
+            ) : activeStep === 1 ? (
               <>
-                <QuestionsList />
-                {/* <DeleteQuestions /> */}
-              </>
-            )}
-
-            <Box
-              sx={{
-                display: "fixed",
-                // flexDirection: "column",
-                // justifyContent: "center",
-                width: "1087px",
-                height: "628px",
-                background: "rgba(255, 255, 255, 0.85)",
-                boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-                borderRadius: "25px",
-              }}
-            >
-              {activeStep === 0 ? (
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
-                    alignItems: "start",
                   }}
                 >
-                  <StepperFirst />
-                  <IsQuize />
+                  <StepperSecond />
+                  <MultiChoiseSwitch />
                 </Box>
-              ) : activeStep === 1 ? (
-                <>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      ml: "22%",
-                      alignItems: "start",
-                    }}
-                  >
-                    <StepperSecond />
-                    <MultiChoiseSwitch />
-                  </Box>
-                </>
-              ) : (
-                <StepperThird />
-              )}
-            </Box>
+              </>
+            ) : (
+              <StepperThird />
+            )}
           </Box>
-          <ArrowsNextBack
-            activeStep={activeStep}
-            handleNext={handleNext}
-            handleBack={handleBack}
-          />
-        </TabContext>
+        </Box>
+        <ArrowsNextBack
+          activeStep={activeStep}
+          handleNext={handleNext}
+          handleBack={handleBack}
+        />
       </stepperContext.Provider>
+      {/* </TabContext> */}
     </Box>
   );
 }

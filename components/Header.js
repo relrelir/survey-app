@@ -12,12 +12,14 @@ import Logo from "./Logo";
 import TabsHeader from "./TabsHeader";
 
 export default function Header() {
-  const { data: session, status } = useSession();
-  const { isOpen, setIsOpen } = useContext(AppContext);
+  const { data: session } = useSession();
+  const { isOpen, setIsOpen ,isMessegesOpen, setIsMessegesOpen} = useContext(AppContext);
 
   return (
-    <Box>
-      <AppBar position="static" sx={{ background: "white" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "row", alignItems: "center", p: 0 }}
+    >
+      <AppBar position="static" sx={{ background: "white", p: 0 }}>
         <Toolbar>
           <Logo />
 

@@ -5,22 +5,23 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { Box } from "@mui/system";
 import stepperContext from "../contexts/stepperContext";
 import {
+  AddChoiceStyle,
   deleteButtonStyle,
   InputAnsStyle,
   TypographyStyle,
 } from "../styles/global.style";
 
 export default function Answers({ questionIndex, handleAnswerPoints }) {
-  const { questionarie, setQuestionarie } = useContext(stepperContext);
+  const { questionarie, setQuestionarie, isQuize } = useContext(stepperContext);
   // const {
   //   questions: { [questionIndex]: question },
   // } = questionarie;
   const question = questionarie.questions[questionIndex];
-  const { questions } = questionarie;
+  // const { questions } = questionarie;
   const { answers } = question;
   console.log("questionarie", questionarie);
 
-  const handleAddAnswer = (e) => {
+  const handleAddAnswer = () => {
     const newQuestionarie = { ...questionarie };
     newQuestionarie.questions = [...questionarie.questions];
     newQuestionarie.questions[questionIndex] = {
@@ -137,14 +138,15 @@ export default function Answers({ questionIndex, handleAnswerPoints }) {
             <Button
               onClick={(e) => handleDeleteAnswer(e, answerIndex)}
               startIcon={<ClearIcon sx={deleteButtonStyle("30px", "30px")} />}
-              // startIcon={
-              //   <HighlightOffIcon sx={deleteButtonStyle("30px", "30px")} />
-              // }
             />
           </Box>
         ))}
-      <Button variant="contained" onClick={(e) => handleAddAnswer(e)}>
-        Add Answer
+      <Button
+        sx={AddChoiceStyle()}
+        // variant="contained"
+        onClick={(e) => handleAddAnswer(e)}
+      >
+        {`Add ${isQuize ? "Choice" : "Answer"}`}
       </Button>
     </>
   );

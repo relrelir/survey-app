@@ -78,15 +78,15 @@ export default function QuestionsList() {
     >
       <Typography sx={TypoQuestionsStyle()}>Questions:</Typography>
       <Tabs
+        scrollButtons
         orientation="vertical"
         variant="scrollable"
         value={sideTabvalue}
         onChange={handleSideTabChange}
-        sx={{ borderRight: 6, borderColor: "divider" }}
+        sx={{ borderRight: 1, borderColor: "divider" }}
       >
         {questions?.length > 0 &&
           questions.map((question, index) => {
-            // const space = question?.title?.slice(0, 15)?.findIndex(" ");
             let tabTitle = question?.title
               ? question?.title?.slice(0, 20)?.indexOf(" ") >= 0
                 ? question?.title.slice(
