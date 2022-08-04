@@ -1,15 +1,20 @@
 import { Box, Button, Typography } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { makeStyles } from "@mui/styles";
-import React, { useContext, useRef } from "react";
+
+import React, { useContext } from "react";
 import stepperContext from "../contexts/stepperContext";
-import { BoxShadowTabs, TextTabsStyle } from "../styles/boxShadow.style";
+import { BoxShadowTabs, createTabStyle } from "../styles/boxShadow.style";
 import ClearIcon from "@mui/icons-material/Clear";
-import { deleteButtonStyle, numbersStyle } from "../styles/global.style";
+import AddCircleOutlineTwoToneIcon from "@mui/icons-material/AddCircleOutlineTwoTone";
+import {
+  deleteButtonStyle,
+  numbersStyle,
+  tabTitleStyle,
+  TypoQuestionsStyle,
+} from "../styles/global.style";
 
 export default function QuestionsList() {
-  const isDelete = useRef(false);
   const {
     handleSideTabChange,
     questionarie,
@@ -20,10 +25,7 @@ export default function QuestionsList() {
 
   const { questions } = questionarie;
 
-  const useStyles = makeStyles(TextTabsStyle());
-  const classes = useStyles();
-
-  const handleAddQuestion = (e) => {
+  const handleAddQuestion = () => {
     const newQuestionarie = { ...questionarie };
     newQuestionarie.questions = [...questionarie.questions];
 
@@ -40,21 +42,26 @@ export default function QuestionsList() {
         },
       ],
     };
-
+    setSideTabValue(questionarie.questions.length);
     setQuestionarie(newQuestionarie);
     console.log("questionarie", questionarie);
   };
 
   const handleDeleteQuestion = (e, index) => {
     const newQuestionarie = { ...questionarie };
+    newQuestionarie.questions = [...questionarie.questions];
 
-    let value = sideTabvalue > 0 ? sideTabvalue - 1 : 0;
+    let value =
+      sideTabvalue === questionarie.questions.length
+        ? sideTabvalue - 1
+        : sideTabvalue === 0
+        ? 0
+        : sideTabvalue;
     setSideTabValue(value);
-    isDelete.current = index;
-    // setTimeout(() => {
-    //   newQuestionarie.questions = [...questionarie.questions];
-    //   newQuestionarie.questions.splice(index, 1);
-    // }, 1000);
+    setTimeout(() => {
+      newQuestionarie.questions.splice(index, 1);
+    }, 1000);
+
     setQuestionarie(newQuestionarie);
   };
 
@@ -69,48 +76,41 @@ export default function QuestionsList() {
         width: "110%",
       }}
     >
-      {sideTabvalue}
+      <Typography sx={TypoQuestionsStyle()}>Questions:</Typography>
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={sideTabvalue}
-        onChange={() => {
-          if (isDelete.current !== false) {
-            const newQuestionarie = { ...questionarie };
-            newQuestionarie.questions = [...questionarie.questions];
-            newQuestionarie.questions.splice(isDelete.current, 1);
-            isDelete.current = false;
-          }
-
-          handleSideTabChange();
-        }}
-        sx={{ borderRight: 2, borderColor: "divider" }}
+        onChange={handleSideTabChange}
+        sx={{ borderRight: 6, borderColor: "divider" }}
       >
         {questions?.length > 0 &&
           questions.map((question, index) => {
+            // const space = question?.title?.slice(0, 15)?.findIndex(" ");
+            let tabTitle = question?.title
+              ? question?.title?.slice(0, 20)?.indexOf(" ") >= 0
+                ? question?.title.slice(
+                    0,
+                    question?.title?.slice(0, 20)?.lastIndexOf(" ")
+                  )
+                : question?.title.slice(0, 20)
+              : "...";
             return (
-              // <Box key={index}>
               <Tab
-                fullWidth
                 key={index}
-                sx={BoxShadowTabs()}
-                className={classes.customLabelColor}
+                sx={BoxShadowTabs("8px")}
                 label={
                   <Box
                     sx={{
                       display: "flex",
                       flexDirection: "row",
-                      alignItems: "flex-start",
-                      alignContent: "flex-start",
-                      gap: "125%",
-                      ml: "10%",
+                      alignItems: "center",
+                      alignContent: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    <Typography sx={numbersStyle()}>
-                      {question?.title
-                        ? index + 1 + question?.title
-                        : index + 1}
-                    </Typography>
+                    <Typography sx={numbersStyle()}>{index + 1}.</Typography>
+                    <Typography sx={tabTitleStyle()}>{tabTitle}</Typography>
                     <Button
                       onClick={(e) => handleDeleteQuestion(e, index)}
                       startIcon={
@@ -124,11 +124,16 @@ export default function QuestionsList() {
           })}
       </Tabs>
       <Button
-        sx={{ my: "5px", mr: "73%", ml: "3%" }}
+        sx={BoxShadowTabs("10%")}
         variant="contained"
         onClick={(e) => handleAddQuestion(e)}
       >
-        Add Question
+        <AddCircleOutlineTwoToneIcon
+          sx={{ width: "100px", height: "100px", mr: "10px" }}
+          fontSize="large"
+          color="primary"
+        />
+        <Typography sx={createTabStyle()}>Add new Question</Typography>
       </Button>
     </Box>
   );

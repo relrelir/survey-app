@@ -84,6 +84,21 @@ export function TypoUserEditStyle() {
     textTransform: "none",
   };
 }
+export function TypoQuestionsStyle() {
+  return {
+    mt: "10%",
+    width: "58px",
+    height: "21px",
+    fontFamily: "Kanit",
+    fontStyle: "normal",
+    fontWeight: 600,
+    fontSize: "27px",
+    lineHeight: "21px",
+    textAlign: "center",
+    color: "#9C9B9B",
+    alignSelf: "start",
+  };
+}
 export function FormLabelStyle() {
   return {
     fontFamily: "Kanit",
@@ -102,7 +117,9 @@ export function deleteButtonStyle(width, height) {
     background: "#FDFDFD",
     border: "2px solid #9C9B9B",
     borderRadius: "11px",
-    ml: "90%",
+    // ml: "70%",
+    position: "sticky",
+    zIndex: 1,
     "&:hover": {
       cursor: "pointer",
       borderRadius: "8px",
@@ -114,14 +131,28 @@ export function numbersStyle() {
   return {
     width: "17px",
     height: "45px",
-    // mr: "100%",
+
     fontFamily: "Kanit",
     fontStyle: "normal",
     fontWeight: 600,
     fontSize: "30px",
     lineHeight: "45px",
-    /* identical to box height */
 
+    textTransform: "none",
     color: "#1374F9",
+  };
+}
+export function tabTitleStyle() {
+  return {
+    width: "240px",
+    height: "36px",
+    textTransform: "none",
+    fontFamily: "Kanit",
+    fontStyle: "normal",
+    fontWeight: 500,
+    fontSize: "24px",
+    lineHeight: "55px",
+    color: "#000000",
+    "&:hover": { fontWeight: 500, fontSize: "26px", ml: "3px" },
   };
 }

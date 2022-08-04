@@ -1,8 +1,8 @@
 import { TabContext } from "@mui/lab";
 import { Box } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ArrowsNextBack from "../../components/ArrowsNextBack";
-import DeleteQuestions from "../../components/deleteQuestions";
+
 import HorizontalStepper from "../../components/HorizontalStepper";
 import IsQuize from "../../components/IsQuize";
 import QuestionsList from "../../components/QuestionsList";
@@ -10,12 +10,9 @@ import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
 import StepperThird from "../../components/stepperSteps/third";
 import MultiChoiseSwitch from "../../components/switch";
-import AppContext from "../../contexts/AppContext";
 import stepperContext from "../../contexts/stepperContext";
 
 export default function NewQuestionariePage() {
-  const { questionaries, setQuestionaries } = useContext(AppContext);
-
   const [sideTabvalue, setSideTabValue] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [questionarie, setQuestionarie] = useState({
@@ -91,7 +88,6 @@ export default function NewQuestionariePage() {
           isQuize,
           setIsQuize,
           handleIsQuizeChange,
-          // activeStep,
           sideTabvalue,
           handleSideTabChange,
           questionarie,
@@ -121,9 +117,9 @@ export default function NewQuestionariePage() {
 
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
+                display: "fixed",
+                // flexDirection: "column",
+                // justifyContent: "center",
                 width: "1087px",
                 height: "628px",
                 background: "rgba(255, 255, 255, 0.85)",

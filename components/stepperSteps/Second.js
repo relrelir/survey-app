@@ -1,5 +1,5 @@
-import { TabPanel } from "@mui/lab";
-import { Checkbox, FormLabel, Grid, Input } from "@mui/material";
+import { TabContext, TabPanel } from "@mui/lab";
+import { Checkbox, FormLabel, Input } from "@mui/material";
 import { Box } from "@mui/system";
 import Answers from "../Answers";
 import { useContext } from "react";
@@ -9,6 +9,7 @@ import {
   InputStyle,
   TypographyStyle,
 } from "../../styles/global.style";
+import QuestionsList from "../QuestionsList";
 
 export default function StepperSecond() {
   const { questionarie, setQuestionarie, sideTabvalue } =
@@ -70,130 +71,128 @@ export default function StepperSecond() {
   };
 
   return (
-    <>
-      <Grid container direction="row" justifyContent="start" alignItems="start">
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <TabContext value={`${sideTabvalue}`}>
+        <Box sx={{ mr: "200px", zIndex: 1 }}>
+          <QuestionsList />
+        </Box>
         {questions?.length > 0 &&
           questions.map((question, questionIndex) => {
             return (
-              <Grid item key={questionIndex}>
-                <TabPanel value={`${sideTabvalue}`} index={sideTabvalue}>
-                  <Box>
-                    {sideTabvalue}
-                    {sideTabvalue === questionIndex && (
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
+              <TabPanel
+                sx={{ p: 0 }}
+                key={questionIndex}
+                value={`${sideTabvalue}`}
+                index={questionIndex}
+              >
+                {sideTabvalue === questionIndex && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      mb: "100px",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <FormLabel
+                        htmlFor="title"
+                        sx={TypographyStyle("126px", "45px")}
                       >
+                        Question:
+                      </FormLabel>
+                      <Input
+                        id="Question"
+                        sx={InputStyle("810px", "72px")}
+                        fullWidth
+                        className="input"
+                        variant="standard"
+                        name="Question"
+                        type="text"
+                        defaultValue={question?.title}
+                        onChange={(e) => handleQuestionTitle(e, questionIndex)}
+                      />
+
+                      <FormLabel
+                        htmlFor="introduction"
+                        sx={TypographyStyle("173px", "45px")}
+                      >
+                        introduction:
+                      </FormLabel>
+                      <Input
+                        sx={InputAnsStyle("72px", "810px")}
+                        className="input"
+                        variant="standard"
+                        name="introduction"
+                        type="text"
+                        id="introduction"
+                        value={question.introduction}
+                        onChange={(e) =>
+                          handleQuestionIntroduction(e, questionIndex)
+                        }
+                        multiline
+                        rows={2}
+                      />
+                    </Box>
+
+                    {questionarie.questions[questionIndex].isMultiChoise && (
+                      <Answers
+                        handleAnswerPoints={handleAnswerPoints}
+                        questionIndex={questionIndex}
+                      />
+                    )}
+
+                    {!questionarie.questions[questionIndex].isMultiChoise && (
+                      <>
+                        <h1 sx={TypographyStyle("117px", "45px")}>Answers</h1>
                         <Box
                           sx={{
                             display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
+                            flexDirection: "row",
                             alignItems: "center",
                           }}
                         >
-                          <FormLabel
-                            htmlFor="title"
-                            sx={TypographyStyle("126px", "45px")}
-                          >
-                            Question:
-                          </FormLabel>
+                          <Checkbox checked />
                           <Input
-                            id="Question"
-                            sx={InputStyle("810px", "72px")}
-                            fullWidth
+                            sx={InputStyle("36px", "610px")}
                             className="input"
                             variant="standard"
-                            name="Question"
+                            name="answer"
                             type="text"
-                            defaultValue={question?.title}
-                            onChange={(e) =>
-                              handleQuestionTitle(e, questionIndex)
-                            }
+                            id="answer"
+                            defaultValue="All answers are correct"
+                            disabled
                           />
-
-                          <FormLabel
-                            htmlFor="introduction"
-                            sx={TypographyStyle("173px", "45px")}
-                          >
-                            introduction:
-                          </FormLabel>
                           <Input
-                            sx={InputAnsStyle("72px", "810px")}
-                            className="input"
-                            variant="standard"
-                            name="introduction"
-                            type="text"
-                            id="introduction"
-                            value={question.introduction}
-                            onChange={(e) =>
-                              handleQuestionIntroduction(e, questionIndex)
+                            sx={InputStyle("36px", "100px")}
+                            value={
+                              questionarie.questions[questionIndex].answers[0]
+                                .pointsValue
                             }
-                            multiline
-                            rows={2}
+                            type="number"
+                            onChange={(e) => {
+                              handleAnswerPoints(e, 0, questionIndex);
+                            }}
+                            id="standard-basic"
+                            variant="standard"
                           />
                         </Box>
-
-                        {questionarie.questions[questionIndex]
-                          .isMultiChoise && (
-                          <Answers
-                            handleAnswerPoints={handleAnswerPoints}
-                            questionIndex={questionIndex}
-                          />
-                        )}
-
-                        {!questionarie.questions[questionIndex]
-                          .isMultiChoise && (
-                          <>
-                            <h1 sx={TypographyStyle("117px", "45px")}>
-                              Answers
-                            </h1>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Checkbox checked />
-                              <Input
-                                sx={InputStyle("36px", "610px")}
-                                className="input"
-                                variant="standard"
-                                name="answer"
-                                type="text"
-                                id="answer"
-                                defaultValue="All answers are correct"
-                                disabled
-                              />
-                              <Input
-                                sx={InputStyle("36px", "100px")}
-                                value={
-                                  questionarie.questions[questionIndex]
-                                    .answers[0].pointsValue
-                                }
-                                type="number"
-                                onChange={(e) => {
-                                  handleAnswerPoints(e, 0, questionIndex);
-                                }}
-                                id="standard-basic"
-                                variant="standard"
-                              />
-                            </Box>
-                          </>
-                        )}
-                      </Box>
+                      </>
                     )}
-                  </Box>{" "}
-                </TabPanel>
-              </Grid>
+                  </Box>
+                )}
+              </TabPanel>
             );
           })}
-      </Grid>
-    </>
+      </TabContext>
+    </Box>
   );
 }

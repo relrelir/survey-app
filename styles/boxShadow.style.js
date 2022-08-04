@@ -12,9 +12,12 @@ export function BoxShadow(width, height) {
     },
   };
 }
-export function BoxShadowTabs() {
+export function BoxShadowTabs(my) {
   return {
-    my: "8px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    my,
     width: "285px",
     height: "52px",
     backgroundColor: "#FFFFFF",
@@ -27,17 +30,39 @@ export function BoxShadowTabs() {
     },
   };
 }
-export function TextTabsStyle() {
+
+export function SignInPaperStyle() {
   return {
-    customLabelColor: {
-      // width: "22px",
-      height: "45px",
-      fontFamily: "Kanit",
-      fontStyle: "normal",
-      fontWeight: 600,
-      fontSize: "30px",
-      lineHeight: "45px",
-      color: "#1374F9",
+    backgroundColor: "#FFFFFF",
+    borderRadius: "18px",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+
+    "&:hover": {
+      boxShadow: "4px 16px 16px rgba(0, 0, 0, 0.7)",
+      opacity: [0.9, 0.9, 0.9],
     },
+
+    maxWidth: 400,
+    mx: "auto",
+    my: 4,
+    py: 3,
+    px: 2,
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+  };
+}
+export function createTabStyle() {
+  return {
+    textTransform: "none",
+    width: "162px",
+    height: "36px",
+    fontFamily: "Kanit",
+    fontStyle: "normal",
+    fontWeight: 500,
+    fontSize: "24px",
+    lineHeight: "30px",
+    color: "#1374F9",
+    mb: "15%",
   };
 }
