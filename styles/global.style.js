@@ -7,7 +7,24 @@ export function TypographyStyle() {
     color: "#000000",
   };
 }
-export function InputStyle(width, height, borderTop, borderBottom) {
+export function InputStyle(width, height) {
+  return {
+    boxSizing: "border-box",
+
+    paddingInlineStart: "10%",
+    paddingInlineEnd: "10%",
+
+    textDecoration: "none",
+
+    height,
+    width,
+    fontSize: "250%",
+    background: "#FFFFFF",
+    border: "2px solid #1374F9",
+    borderRadius: "40px",
+  };
+}
+export function InputDateStyle(width, height, borderTop, borderBottom) {
   return {
     boxSizing: "border-box",
 
@@ -21,7 +38,7 @@ export function InputStyle(width, height, borderTop, borderBottom) {
     width,
     fontSize: "250%",
     background: "#FFFFFF",
-    border: "2px solid #1374F9",
+
     borderRadius: "40px",
   };
 }
@@ -100,12 +117,15 @@ export function AvatarStyle(width, height) {
     borderRadius: "206px",
   };
 }
-export function ButtonRoundStyle(width, height) {
+export function ButtonRoundStyle(width, height, my) {
   return {
+    my,
     width,
     height,
     background: "#1374F9",
     borderRadius: "40px",
+
+    zIndex: 1,
   };
 }
 export function TypoUserEditStyle() {

@@ -102,6 +102,7 @@ export default function NewQuestionariePage() {
 
         <Box
           sx={{
+            display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             width: "1087px",
