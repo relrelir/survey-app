@@ -46,13 +46,33 @@ export function InputNumberStyle(width, height, borderTop, borderBottom) {
 export function InputAnsStyle(height, width) {
   return {
     boxSizing: "border-box",
-    textIndent: "50%",
+
     height,
     width,
     fontSize: "150%",
     background: "#FFFFFF",
     border: "2px solid #1374F9",
     borderRadius: "40px",
+    paddingInlineStart: "5%",
+    paddingInlineEnd: "5%",
+
+    textDecoration: "none",
+  };
+}
+export function InputAnsNumberStyle(height, width) {
+  return {
+    boxSizing: "border-box",
+
+    height,
+    width,
+    fontSize: "150%",
+    background: "#FFFFFF",
+    border: "2px solid #1374F9",
+    borderRadius: "40px",
+    paddingInlineStart: "2%",
+    paddingInlineEnd: "1%",
+
+    textDecoration: "none",
   };
 }
 export function NavigateButtonsStyle() {

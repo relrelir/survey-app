@@ -4,7 +4,6 @@ import { useState } from "react";
 import ArrowsNextBack from "../../components/ArrowsNextBack";
 
 import HorizontalStepper from "../../components/HorizontalStepper";
-import IsQuize from "../../components/IsQuize";
 
 import StepperFirst from "../../components/stepperSteps/First";
 import StepperSecond from "../../components/stepperSteps/Second";
@@ -103,51 +102,48 @@ export default function NewQuestionariePage() {
 
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "1087px",
+            height: "628px",
+            background: "rgba(255, 255, 255, 0.85)",
+            boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
+            borderRadius: "25px",
           }}
         >
-          <Box
-            sx={{
-              flexDirection: "column",
-              justifyContent: "center",
-              width: "1087px",
-              height: "628px",
-              background: "rgba(255, 255, 255, 0.85)",
-              boxShadow: "0px 0px 75px rgba(0, 0, 0, 0.06)",
-              borderRadius: "25px",
-              // zIndex: -1,
-            }}
-          >
-            {activeStep === 0 ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <StepperFirst />
-                <IsQuize />
-              </Box>
-            ) : activeStep === 1 ? (
-              <>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                  }}
-                >
-                  <StepperSecond />
-                </Box>
-              </>
-            ) : (
+          {activeStep === 0 ? (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <StepperFirst />
+            </Box>
+          ) : activeStep === 1 ? (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <StepperSecond />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
               <StepperThird />
-            )}
-          </Box>
+            </Box>
+          )}
         </Box>
+
         <ArrowsNextBack
           activeStep={activeStep}
           handleNext={handleNext}

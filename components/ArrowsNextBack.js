@@ -3,7 +3,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { NavigateButtonsStyle } from "../styles/global.style";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-export default function ArrowsNextBack({ activeStep, handleNext, handleBack }) {
+export default function ArrowsNextBack({ handleNext, handleBack }) {
   return (
     <Box
       sx={{
@@ -22,11 +22,6 @@ export default function ArrowsNextBack({ activeStep, handleNext, handleBack }) {
         Next
         <ArrowForwardIosIcon />
       </Button>
-      {activeStep === 2 && (
-        <Button type="submit" variant="contained" color="success">
-          Create
-        </Button>
-      )}
     </Box>
   );
 }

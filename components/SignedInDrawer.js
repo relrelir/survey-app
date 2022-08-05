@@ -1,22 +1,19 @@
 import Button from "@mui/joy/Button";
 import Typography from "@mui/joy/Typography";
-import TabPanel from "@mui/lab/TabPanel";
+
+import AddIcon from "@mui/icons-material/Add";
+import { Avatar, Drawer, Fab } from "@mui/material";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { Avatar, Drawer, Fab } from "@mui/material";
-import Box from "@mui/material/Box";
-import SurviesList from "./SurviesList";
-import ControlPointTwoToneIcon from "@mui/icons-material/ControlPointTwoTone";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "../contexts/AppContext";
-import { useEffect, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
+import SurviesList from "./SurviesList";
 
 function SignedInTab() {
-  const { isOpen, setIsOpen, questionaries, setQuestionaries } =
-    useContext(AppContext);
+  const { isOpen, setIsOpen, setQuestionaries } = useContext(AppContext);
   const { data: session } = useSession();
   const router = useRouter();
 

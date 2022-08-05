@@ -7,7 +7,9 @@ import stepperContext from "../contexts/stepperContext";
 import {
   AddChoiceStyle,
   deleteButtonStyle,
+  InputAnsNumberStyle,
   InputAnsStyle,
+  InputNumberStyle,
   TypographyStyle,
 } from "../styles/global.style";
 
@@ -17,7 +19,6 @@ export default function Answers({ questionIndex, handleAnswerPoints }) {
   //   questions: { [questionIndex]: question },
   // } = questionarie;
   const question = questionarie.questions[questionIndex];
-  // const { questions } = questionarie;
   const { answers } = question;
   console.log("questionarie", questionarie);
 
@@ -103,51 +104,83 @@ export default function Answers({ questionIndex, handleAnswerPoints }) {
   };
 
   return (
-    <>
-      <Typography sx={TypographyStyle()}>Answers</Typography>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "start ",
+      }}
+    >
+      <Typography sx={TypographyStyle()}>Answers:</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center ",
+        }}
+      >
+        {questionarie.questions[questionIndex].isMultiChoise &&
+          answers?.length > 0 &&
+          answers?.map((answer, answerIndex) => (
+            <Box key={answer?._id ? answer?._id : answerIndex}>
+              <Checkbox
+                size="large"
+                checked={
+                  questionarie.isQuize === true ? true : answer.isCorrect
+                }
+                onChange={(e) => handleIsCorrect(e, answerIndex)}
+              />
 
-      {answers?.length > 0 &&
-        answers?.map((answer, answerIndex) => (
-          <Box
-            key={answer?._id ? answer?._id : answerIndex}
-            sx={{ display: "flex", flexDirection: "row", gap: "5px" }}
-          >
-            <Checkbox
-              checked={questionarie.isQuize === true ? true : answer.isCorrect}
-              onChange={(e) => handleIsCorrect(e, answerIndex)}
-            />
+              <Input
+                sx={InputAnsStyle("36px", "610px")}
+                value={answer.content}
+                onChange={(e) => handleAnswerTitle(e, answerIndex)}
+                id="standard-basic"
+                variant="standard"
+              />
+
+              <Input
+                sx={InputAnsNumberStyle("36px", "100px")}
+                value={answer.pointsValue}
+                type="number"
+                onChange={(e) => {
+                  handleAnswerPoints(e, answerIndex, questionIndex);
+                }}
+                id="standard-basic"
+                variant="standard"
+              />
+              <Button
+                onClick={(e) => handleDeleteAnswer(e, answerIndex)}
+                startIcon={<ClearIcon sx={deleteButtonStyle("30px", "30px")} />}
+              />
+            </Box>
+          ))}
+        {!questionarie.questions[questionIndex].isMultiChoise && (
+          <Box>
+            <Checkbox checked size="large" />
 
             <Input
-              sx={InputAnsStyle("36px", "610px")}
-              value={answer.content}
-              onChange={(e) => handleAnswerTitle(e, answerIndex)}
-              id="standard-basic"
-              variant="standard"
-            />
-
-            <Input
-              sx={InputAnsStyle("36px", "100px")}
-              value={answer.pointsValue}
+              sx={InputNumberStyle("250px", "50px")}
+              value={
+                questionarie.questions[questionIndex].answers[0].pointsValue
+              }
               type="number"
               onChange={(e) => {
-                handleAnswerPoints(e, answerIndex, questionIndex);
+                handleAnswerPoints(e, 0, questionIndex);
               }}
               id="standard-basic"
               variant="standard"
             />
-            <Button
-              onClick={(e) => handleDeleteAnswer(e, answerIndex)}
-              startIcon={<ClearIcon sx={deleteButtonStyle("30px", "30px")} />}
-            />
           </Box>
-        ))}
-      <Button
-        sx={AddChoiceStyle()}
-        // variant="contained"
-        onClick={(e) => handleAddAnswer(e)}
-      >
-        {`Add ${isQuize ? "Choice" : "Answer"}`}
-      </Button>
-    </>
+        )}
+        <Button
+          sx={AddChoiceStyle()}
+          // variant="contained"
+          onClick={(e) => handleAddAnswer(e)}
+        >
+          {`Add ${isQuize ? "Choice" : "Answer"}`}
+        </Button>
+      </Box>
+    </Box>
   );
 }

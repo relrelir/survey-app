@@ -6,19 +6,19 @@ export default function IsQuize() {
   const { handleIsQuizeChange, questionarie } = useContext(stepperContext);
   return (
     <Stack
-      sx={BoxShadow("250px", "61px")}
+      sx={BoxShadow("350px", "61px")}
       direction="row"
       spacing={2}
       alignItems="center"
     >
-      <Typography>Quize</Typography>
+      <Typography sx={{ pl: "30px" }}>Quize</Typography>
 
       <Switch
         checked={questionarie.isQuize}
         inputProps={{ "aria-label": "ant design" }}
         onChange={(e) => handleIsQuizeChange(e)}
       />
-      <Typography>Survey</Typography>
+      <Typography sx={{ pr: "30px" }}>Survey</Typography>
     </Stack>
   );
 }
